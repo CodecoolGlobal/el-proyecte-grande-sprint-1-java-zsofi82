@@ -25,4 +25,10 @@ public class Table {
         this.reservations = new HashMap<>();
     }
 
+    public void reserve(LocalDateTime time, UUID id){
+        reservations.put(time, id);
+    }
+
+
+
 }
