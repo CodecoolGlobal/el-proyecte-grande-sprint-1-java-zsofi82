@@ -15,7 +15,7 @@ public class TableDaoMem implements TableDao {
         this.tables = new ArrayList<>();
     }
 
-    public TableDaoMem getInstance() {
+    public static TableDaoMem getInstance() {
         if (tableDaoMem == null) {
             tableDaoMem = new TableDaoMem();
         }
