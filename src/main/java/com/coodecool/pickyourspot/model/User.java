@@ -9,6 +9,9 @@ public class User {
     private String email;
     private String password;
 
+    public User(){
+    }
+
     public User(UUID id, String username, String email, String hashedPassword) {
         this.id = id;
         this.username = username;
@@ -52,5 +55,29 @@ public class User {
 
     public UUID getId() {
         return id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

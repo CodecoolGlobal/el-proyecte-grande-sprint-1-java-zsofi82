@@ -22,13 +22,13 @@ public class TableController {
         return "map";
     }
 
-    @GetMapping(value= "registration")
+    @GetMapping(value = "registration")
     public String displayRegistration() {
         return "registration";
     }
 
     @PostMapping(value = "registration")
-    public String handleRegistration(@RequestBody User user) {
+    public String handleRegistration(@ModelAttribute("user") User user) {
         productService.addNewUser(user);
         return "redirect:";
     }
