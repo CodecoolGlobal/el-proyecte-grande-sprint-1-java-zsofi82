@@ -72,4 +72,8 @@ public class Table {
                 ", reservations=" + reservations +
                 '}';
     }
+
+    public UUID getId() {
+        return id;
+    }
 }
