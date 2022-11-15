@@ -37,8 +37,15 @@ public class Table {
         reservations.remove(time, id);
     }
 
+    public String getName() {
+        return name;
+    }
 
+    public String getAddress() {
+        return address;
+    }
 
-
-
+    public Map<LocalDateTime, UUID> getReservations() {
+        return reservations;
+    }
 }
