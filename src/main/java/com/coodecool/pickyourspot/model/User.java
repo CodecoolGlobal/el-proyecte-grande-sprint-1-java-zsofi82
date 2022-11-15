@@ -7,20 +7,20 @@ public class User {
     private UUID id;
     private String username;
     private String email;
-    private String hashedPassword;
+    private String password;
 
     public User(UUID id, String username, String email, String hashedPassword) {
         this.id = id;
         this.username = username;
         this.email = email;
-        this.hashedPassword = hashedPassword;
+        this.password = hashedPassword;
     }
 
     public User(String username, String email, String hashedPassword) {
         this.id = UUID.randomUUID();
         this.username = username;
         this.email = email;
-        this.hashedPassword = hashedPassword;
+        this.password = hashedPassword;
     }
 
     public String getUsername() {
@@ -46,7 +46,7 @@ public class User {
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
-                ", hashedPassword='" + hashedPassword + '\'' +
+                ", hashedPassword='" + password + '\'' +
                 '}';
     }
 

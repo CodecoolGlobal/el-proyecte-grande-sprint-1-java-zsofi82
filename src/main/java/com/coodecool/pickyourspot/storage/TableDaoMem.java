@@ -1,11 +1,12 @@
 package com.coodecool.pickyourspot.storage;
 
 import com.coodecool.pickyourspot.model.Table;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
+@Component
 public class TableDaoMem implements TableDao {
     private List<Table> tables;
 
