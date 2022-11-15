@@ -1,5 +1,6 @@
 package com.coodecool.pickyourspot.controller;
 
+import com.coodecool.pickyourspot.model.User;
 import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
