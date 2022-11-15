@@ -33,6 +33,10 @@ public class Table {
         }
     }
 
+    public void cancelReservation(LocalDateTime time, UUID id){
+        reservations.remove(time, id);
+    }
+
 
 
 
