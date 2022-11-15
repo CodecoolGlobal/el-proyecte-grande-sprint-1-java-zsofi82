@@ -25,9 +25,15 @@ public class Table {
         this.reservations = new HashMap<>();
     }
 
-    public void reserve(LocalDateTime time, UUID id){
-        reservations.put(time, id);
+    public void reserve(LocalDateTime time, UUID id) throws IllegalAccessException {
+        if (reservations.containsKey(time)){
+            throw new IllegalAccessException("This time is already reserved!");
+        } else{
+            reservations.put(time, id);
+        }
     }
+
+
 
 
 
