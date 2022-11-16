@@ -1,12 +1,13 @@
 package com.coodecool.pickyourspot.storage;
 
 import com.coodecool.pickyourspot.model.User;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-
+@Component
 public class UserDaoMem implements UserDao {
     private final List<User> users = new ArrayList<>();
     private static UserDaoMem userDaoMem = null;

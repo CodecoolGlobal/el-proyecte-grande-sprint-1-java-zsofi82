@@ -1,15 +1,17 @@
 package com.coodecool.pickyourspot.controller;
 
 import com.coodecool.pickyourspot.model.User;
-import org.springframework.boot.Banner;
+import com.coodecool.pickyourspot.service.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/")
 public class TableController {
 
+    @Autowired
+    private ProductService productService;
     @GetMapping
     public String index() {
         return "index";
@@ -20,14 +22,14 @@ public class TableController {
         return "map";
     }
 
-    @GetMapping(value= "registration")
+    @GetMapping(value = "registration")
     public String displayRegistration() {
         return "registration";
     }
 
-    //TODO: add user
     @PostMapping(value = "registration")
-    public String handleRegistration(@RequestBody User user) {
+    public String handleRegistration(@ModelAttribute("user") User user) {
+        productService.addNewUser(user);
         return "redirect:";
     }
 
