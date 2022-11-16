@@ -26,10 +26,9 @@ public class ProductService {
         return tableDao.getAllTables();
     }
 
-//TODO: password hashing, validation
     public void addNewUser(User user) {
-        userDao.addUser(new User(user.getUsername(), user.getEmail(), user.getPassword()));
-        System.out.println(userDao.getAllUsers());
+        //TODO: user validation (is username exists?), password hashing
+        userDao.addUser(user);
     }
 
     public Optional<User> getUserById(String id){
