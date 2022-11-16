@@ -46,6 +46,10 @@ public class APIController {
         productService.removeReservation(id,reservation);
     }
 
+    @GetMapping("/table/free-tables/{dateTimeString}")
+    public List<Table> getFreeTables(@PathVariable String dateTimeString){
+        return productService.getFreeTables(dateTimeString);
+    }
 
 
 

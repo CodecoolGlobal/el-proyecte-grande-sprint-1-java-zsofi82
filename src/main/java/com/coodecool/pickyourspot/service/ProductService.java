@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Component
 public class ProductService {
@@ -66,5 +67,12 @@ public class ProductService {
             currentTable.get().cancelReservation(LocalDateTime.parse(key) , UUID.fromString(reservation.get(key)));
             System.out.println(currentTable);
         }
+    }
+
+    public List<Table> getFreeTables(String dateTimeString) {
+        LocalDateTime dateTime = LocalDateTime.parse(dateTimeString);
+        return tableDao.getAllTables().stream()
+                .filter(table -> !table.getReservations().containsKey(dateTime))
+                .collect(Collectors.toList());
     }
 }
