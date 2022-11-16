@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.List;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -16,7 +17,7 @@ class APIControllerTest {
     ProductService productService;
 
     @Test
-    void getUserByValidId() {
+    void testGetUserByValidId() {
         User sentUser = new User("username", "email", "password");
         productService.addNewUser(sentUser);
         String userId = sentUser.getId().toString();
@@ -27,15 +28,17 @@ class APIControllerTest {
     }
 
     @Test
-    void getUserByInvalidId() {
-        User sentUser = new User("username", "email", "password");
-        productService.addNewUser(sentUser);
-        sentUser.setId(UUID.randomUUID());
-        String userId = sentUser.getId().toString();
+    void testGetAllUsers() {
+        User user1 = new User("username1", "email1", "password1");
+        User user2 = new User("username2", "email2", "password2");
+        productService.addNewUser(user1);
+        productService.addNewUser(user2);
 
-        User foundUser = productService.getUserById(userId).get();
+        List<User> foundUser = productService.getAllUsers();
 
-        assertNotEquals(sentUser, foundUser);
+        assertTrue(foundUser.contains(user1));
+        assertTrue(foundUser.contains(user2));
+        assertEquals(2, foundUser.size());
     }
 
 }
