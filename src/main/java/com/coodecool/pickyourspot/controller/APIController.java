@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api")
 public class APIController {
-
-
+    @GetMapping("/get-user/{id}")
+    public User getUserById(@PathVariable String id){
+        return null;
+    }
 }
