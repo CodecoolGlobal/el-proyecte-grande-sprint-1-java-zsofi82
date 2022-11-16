@@ -6,6 +6,7 @@ import com.coodecool.pickyourspot.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,6 +35,13 @@ public class APIController {
     public void addTable(@RequestBody Table table){
         productService.addNewTable(table);
     }
+
+    @PutMapping("/table/{id}/reservation/add")
+    public void addReservation(@RequestBody HashMap<String, String> reservation, @PathVariable String id) throws IllegalAccessException {
+        productService.addReservation(id, reservation);
+    }
+
+
 
 
 

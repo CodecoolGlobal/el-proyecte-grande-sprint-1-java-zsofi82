@@ -7,6 +7,8 @@ import com.coodecool.pickyourspot.storage.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -42,5 +44,18 @@ public class ProductService {
     public void addNewTable(Table table){
         tableDao.addTable(new Table(table.getName(), table.getAddress()));
         System.out.println(tableDao.getAllTables());
+    }
+
+    public Optional<Table> getTableById(String id){
+        return tableDao.getTableById(UUID.fromString(id));
+    }
+
+    public void addReservation(String id, HashMap<String, String> reservation) throws IllegalAccessException {
+        Optional<Table> currentTable = getTableById(id);
+        if(currentTable.isPresent()){
+            String key = reservation.keySet().stream().findFirst().get();
+            currentTable.get().reserve(LocalDateTime.parse(key) , UUID.fromString(reservation.get(key)));
+            System.out.println(currentTable);
+        }
     }
 }
