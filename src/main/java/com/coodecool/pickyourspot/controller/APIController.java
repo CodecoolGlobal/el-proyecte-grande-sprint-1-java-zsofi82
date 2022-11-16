@@ -15,8 +15,11 @@ import java.util.Optional;
 public class APIController {
     @Autowired
     ProductService productService;
-    @GetMapping("/get-user/{id}")
+    @GetMapping("/user/{id}")
     public Optional<User> getUserById(@PathVariable String id){
         return productService.getUserById(id);
     }
+
+
+
 }
