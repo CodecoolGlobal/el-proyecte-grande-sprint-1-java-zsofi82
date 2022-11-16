@@ -12,6 +12,13 @@ public class User {
     public User(){
     }
 
+    public User(String username, String email, String hashedPassword) {
+        this.id = UUID.randomUUID();
+        this.username = username;
+        this.email = email;
+        this.password = hashedPassword;
+    }
+/*
     public User(UUID id, String username, String email, String hashedPassword) {
         this.id = id;
         this.username = username;
@@ -19,12 +26,7 @@ public class User {
         this.password = hashedPassword;
     }
 
-    public User(String username, String email, String hashedPassword) {
-        this.id = UUID.randomUUID();
-        this.username = username;
-        this.email = email;
-        this.password = hashedPassword;
-    }
+*/
 
     public String getUsername() {
         return username;
