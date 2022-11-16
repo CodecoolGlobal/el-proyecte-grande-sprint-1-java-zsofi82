@@ -8,15 +8,29 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
 public class APIController {
-    @Autowired
     ProductService productService;
-    @GetMapping("/get-user/{id}")
+
+    @Autowired
+    public APIController(ProductService productService) {
+        this.productService = productService;
+    }
+
+    @GetMapping("/user/{id}")
     public Optional<User> getUserById(@PathVariable String id){
         return productService.getUserById(id);
     }
+
+    @GetMapping("/user/all")
+    public List<User> getAllUsers(){
+        return productService.getAllUsers();
+    }
+
+
+
 }

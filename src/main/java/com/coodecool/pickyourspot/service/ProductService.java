@@ -35,4 +35,8 @@ public class ProductService {
     public Optional<User> getUserById(String id){
         return userDao.getUserById(UUID.fromString(id));
     }
+
+    public List<User> getAllUsers() {
+        return userDao.getAllUsers();
+    }
 }
