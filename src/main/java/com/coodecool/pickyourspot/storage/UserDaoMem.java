@@ -45,7 +45,7 @@ public class UserDaoMem implements UserDao {
     @Override
     public Optional<User> getUserById(UUID id) {
         return users.stream()
-                .filter(u -> u.getId().equals(id))
+                .filter(u -> u.getId().compareTo(id) == 0)
                 .findFirst();
     }
 }
