@@ -39,4 +39,9 @@ public class ProductService {
     public List<User> getAllUsers() {
         return userDao.getAllUsers();
     }
+
+    public void addNewTable(Table table){
+        tableDao.addTable(new Table(table.getName(), table.getAddress()));
+        System.out.println(tableDao.getAllTables());
+    }
 }
