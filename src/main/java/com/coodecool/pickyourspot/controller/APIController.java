@@ -1,12 +1,10 @@
 package com.coodecool.pickyourspot.controller;
 
+import com.coodecool.pickyourspot.model.Table;
 import com.coodecool.pickyourspot.model.User;
 import com.coodecool.pickyourspot.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -29,6 +27,12 @@ public class APIController {
     @GetMapping("/user/all")
     public List<User> getAllUsers(){
         return productService.getAllUsers();
+    }
+
+
+    @PostMapping("/table/add")
+    public void addTable(@RequestBody Table table){
+        productService.addNewTable(table);
     }
 
 
