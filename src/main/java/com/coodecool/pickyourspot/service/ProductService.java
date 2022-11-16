@@ -28,7 +28,7 @@ public class ProductService {
 
 //TODO: password hashing, validation
     public void addNewUser(User user) {
-        userDao.addUser(user);
+        userDao.addUser(new User(user.getUsername(), user.getEmail(), user.getPassword()));
         System.out.println(userDao.getAllUsers());
     }
 
