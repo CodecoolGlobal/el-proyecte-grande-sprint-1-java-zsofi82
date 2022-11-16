@@ -1,8 +1,10 @@
 package com.coodecool.pickyourspot.storage;
 
 import com.coodecool.pickyourspot.model.Table;
+import com.coodecool.pickyourspot.model.User;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public interface TableDao {
@@ -10,5 +12,5 @@ public interface TableDao {
     void deleteTable(Table table);
     List<Table> getAllTables();
     void updateTable(Table table);
-    Table getTableById(UUID id);
+    Optional<Table> getTableById(UUID id);
 }

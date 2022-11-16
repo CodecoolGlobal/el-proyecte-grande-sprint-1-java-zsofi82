@@ -1,10 +1,12 @@
 package com.coodecool.pickyourspot.storage;
 
 import com.coodecool.pickyourspot.model.Table;
+import com.coodecool.pickyourspot.model.User;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 @Component
 public class TableDaoMem implements TableDao {
@@ -44,10 +46,9 @@ public class TableDaoMem implements TableDao {
     }
 
     @Override
-    public Table getTableById(UUID id) {
+    public Optional<Table> getTableById(UUID id) {
         return tables.stream()
-                .filter(table -> table.getId().equals(id))
-                .findFirst()
-                .get();
+                .filter(u -> u.getId().compareTo(id) == 0)
+                .findFirst();
     }
 }
