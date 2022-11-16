@@ -41,6 +41,11 @@ public class APIController {
         productService.addReservation(id, reservation);
     }
 
+    @PutMapping("/table/{id}/reservation/delete")
+    public void deleteReservation(@RequestBody HashMap<String, String> reservation, @PathVariable String id){
+        productService.removeReservation(id,reservation);
+    }
+
 
 
 

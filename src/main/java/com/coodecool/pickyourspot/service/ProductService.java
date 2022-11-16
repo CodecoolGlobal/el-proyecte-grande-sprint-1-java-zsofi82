@@ -58,4 +58,13 @@ public class ProductService {
             System.out.println(currentTable);
         }
     }
+
+    public void removeReservation(String id, HashMap<String, String> reservation){
+        Optional<Table> currentTable = getTableById(id);
+        if(currentTable.isPresent()){
+            String key = reservation.keySet().stream().findFirst().get();
+            currentTable.get().cancelReservation(LocalDateTime.parse(key) , UUID.fromString(reservation.get(key)));
+            System.out.println(currentTable);
+        }
+    }
 }
