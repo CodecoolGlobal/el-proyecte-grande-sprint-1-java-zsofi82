@@ -1,13 +1,12 @@
 package com.coodecool.pickyourspot.controller;
 
-import com.coodecool.pickyourspot.model.User;
+import com.coodecool.pickyourspot.model.AppUser;
 import com.coodecool.pickyourspot.service.ProductService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
-import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -18,27 +17,27 @@ class APIControllerTest {
 
     @Test
     void testGetUserByValidId() {
-        User sentUser = new User("username", "email", "password");
-        productService.addNewUser(sentUser);
-        String userId = sentUser.getId().toString();
+        AppUser sentAppUser = new AppUser("username", "email", "password");
+        productService.addNewUser(sentAppUser);
+        String userId = sentAppUser.getId().toString();
 
-        User foundUser = productService.getUserById(userId).get();
+        AppUser foundAppUser = productService.getUserById(userId).get();
 
-        assertEquals(sentUser, foundUser);
+        assertEquals(sentAppUser, foundAppUser);
     }
 
     @Test
     void testGetAllUsers() {
-        User user1 = new User("username1", "email1", "password1");
-        User user2 = new User("username2", "email2", "password2");
-        productService.addNewUser(user1);
-        productService.addNewUser(user2);
+        AppUser appUser1 = new AppUser("username1", "email1", "password1");
+        AppUser appUser2 = new AppUser("username2", "email2", "password2");
+        productService.addNewUser(appUser1);
+        productService.addNewUser(appUser2);
 
-        List<User> foundUser = productService.getAllUsers();
+        List<AppUser> foundAppUser = productService.getAllUsers();
 
-        assertTrue(foundUser.contains(user1));
-        assertTrue(foundUser.contains(user2));
-        assertEquals(2, foundUser.size());
+        assertTrue(foundAppUser.contains(appUser1));
+        assertTrue(foundAppUser.contains(appUser2));
+        assertEquals(2, foundAppUser.size());
     }
 
 }

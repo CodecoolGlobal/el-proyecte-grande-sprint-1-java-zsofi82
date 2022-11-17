@@ -1,6 +1,6 @@
 package com.coodecool.pickyourspot.controller;
 
-import com.coodecool.pickyourspot.model.User;
+import com.coodecool.pickyourspot.model.AppUser;
 import com.coodecool.pickyourspot.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,8 +28,8 @@ public class TableController {
     }
 
     @PostMapping(value = "registration")
-    public String handleRegistration(@ModelAttribute("user") User user) {
-        productService.addNewUser(user);
+    public String handleRegistration(@ModelAttribute("user") AppUser appUser) {
+        productService.addNewUser(appUser);
         return "redirect:";
     }
 
@@ -40,7 +40,7 @@ public class TableController {
 
     //TODO: login user create session
     @PostMapping(value = "login")
-    public String handleLogin(@RequestBody User user) {
+    public String handleLogin(@RequestBody AppUser appUser) {
         return "redirect:";
     }
 

@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
 
-public class Table {
+public class FoosballTable {
     UUID id;
     String name;
     String address;
@@ -19,7 +19,7 @@ public class Table {
         this.reservations = reservations;
     }
 */
-    public Table(String name, String address) {
+    public FoosballTable(String name, String address) {
         this.id = UUID.randomUUID();
         this.name = name;
         this.address = address;
@@ -54,8 +54,8 @@ public class Table {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Table table = (Table) o;
-        return Objects.equals(id, table.id);
+        FoosballTable foosballTable = (FoosballTable) o;
+        return Objects.equals(id, foosballTable.id);
     }
 
     @Override

@@ -1,6 +1,6 @@
 package com.coodecool.pickyourspot.storage;
 
-import com.coodecool.pickyourspot.model.User;
+import com.coodecool.pickyourspot.model.AppUser;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -9,7 +9,7 @@ import java.util.Optional;
 import java.util.UUID;
 @Component
 public class UserDaoMem implements UserDao {
-    private final List<User> users = new ArrayList<>();
+    private final List<AppUser> appUsers = new ArrayList<>();
     private static UserDaoMem userDaoMem = null;
 
     private UserDaoMem() {
@@ -23,28 +23,28 @@ public class UserDaoMem implements UserDao {
     }
 
     @Override
-    public void addUser(User user) {
-        users.add(user);
+    public void addUser(AppUser appUser) {
+        appUsers.add(appUser);
     }
 
     @Override
-    public void deleteUser(User user) {
-        users.remove(user);
+    public void deleteUser(AppUser appUser) {
+        appUsers.remove(appUser);
     }
 
     @Override
-    public List<User> getAllUsers() {
-        return users;
+    public List<AppUser> getAllUsers() {
+        return appUsers;
     }
 
     @Override
-    public void updateUser(User user) {
-        users.set(users.indexOf(user), user);
+    public void updateUser(AppUser appUser) {
+        appUsers.set(appUsers.indexOf(appUser), appUser);
     }
 
     @Override
-    public Optional<User> getUserById(UUID id) {
-        return users.stream()
+    public Optional<AppUser> getUserById(UUID id) {
+        return appUsers.stream()
                 .filter(u -> u.getId().compareTo(id) == 0)
                 .findFirst();
     }
