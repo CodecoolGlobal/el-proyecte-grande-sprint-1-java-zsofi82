@@ -3,6 +3,8 @@ package com.coodecool.pickyourspot.controller;
 import com.coodecool.pickyourspot.model.AppUser;
 import com.coodecool.pickyourspot.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,8 +21,12 @@ public class UserController {
     }
 
     @GetMapping("/user/{userId}")
-    public Optional<AppUser> getUserById(@PathVariable String userId){
-        return productService.getUserById(userId);
+    public ResponseEntity<AppUser> getUserById(@PathVariable String userId){
+        Optional<AppUser> user = productService.getUserById(userId);
+        if (user.isPresent()) {
+            return ResponseEntity.ok(user.get());
+        }
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
     }
 
     @GetMapping("/user")
