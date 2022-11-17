@@ -2,6 +2,7 @@ package com.coodecool.pickyourspot.controller;
 
 import com.coodecool.pickyourspot.model.AppUser;
 import com.coodecool.pickyourspot.model.FoosballTable;
+import com.coodecool.pickyourspot.model.Reservation;
 import com.coodecool.pickyourspot.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -41,13 +42,13 @@ public class APIController {
     }
 
     @PostMapping("/table/{tableId}/reservation")
-    public void addReservation(@RequestBody HashMap<String, String> reservation, @PathVariable String tableId) throws IllegalAccessException {
+    public void addReservation(@RequestBody Reservation reservation, @PathVariable String tableId) throws IllegalAccessException {
         productService.addReservation(tableId, reservation);
     }
 
     @DeleteMapping("/table/{tableId}/reservation")
-    public void deleteReservation(@RequestBody HashMap<String, String> reservation, @PathVariable String tableId){
-        productService.removeReservation(tableId,reservation);
+    public void deleteReservation(@RequestBody Reservation reservation, @PathVariable String tableId){
+        productService.removeReservation(tableId, reservation);
     }
 
     @GetMapping("/table/free-tables/{dateTimeString}")
