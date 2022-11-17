@@ -20,30 +20,30 @@ public class APIController {
         this.productService = productService;
     }
 
-    @GetMapping("/user/{id}")
-    public Optional<AppUser> getUserById(@PathVariable String id){
-        return productService.getUserById(id);
+    @GetMapping("/user/{userId}")
+    public Optional<AppUser> getUserById(@PathVariable String userId){
+        return productService.getUserById(userId);
     }
 
-    @GetMapping("/user/all")
+    @GetMapping("/user")
     public List<AppUser> getAllUsers(){
         return productService.getAllUsers();
     }
 
 
-    @PostMapping("/table/add")
+    @PostMapping("/table")
     public void addTable(@RequestBody FoosballTable foosballTable){
         productService.addNewTable(foosballTable);
     }
 
-    @PutMapping("/table/{id}/reservation/add")
-    public void addReservation(@RequestBody HashMap<String, String> reservation, @PathVariable String id) throws IllegalAccessException {
-        productService.addReservation(id, reservation);
+    @PostMapping("/table/{tableId}/reservation")
+    public void addReservation(@RequestBody HashMap<String, String> reservation, @PathVariable String tableId) throws IllegalAccessException {
+        productService.addReservation(tableId, reservation);
     }
 
-    @PutMapping("/table/{id}/reservation/delete")
-    public void deleteReservation(@RequestBody HashMap<String, String> reservation, @PathVariable String id){
-        productService.removeReservation(id,reservation);
+    @DeleteMapping("/table/{tableId}/reservation")
+    public void deleteReservation(@RequestBody HashMap<String, String> reservation, @PathVariable String tableId){
+        productService.removeReservation(tableId,reservation);
     }
 
     @GetMapping("/table/free-tables/{dateTimeString}")
