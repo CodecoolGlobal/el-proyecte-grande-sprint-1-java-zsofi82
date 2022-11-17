@@ -7,7 +7,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface TableDao {
-    void addTable(FoosballTable foosballTable);
+    boolean addTable(FoosballTable foosballTable);
     void deleteTable(FoosballTable foosballTable);
     List<FoosballTable> getAllTables();
     void updateTable(FoosballTable foosballTable);

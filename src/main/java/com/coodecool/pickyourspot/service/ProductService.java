@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -25,7 +24,7 @@ public class ProductService {
         this.tableDao = tableDao;
         this.userDao = userDao;
     }
-    
+
     public List<FoosballTable> getAllTables() {
         return tableDao.getAllTables();
     }
@@ -35,7 +34,7 @@ public class ProductService {
         userDao.addUser(appUser);
     }
 
-    public Optional<AppUser> getUserById(String id){
+    public Optional<AppUser> getUserById(String id) {
         return userDao.getUserById(UUID.fromString(id));
     }
 
@@ -43,29 +42,35 @@ public class ProductService {
         return userDao.getAllUsers();
     }
 
-    public void addNewTable(FoosballTable foosballTable){
-        tableDao.addTable(new FoosballTable(foosballTable.getName(), foosballTable.getAddress()));
-        System.out.println(tableDao.getAllTables());
+    public boolean addNewTable(FoosballTable foosballTable) {
+        if (tableDao.addTable(new FoosballTable(foosballTable.getName(), foosballTable.getAddress()))) {
+            System.out.println(tableDao.getAllTables());
+            return true;
+        }
+        return false;
     }
 
-    public Optional<FoosballTable> getTableById(String id){
+    public Optional<FoosballTable> getTableById(String id) {
         return tableDao.getTableById(UUID.fromString(id));
     }
 
-    public void addReservation(String tableId, Reservation reservation) throws IllegalAccessException {
+    public boolean addReservation(String tableId, Reservation reservation) throws IllegalAccessException {
         Optional<FoosballTable> currentTable = getTableById(tableId);
-        if(currentTable.isPresent()){
-            currentTable.get().reserve(reservation);
-            System.out.println(currentTable);
+        if (currentTable.isPresent()) {
+            if (currentTable.get().reserve(reservation)) {
+                return true;
+            }
         }
+        return false;
     }
 
-    public void removeReservation(String tableId, Reservation reservation){
+    public boolean removeReservation(String tableId, Reservation reservation) {
         Optional<FoosballTable> currentTable = getTableById(tableId);
-        if(currentTable.isPresent()){
-            currentTable.get().cancelReservation(reservation);
-            System.out.println(currentTable);
+        if (currentTable.isPresent()) {
+            return currentTable.get().cancelReservation(reservation);
         }
+        return false;
+
     }
 
     public List<FoosballTable> getFreeTables(String dateTimeString) {
