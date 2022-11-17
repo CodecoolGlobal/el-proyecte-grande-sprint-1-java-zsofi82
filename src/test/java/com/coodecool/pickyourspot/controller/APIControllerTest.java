@@ -2,6 +2,7 @@ package com.coodecool.pickyourspot.controller;
 
 import com.coodecool.pickyourspot.model.AppUser;
 import com.coodecool.pickyourspot.service.ProductService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

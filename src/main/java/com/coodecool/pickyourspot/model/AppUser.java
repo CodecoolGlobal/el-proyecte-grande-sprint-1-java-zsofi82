@@ -9,8 +9,8 @@ public class AppUser {
     private String email;
     private String password;
 
-    public AppUser(){
-    }
+//    public AppUser(){
+//    }
 
     public AppUser(String username, String email, String hashedPassword) {
         this.id = UUID.randomUUID();
