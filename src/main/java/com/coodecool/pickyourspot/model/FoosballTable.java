@@ -37,8 +37,8 @@ public class FoosballTable {
                 .anyMatch(res -> res.reservationTime().equals(reservation.reservationTime()));
     }
 
-    public void cancelReservation(Reservation reservation) {
-        reservations.remove(reservation);
+    public boolean cancelReservation(Reservation reservation) {
+        return reservations.remove(reservation);
     }
 
     public String getName() {

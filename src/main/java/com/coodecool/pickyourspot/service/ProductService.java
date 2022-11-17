@@ -64,12 +64,13 @@ public class ProductService {
         return false;
     }
 
-    public void removeReservation(String tableId, Reservation reservation) {
+    public boolean removeReservation(String tableId, Reservation reservation) {
         Optional<FoosballTable> currentTable = getTableById(tableId);
         if (currentTable.isPresent()) {
-            currentTable.get().cancelReservation(reservation);
-            System.out.println(currentTable);
+            return currentTable.get().cancelReservation(reservation);
         }
+        return false;
+
     }
 
     public List<FoosballTable> getFreeTables(String dateTimeString) {

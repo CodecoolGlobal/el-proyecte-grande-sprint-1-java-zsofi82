@@ -43,8 +43,11 @@ public class TableController {
     }
 
     @DeleteMapping("/table/{tableId}/reservation")
-    public void deleteReservation(@RequestBody Reservation reservation, @PathVariable String tableId) {
-        productService.removeReservation(tableId, reservation);
+    public ResponseEntity<String> deleteReservation(@RequestBody Reservation reservation, @PathVariable String tableId) {
+        if (productService.removeReservation(tableId, reservation)){
+            return ResponseEntity.ok("Removed reservation " + reservation + " from table");
+        }
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Table reservation cancelling failed");
     }
 
     @GetMapping("/table/free-tables/{dateTimeString}")
