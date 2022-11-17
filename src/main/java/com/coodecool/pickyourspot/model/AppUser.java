@@ -3,16 +3,16 @@ package com.coodecool.pickyourspot.model;
 import java.util.Objects;
 import java.util.UUID;
 
-public class User {
+public class AppUser {
     private UUID id;
     private String username;
     private String email;
     private String password;
 
-    public User(){
+    public AppUser(){
     }
 
-    public User(String username, String email, String hashedPassword) {
+    public AppUser(String username, String email, String hashedPassword) {
         this.id = UUID.randomUUID();
         this.username = username;
         this.email = email;
@@ -36,8 +36,8 @@ public class User {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return Objects.equals(id, user.id);
+        AppUser appUser = (AppUser) o;
+        return Objects.equals(id, appUser.id);
     }
 
     @Override

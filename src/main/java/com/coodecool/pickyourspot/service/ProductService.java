@@ -1,7 +1,7 @@
 package com.coodecool.pickyourspot.service;
 
-import com.coodecool.pickyourspot.model.Table;
-import com.coodecool.pickyourspot.model.User;
+import com.coodecool.pickyourspot.model.AppUser;
+import com.coodecool.pickyourspot.model.FoosballTable;
 import com.coodecool.pickyourspot.storage.TableDao;
 import com.coodecool.pickyourspot.storage.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,34 +25,34 @@ public class ProductService {
         this.userDao = userDao;
     }
     
-    public List<Table> getAllTables() {
+    public List<FoosballTable> getAllTables() {
         return tableDao.getAllTables();
     }
 
-    public void addNewUser(User user) {
+    public void addNewUser(AppUser appUser) {
         //TODO: user validation (is username exists?), password hashing
-        userDao.addUser(user);
+        userDao.addUser(appUser);
     }
 
-    public Optional<User> getUserById(String id){
+    public Optional<AppUser> getUserById(String id){
         return userDao.getUserById(UUID.fromString(id));
     }
 
-    public List<User> getAllUsers() {
+    public List<AppUser> getAllUsers() {
         return userDao.getAllUsers();
     }
 
-    public void addNewTable(Table table){
-        tableDao.addTable(new Table(table.getName(), table.getAddress()));
+    public void addNewTable(FoosballTable foosballTable){
+        tableDao.addTable(new FoosballTable(foosballTable.getName(), foosballTable.getAddress()));
         System.out.println(tableDao.getAllTables());
     }
 
-    public Optional<Table> getTableById(String id){
+    public Optional<FoosballTable> getTableById(String id){
         return tableDao.getTableById(UUID.fromString(id));
     }
 
     public void addReservation(String id, HashMap<String, String> reservation) throws IllegalAccessException {
-        Optional<Table> currentTable = getTableById(id);
+        Optional<FoosballTable> currentTable = getTableById(id);
         if(currentTable.isPresent()){
             String key = reservation.keySet().stream().findFirst().get();
             currentTable.get().reserve(LocalDateTime.parse(key) , UUID.fromString(reservation.get(key)));
@@ -61,7 +61,7 @@ public class ProductService {
     }
 
     public void removeReservation(String id, HashMap<String, String> reservation){
-        Optional<Table> currentTable = getTableById(id);
+        Optional<FoosballTable> currentTable = getTableById(id);
         if(currentTable.isPresent()){
             String key = reservation.keySet().stream().findFirst().get();
             currentTable.get().cancelReservation(LocalDateTime.parse(key) , UUID.fromString(reservation.get(key)));
@@ -69,7 +69,7 @@ public class ProductService {
         }
     }
 
-    public List<Table> getFreeTables(String dateTimeString) {
+    public List<FoosballTable> getFreeTables(String dateTimeString) {
         LocalDateTime dateTime = LocalDateTime.parse(dateTimeString);
         return tableDao.getAllTables().stream()
                 .filter(table -> !table.getReservations().containsKey(dateTime))

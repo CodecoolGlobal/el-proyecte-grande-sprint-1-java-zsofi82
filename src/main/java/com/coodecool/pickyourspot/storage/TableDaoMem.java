@@ -1,7 +1,6 @@
 package com.coodecool.pickyourspot.storage;
 
-import com.coodecool.pickyourspot.model.Table;
-import com.coodecool.pickyourspot.model.User;
+import com.coodecool.pickyourspot.model.FoosballTable;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -10,12 +9,12 @@ import java.util.Optional;
 import java.util.UUID;
 @Component
 public class TableDaoMem implements TableDao {
-    private List<Table> tables;
+    private List<FoosballTable> foosballTables;
 
     private static TableDaoMem tableDaoMem = null;
 
     private TableDaoMem() {
-        this.tables = new ArrayList<>();
+        this.foosballTables = new ArrayList<>();
     }
 
     public static TableDaoMem getInstance() {
@@ -26,28 +25,28 @@ public class TableDaoMem implements TableDao {
     }
 
     @Override
-    public void addTable(Table table) {
-        tables.add(table);
+    public void addTable(FoosballTable foosballTable) {
+        foosballTables.add(foosballTable);
     }
 
     @Override
-    public void deleteTable(Table table) {
-        tables.remove(table);
+    public void deleteTable(FoosballTable foosballTable) {
+        foosballTables.remove(foosballTable);
     }
 
     @Override
-    public List<Table> getAllTables() {
-        return tables;
+    public List<FoosballTable> getAllTables() {
+        return foosballTables;
     }
 
     @Override
-    public void updateTable(Table table) {
-        tables.set(tables.indexOf(table), table);
+    public void updateTable(FoosballTable foosballTable) {
+        foosballTables.set(foosballTables.indexOf(foosballTable), foosballTable);
     }
 
     @Override
-    public Optional<Table> getTableById(UUID id) {
-        return tables.stream()
+    public Optional<FoosballTable> getTableById(UUID id) {
+        return foosballTables.stream()
                 .filter(u -> u.getId().compareTo(id) == 0)
                 .findFirst();
     }
