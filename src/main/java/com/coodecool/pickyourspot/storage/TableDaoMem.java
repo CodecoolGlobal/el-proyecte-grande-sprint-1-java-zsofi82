@@ -25,8 +25,8 @@ public class TableDaoMem implements TableDao {
     }
 
     @Override
-    public void addTable(FoosballTable foosballTable) {
-        foosballTables.add(foosballTable);
+    public boolean addTable(FoosballTable foosballTable) {
+        return foosballTables.add(foosballTable);
     }
 
     @Override
