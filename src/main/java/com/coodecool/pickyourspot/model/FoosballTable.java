@@ -8,14 +8,15 @@ public class FoosballTable {
     String name;
     String address;
     List<Reservation> reservations;
-/*
-    public Table(UUID id, String name, String address, Map<LocalDateTime, UUID> reservations) {
-        this.id = id;
-        this.name = name;
-        this.address = address;
-        this.reservations = reservations;
-    }
-*/
+
+    /*
+        public Table(UUID id, String name, String address, Map<LocalDateTime, UUID> reservations) {
+            this.id = id;
+            this.name = name;
+            this.address = address;
+            this.reservations = reservations;
+        }
+    */
     public FoosballTable(String name, String address) {
         this.id = UUID.randomUUID();
         this.name = name;
@@ -23,11 +24,11 @@ public class FoosballTable {
         this.reservations = new ArrayList<>();
     }
 
-    public void reserve(Reservation reservation) throws IllegalAccessException {
-        if (isTimeTaken(reservation)){
-            throw new IllegalAccessException("This time is already reserved!");
-        } else{
-            reservations.add(reservation);
+    public boolean reserve(Reservation reservation) {
+        if (isTimeTaken(reservation)) {
+            return false;
+        } else {
+            return reservations.add(reservation);
         }
     }
 
@@ -36,7 +37,7 @@ public class FoosballTable {
                 .anyMatch(res -> res.reservationTime().equals(reservation.reservationTime()));
     }
 
-    public void cancelReservation(Reservation reservation){
+    public void cancelReservation(Reservation reservation) {
         reservations.remove(reservation);
     }
 

@@ -54,12 +54,14 @@ public class ProductService {
         return tableDao.getTableById(UUID.fromString(id));
     }
 
-    public void addReservation(String tableId, Reservation reservation) throws IllegalAccessException {
+    public boolean addReservation(String tableId, Reservation reservation) throws IllegalAccessException {
         Optional<FoosballTable> currentTable = getTableById(tableId);
         if (currentTable.isPresent()) {
-            currentTable.get().reserve(reservation);
-            System.out.println(currentTable);
+            if (currentTable.get().reserve(reservation)) {
+                return true;
+            }
         }
+        return false;
     }
 
     public void removeReservation(String tableId, Reservation reservation) {

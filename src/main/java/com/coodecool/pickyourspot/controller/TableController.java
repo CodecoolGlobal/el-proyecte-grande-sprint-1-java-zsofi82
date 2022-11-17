@@ -35,8 +35,11 @@ public class TableController {
     }
 
     @PostMapping("/table/{tableId}/reservation")
-    public void addReservation(@RequestBody Reservation reservation, @PathVariable String tableId) throws IllegalAccessException {
-        productService.addReservation(tableId, reservation);
+    public ResponseEntity<String> addReservation(@RequestBody Reservation reservation, @PathVariable String tableId) throws IllegalAccessException {
+        if (productService.addReservation(tableId, reservation)) {
+            return ResponseEntity.ok("Added reservation " + reservation + " to table");
+        }
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Table reservation failed");
     }
 
     @DeleteMapping("/table/{tableId}/reservation")
