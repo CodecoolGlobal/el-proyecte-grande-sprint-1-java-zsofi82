@@ -2,6 +2,7 @@ package com.coodecool.pickyourspot.service;
 
 import com.coodecool.pickyourspot.model.AppUser;
 import com.coodecool.pickyourspot.model.FoosballTable;
+import com.coodecool.pickyourspot.model.Reservation;
 import com.coodecool.pickyourspot.storage.TableDao;
 import com.coodecool.pickyourspot.storage.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,20 +52,18 @@ public class ProductService {
         return tableDao.getTableById(UUID.fromString(id));
     }
 
-    public void addReservation(String id, HashMap<String, String> reservation) throws IllegalAccessException {
-        Optional<FoosballTable> currentTable = getTableById(id);
+    public void addReservation(String tableId, Reservation reservation) throws IllegalAccessException {
+        Optional<FoosballTable> currentTable = getTableById(tableId);
         if(currentTable.isPresent()){
-            String key = reservation.keySet().stream().findFirst().get();
-            currentTable.get().reserve(LocalDateTime.parse(key) , UUID.fromString(reservation.get(key)));
+            currentTable.get().reserve(reservation);
             System.out.println(currentTable);
         }
     }
 
-    public void removeReservation(String id, HashMap<String, String> reservation){
-        Optional<FoosballTable> currentTable = getTableById(id);
+    public void removeReservation(String tableId, Reservation reservation){
+        Optional<FoosballTable> currentTable = getTableById(tableId);
         if(currentTable.isPresent()){
-            String key = reservation.keySet().stream().findFirst().get();
-            currentTable.get().cancelReservation(LocalDateTime.parse(key) , UUID.fromString(reservation.get(key)));
+            currentTable.get().cancelReservation(reservation);
             System.out.println(currentTable);
         }
     }
@@ -72,7 +71,7 @@ public class ProductService {
     public List<FoosballTable> getFreeTables(String dateTimeString) {
         LocalDateTime dateTime = LocalDateTime.parse(dateTimeString);
         return tableDao.getAllTables().stream()
-                .filter(table -> !table.getReservations().containsKey(dateTime))
+                .filter(table -> table.isFreeAt(dateTime))
                 .collect(Collectors.toList());
     }
 }

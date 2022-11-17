@@ -1,16 +1,13 @@
 package com.coodecool.pickyourspot.model;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 
 public class FoosballTable {
     UUID id;
     String name;
     String address;
-    Map<LocalDateTime,UUID> reservations;
+    List<Reservation> reservations;
 /*
     public Table(UUID id, String name, String address, Map<LocalDateTime, UUID> reservations) {
         this.id = id;
@@ -23,19 +20,24 @@ public class FoosballTable {
         this.id = UUID.randomUUID();
         this.name = name;
         this.address = address;
-        this.reservations = new HashMap<>();
+        this.reservations = new ArrayList<>();
     }
 
-    public void reserve(LocalDateTime time, UUID id) throws IllegalAccessException {
-        if (reservations.containsKey(time)){
+    public void reserve(Reservation reservation) throws IllegalAccessException {
+        if (isTimeTaken(reservation)){
             throw new IllegalAccessException("This time is already reserved!");
         } else{
-            reservations.put(time, id);
+            reservations.add(reservation);
         }
     }
 
-    public void cancelReservation(LocalDateTime time, UUID id){
-        reservations.remove(time, id);
+    private boolean isTimeTaken(Reservation reservation) {
+        return reservations.stream()
+                .anyMatch(res -> res.reservationTime().equals(reservation.reservationTime()));
+    }
+
+    public void cancelReservation(Reservation reservation){
+        reservations.remove(reservation);
     }
 
     public String getName() {
@@ -46,7 +48,7 @@ public class FoosballTable {
         return address;
     }
 
-    public Map<LocalDateTime, UUID> getReservations() {
+    public List<Reservation> getReservations() {
         return reservations;
     }
 
@@ -75,5 +77,10 @@ public class FoosballTable {
 
     public UUID getId() {
         return id;
+    }
+
+    public boolean isFreeAt(LocalDateTime dateTime) {
+        return reservations.stream()
+                .noneMatch(res -> res.reservationTime().equals(dateTime));
     }
 }
