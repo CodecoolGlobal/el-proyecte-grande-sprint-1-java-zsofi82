@@ -30,6 +30,10 @@ public class APIController {
         return productService.getAllUsers();
     }
 
+    @GetMapping("/table")
+    public List<FoosballTable> getAllTable(){
+        return productService.getAllTables();
+    }
 
     @PostMapping("/table")
     public void addTable(@RequestBody FoosballTable foosballTable){
