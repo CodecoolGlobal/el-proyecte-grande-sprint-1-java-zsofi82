@@ -26,7 +26,7 @@ public class UserController {
         if (user.isPresent()) {
             return ResponseEntity.ok(user.get());
         }
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
     }
 
     @GetMapping("/user")
