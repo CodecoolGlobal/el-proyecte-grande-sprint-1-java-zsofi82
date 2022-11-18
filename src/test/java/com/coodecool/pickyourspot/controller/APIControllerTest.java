@@ -13,8 +13,24 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class APIControllerTest {
-    @Autowired
+    private final TableDao tableDao;
+    private final UserDao userDao;
+
+
     ProductService productService;
+
+    @Autowired
+    public APIControllerTest(TableDao tableDao, UserDao userDao, ProductService productService) {
+        this.tableDao = tableDao;
+        this.userDao = userDao;
+        this.productService = productService;
+    }
+
+    @BeforeEach
+    public void setUp() {
+        MockTableDao tableDao = (MockTableDao) this.tableDao;
+        tableDao.clear();
+    }
 
     @Test
     void testGetUserByValidId() {
