@@ -42,12 +42,12 @@ public class ProductService {
         return userDao.getAllUsers();
     }
 
-    public boolean addNewTable(FoosballTable foosballTable) {
+    public void addNewTable(FoosballTable foosballTable) {
         if (tableDao.addTable(new FoosballTable(foosballTable.getName(), foosballTable.getAddress()))) {
             System.out.println(tableDao.getAllTables());
-            return true;
+            return
         }
-        return false;
+        throw new TableAlreadyExistsException(foosballTable);
     }
 
     public Optional<FoosballTable> getTableById(String id) {

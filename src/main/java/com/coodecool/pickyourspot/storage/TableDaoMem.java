@@ -1,20 +1,22 @@
 package com.coodecool.pickyourspot.storage;
 
-import com.coodecool.pickyourspot.model.FoosballTable;
-import org.springframework.stereotype.Component;
-
-import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.UUID;
+
+import com.coodecool.pickyourspot.model.FoosballTable;
+
+import org.springframework.stereotype.Component;
 @Component
 public class TableDaoMem implements TableDao {
-    private List<FoosballTable> foosballTables;
+    private Set<FoosballTable> foosballTables;
 
     private static TableDaoMem tableDaoMem = null;
 
     private TableDaoMem() {
-        this.foosballTables = new ArrayList<>();
+        this.foosballTables = new LinkedHashSet<>();
     }
 
     public static TableDaoMem getInstance() {
@@ -36,7 +38,7 @@ public class TableDaoMem implements TableDao {
 
     @Override
     public List<FoosballTable> getAllTables() {
-        return foosballTables;
+        return List.copyOf(this.foosballTables);
     }
 
     @Override

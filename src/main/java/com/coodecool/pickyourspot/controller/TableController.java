@@ -3,6 +3,8 @@ package com.coodecool.pickyourspot.controller;
 import com.coodecool.pickyourspot.model.FoosballTable;
 import com.coodecool.pickyourspot.model.Reservation;
 import com.coodecool.pickyourspot.service.ProductService;
+import com.coodecool.pickyourspot.service.TableAlreadyExistsException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,11 +29,13 @@ public class TableController {
 
     @PostMapping("/table")
     public ResponseEntity<String> addTable(@RequestBody FoosballTable foosballTable) {
-        if (productService.addNewTable(foosballTable)) {
-            return ResponseEntity.ok("Added table");
-        }
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid table data");
+        productService.addNewTable(foosballTable);
+        return ResponseEntity.ok("Added table");
+    }
 
+    @ExceptionHandler(TableAlreadyExistsException.class)
+    public ResponseEntity<String> tableAlreadyExits(TableAlreadyExistsException ex) {
+        return ResponseEntity.badRequest().body(ex.getMessage());
     }
 
     @PostMapping("/table/{tableId}/reservation")
