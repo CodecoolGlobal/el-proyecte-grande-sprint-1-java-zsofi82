@@ -6,38 +6,9 @@ import java.util.UUID;
 
 import com.coodecool.pickyourspot.model.FoosballTable;
 import com.coodecool.pickyourspot.storage.TableDao;
+import com.coodecool.pickyourspot.storage.TableDaoMem;
 
-public class MockTableDao implements TableDao {
-
-    @Override
-    public boolean addTable(FoosballTable foosballTable) {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
-    @Override
-    public void deleteTable(FoosballTable foosballTable) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public List<FoosballTable> getAllTables() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public Optional<FoosballTable> getTableById(UUID id) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public void updateTable(FoosballTable foosballTable) {
-        // TODO Auto-generated method stub
-
-    }
+public class MockTableDao extends TableDaoMem {
 
     public void clear() {
         // TODO
