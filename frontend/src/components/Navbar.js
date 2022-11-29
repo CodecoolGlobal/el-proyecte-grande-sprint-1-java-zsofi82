@@ -7,8 +7,8 @@ const Navbar = () => {
 
   return (
     <nav className="navbar sticky-top navbar-expand-lg bg-dark text-light">
-      <div class="container-fluid">
-        <span class="navbar-brand mb-0 h1 text-light" onClick={() => { navigate("/") }}>Pick Your Spot</span>
+      <div className="container-fluid">
+        <span className="navbar-brand mb-0 h1 text-light" onClick={() => { navigate("/") }}>Pick Your Spot</span>
         <ul className="flex-row navbar-nav">
           <li className="nav-item col" style={{marginLeft: "0.4em"}}>
             <Button text={"Register"} onClick={() => { navigate("/registration") }}></Button></li>
