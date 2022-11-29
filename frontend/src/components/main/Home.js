@@ -4,37 +4,29 @@ import { useEffect, useState } from "react";
 import Navbar from "../Navbar";
 
 const Home = () => {
-  const [tableData, setTableData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [tableData, setTableData] = useState({});
 
-  useEffect(() => {
-    fetch("api/table")
-      .then(res => res.json())
-      .then(
-        (result) => {
-          setLoading(false)
-          setTableData(result)
-        },
-        // Note: it's important to handle errors here
-        // instead of a catch() block so that we don't swallow
-        // exceptions from actual bugs in components.
-        (error) => {
-          setLoading(false);
-          setError(error);
-        }
-      )
-  }, [])
-  if (loading === false) {
-    return (
-      <div>
-        <Navbar />
-        <p>{tableData.length ? <Tables tables={tableData} /> : 'No tables to show'}</p>
-        <Footer />
-      </div>
+  useEffect(()=> {
+    async function fetchTables() {
+      let res = await fetch(`/api/table`)
+      let data = await res.json()
+      setTableData(data)
+    }
 
-    )
-  }
+    try {
+      fetchTables()
+    } catch(err) {
+      console.error(err)
+    }
+  })
+
+  return (
+    <div>
+      <Navbar />
+      {tableData.length ? <Tables tables={tableData} /> : 'No tables to show'}
+      <Footer />
+    </div>
+  )
 
 }
 
