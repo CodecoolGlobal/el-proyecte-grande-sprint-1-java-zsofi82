@@ -1,23 +1,36 @@
 import logo from './logo.svg';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import './App.css';
+import Home from './components/main/Home';
+import Login from './components/login/Login';
+import Logout from './components/logout/Logout';
+import Registration from './components/registration/Registration';
+// import User from './components/User';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/logout" element={<Logout />} />
+          <Route path="/registration" element={<Registration />} />
+          {/* <Route
+            // this path will match URLs like
+            // - /teams/hotspur
+            // - /teams/real
+            path="/user/:id"
+            // the matching param will be available to the loader
+            loader={({ params }) => {
+              console.log(params.id); // "hotspur"
+            }}
+            // and the action
+            action={({ params }) => { }}
+            element={<User />}
+          />; */}
+        </Routes>
+      </Router>
     </div>
   );
 }
