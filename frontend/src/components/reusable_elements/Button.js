@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 const Button = ({ onClick, text, bootstrapClassname }) => {
   return (
     <button
-      className={["btn", bootstrapClassname]}
+      className={"btn " + bootstrapClassname}
       onClick={onClick}
     >
       {text}
