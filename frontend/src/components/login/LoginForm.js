@@ -1,49 +1,45 @@
 import { useEffect, useState } from "react"
-import Button from '../reusable_elements/Button.js'
+import Button from "../reusable_elements/Button"
 
-const RegistrationForm = () => {
-    const [userData, setUserData] = useState()
+const LoginForm = () => {
+    const [loginData, setLoginData] = useState()
 
     function grabFormData(e) {
         e.preventDefault()
         const userName = e.target['name'].value
         const userPassword = e.target['password'].value
-        const userEmail = e.target['email'].value
-        const data = { "username": userName, "password": userPassword, "email": userEmail }
+        const data = { "username": userName, "password": userPassword }
         e.target.reset()
-        const update = () => { setUserData(data) }
+        const update = () => { setLoginData(data) }
         update()
     }
 
     useEffect(() => {
-        if (userData) {
+        if (loginData) {
             try {
-                const backendUrl = `/api/registration`
+                const backendUrl = `/api/login`
                 fetch(backendUrl, {
                     method: 'POST',
                     headers: {
                         'Content-type': 'application/json',
                     },
-                    body: JSON.stringify(userData)
+                    body: JSON.stringify(loginData)
                 })
             } catch (err) {
                 console.error(err)
             }
         }
-    }, [userData])
+    }, [loginData])
 
     return (
         <>
-            <div className="registrationFormDiv">
-                <form className="registrationForm" onSubmit={(e) => grabFormData(e)}>
+            <div className="loginFormDiv">
+                <form className="loginForm" onSubmit={(e) => grabFormData(e)}>
                     <label>Name:</label>
                     <input type="text" name="name">
                     </input>
                     <label>Password:</label>
                     <input type="password" name="password">
-                    </input>
-                    <label>Email:</label>
-                    <input type="email" name="email">
                     </input>
                     <Button type='submit' text='Submit'/>
                 </form>
@@ -52,4 +48,4 @@ const RegistrationForm = () => {
     )
 }
 
-export default RegistrationForm
+export default LoginForm

@@ -1,15 +1,15 @@
 import Navbar from "../Navbar"
 import RegistrationForm from "./RegistrationForm"
-import Title from "./Title"
-import './registration.css'
+import './Registration.css'
+import Footer from "../Footer"
 
 const Registration = () => {
   return (
-    <div className="registratinoContainer">
+    <div className="registrationContainer">
       <Navbar />
-      <Title />
+      <h1>Registration:</h1>
       <RegistrationForm />
-      {/* <Footer /> */}
+      <Footer />
     </div>
   )
 }
