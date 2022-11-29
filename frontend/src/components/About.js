@@ -1,4 +1,4 @@
-import foosball_table from '/Foosball_table.jpg'
+import foosball_table from '../Foosball_table.jpg'
 
 const About = () => {
     return (
