@@ -1,18 +1,17 @@
-.registratinoContainer {
+.loginContainer {
     text-align: center;
     display: flex;
     flex-direction: column;
     gap: 3vh;
 }
 
-.registrationFormDiv {
+.loginFormDiv {
     display: flex;
     justify-content: center;
 }
 
-.registrationForm {
+.loginForm {
     display: flex;
     flex-direction: column;
     gap: 1vh;
-
 }
