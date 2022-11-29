@@ -5,6 +5,7 @@ import Home from './components/main/Home';
 import Login from './components/login/Login';
 import Logout from './components/logout/Logout';
 import Registration from './components/registration/Registration';
+import About from "./components/About";
 // import User from './components/User';
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/logout" element={<Logout />} />
           <Route path="/registration" element={<Registration />} />
+          <Route path="/about" element={<About />} />
           {/* <Route
             // this path will match URLs like
             // - /teams/hotspur
