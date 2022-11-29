@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import Button from '../reusable_elements/Button.js'
 
 const RegistrationForm = () => {
     const [userData, setUserData] = useState()
@@ -9,6 +10,7 @@ const RegistrationForm = () => {
         const userPassword = e.target['password'].value
         const userEmail = e.target['email'].value
         const data = { "username": userName, "password": userPassword, "email": userEmail }
+        e.target.reset()
         const update = () => { setUserData(data) }
         update()
     }
@@ -45,7 +47,8 @@ const RegistrationForm = () => {
                     <label>Email:</label>
                     <input type="email" name="email">
                     </input>
-                    <button type='submit'>Submit</button>
+                    <Button type='submit' text='Submit'/>
+                    {/* <button type='submit'>Submit</button> */}
                 </form>
             </div>
         </>
