@@ -24,7 +24,7 @@ const Home =  () => {
                 }
             )
     }, [])
-    if(loading == false){
+    if(loading === false){
         return (
             <div>Home
                 <p>{tableData.length? <Tables  tables={tableData}/> : 'No tables to show' }</p>
