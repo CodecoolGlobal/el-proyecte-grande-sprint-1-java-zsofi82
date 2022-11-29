@@ -6,9 +6,9 @@ const Navbar = () => {
       <div class="container-fluid">
         <span class="navbar-brand mb-0 h1 text-light">Pick Your Spot</span>
         <ul className="flex-row-reverse navbar-nav">
-          <li className="nav-item col">
-            <Button text={"Register"}></Button></li>
-          <li className="nav-item col">
+          <li className="nav-item col m-1">
+            <Button text={"Register"} ></Button></li>
+          <li className="nav-item col m-1">
             <Button text={"Login"}></Button></li>
         </ul>
       </div>
