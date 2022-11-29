@@ -10,11 +10,11 @@ const Navbar = () => {
       <div class="container-fluid">
         <span class="navbar-brand mb-0 h1 text-light" onClick={() => { navigate("/") }}>Pick Your Spot</span>
         <ul className="flex-row navbar-nav">
-          <li className="nav-item col m-1">
+          <li className="nav-item col" style={{marginLeft: "0.4em"}}>
             <Button text={"Register"} onClick={() => { navigate("/registration") }}></Button></li>
-          <li className="nav-item col m-1">
+          <li className="nav-item col" style={{marginLeft: "0.4em"}}>
             <Button text={"Login"} onClick={() => { navigate("/login") }}></Button></li>
-          <li className="nav-item col m-1">
+          <li className="nav-item col">
             <Button text={"About"} bootstrapClassname={"btn-link"} onClick={() => { navigate("/about") }} ></Button></li>
         </ul>
       </div>
