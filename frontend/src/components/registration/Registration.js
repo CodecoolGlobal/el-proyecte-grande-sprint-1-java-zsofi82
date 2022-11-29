@@ -1,7 +1,16 @@
+import Navbar from "../Navbar"
+import RegistrationForm from "./RegistrationForm"
+import Title from "./Title"
+import './registration.css'
 
 const Registration = () => {
   return (
-    <div>Registration</div>
+    <div className="registratinoContainer">
+      <Navbar />
+      <Title />
+      <RegistrationForm />
+      {/* <Footer /> */}
+    </div>
   )
 }
 
