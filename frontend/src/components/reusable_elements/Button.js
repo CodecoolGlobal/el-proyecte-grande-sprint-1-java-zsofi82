@@ -1,10 +1,11 @@
 import PropTypes from "prop-types";
 
-const Button = ({ onClick, text, bootstrapClassname }) => {
+const Button = ({ onClick, type, text, bootstrapClassname }) => {
   return (
     <button
       className={"btn " + bootstrapClassname}
       onClick={onClick}
+      type={type}
     >
       {text}
     </button>
@@ -14,9 +15,6 @@ const Button = ({ onClick, text, bootstrapClassname }) => {
 Button.defaultProps = {
   bootstrapClassname: "btn-primary",
   text: "Button",
-  onClick: (e) => {
-    console.log(e.target)
-  }
 };
 
 Button.propTypes = {
