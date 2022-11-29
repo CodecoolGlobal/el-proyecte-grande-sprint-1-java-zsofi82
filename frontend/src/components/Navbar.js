@@ -13,7 +13,7 @@ const Navbar = () => {
           <li className="nav-item col m-1">
             <Button text={"Register"} onClick={()=>{navigate("/login")}}></Button></li>
           <li className="nav-item col m-1">
-            <Button text={"Login"} onClick={()=>{navigate("/login")}}></Button></li>
+            <Button text={"Login"} onClick={()=>{navigate("/registration")}}></Button></li>
         </ul>
       </div>
     </nav>
