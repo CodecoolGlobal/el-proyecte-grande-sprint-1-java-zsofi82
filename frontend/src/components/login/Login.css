@@ -1,0 +1,17 @@
+.loginContainer {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 3vh;
+}
+
+.loginFormDiv {
+    display: flex;
+    justify-content: center;
+}
+
+.loginForm {
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+}
