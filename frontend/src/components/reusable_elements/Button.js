@@ -14,7 +14,9 @@ const Button = ({ onClick, text, bootstrapClassname }) => {
 Button.defaultProps = {
   bootstrapClassname: "btn-primary",
   text: "Button",
-  onClick: (e) => { console.log("Pressed: " + e.target) }
+  onClick: (e) => {
+    console.log(e.target)
+  }
 };
 
 Button.propTypes = {
