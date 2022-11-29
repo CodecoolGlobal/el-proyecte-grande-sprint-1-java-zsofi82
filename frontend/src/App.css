@@ -40,3 +40,7 @@
 .navbarButton {
   margin-left: 0.4em;
 }
+
+.backToHome:hover {
+  cursor: pointer;
+}

@@ -45,7 +45,7 @@ const RegistrationForm = () => {
                     <label>Email:</label>
                     <input type="email" name="email">
                     </input>
-                    <Button type='submit' text='Submit'/>
+                    <Button type='submit' text='Submit' />
                 </form>
             </div>
         </>

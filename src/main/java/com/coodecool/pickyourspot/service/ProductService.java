@@ -23,6 +23,9 @@ public class ProductService {
     public ProductService(TableDao tableDao, UserDao userDao) {
         this.tableDao = tableDao;
         this.userDao = userDao;
+
+        // TODO adding default tables, just for testing, delete later
+        tableDao.addTable(new FoosballTable("testTable", "testAddress"));
     }
 
     public List<FoosballTable> getAllTables() {

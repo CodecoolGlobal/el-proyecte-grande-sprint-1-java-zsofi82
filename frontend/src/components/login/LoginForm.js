@@ -41,7 +41,7 @@ const LoginForm = () => {
                     <label>Password:</label>
                     <input type="password" name="password">
                     </input>
-                    <Button type='submit' text='Submit'/>
+                    <Button type='submit' text='Submit' />
                 </form>
             </div>
         </>

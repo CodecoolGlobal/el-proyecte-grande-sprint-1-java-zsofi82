@@ -3,7 +3,7 @@ import foosball_table from '../Foosball_table.jpg'
 const About = () => {
     return (
         <div className="about">
-            <div style={{backgroundImage: `url(${foosball_table})`}}>">
+            <div style={{backgroundImage: `url(${foosball_table})`}}>
                 <h1 className="font-weight-light">About</h1>
                 <p>
                     Pick your spot is a foosball reservation application.
