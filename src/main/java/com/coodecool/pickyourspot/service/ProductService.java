@@ -82,4 +82,12 @@ public class ProductService {
                 .filter(table -> table.isFreeAt(dateTime))
                 .collect(Collectors.toList());
     }
+
+    public List<FoosballTable> getReservedTablesByUser(String userId){
+        return tableDao.getReservedTablesByUser(UUID.fromString(userId));
+    }
+
+    public List<Reservation> getReservationsByTableIdAndUserId(String tableId, String userId){
+        return tableDao.getReservationsByTableIdAndUserId(UUID.fromString(tableId), UUID.fromString(userId));
+    }
 }
