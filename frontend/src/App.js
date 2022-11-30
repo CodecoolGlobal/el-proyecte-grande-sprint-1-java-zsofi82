@@ -6,14 +6,17 @@ import Login from './components/login/Login';
 import Logout from './components/logout/Logout';
 import Registration from './components/registration/Registration';
 import About from "./components/About";
+import React from "react";
+import { CookiesProvider, useCookies } from "react-cookie";
 import User from "./components/user/User";
+
 // import User from './components/User';
 import { CookiesProvider, useCookies } from "react-cookie";
 
 
 function App() {
   const [cookies, setCookie] = useCookies(["user"]);
-  
+
   return (
     <div className="App">
       <CookiesProvider>
@@ -26,6 +29,7 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/user/:userId" element={<User />} />
             {/* <Route
+          {/* <Route
             // this path will match URLs like
             // - /teams/hotspur
             // - /teams/real

@@ -53,6 +53,4 @@ public class ApiController {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson("Invalid username or password!"));
     }
 
-
-
 }

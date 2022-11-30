@@ -98,7 +98,7 @@ public class ProductService {
         return false;
     }
 
-    public List<FoosballTable> getReservedTablesByUser(String userId){
+    public List<FoosballTable> getReservedTablesByUser(String userId ){
         return tableDao.getReservedTablesByUser(UUID.fromString(userId));
     }
 
@@ -106,7 +106,7 @@ public class ProductService {
         return tableDao.getReservationsByTableIdAndUserId(UUID.fromString(tableId), UUID.fromString(userId));
 
     }
-    
+
     public  Optional<AppUser> loginUser(AppUser appUser) {
         List<AppUser> allUsers = userDao.getAllUsers();
         return allUsers.stream()
@@ -115,3 +115,4 @@ public class ProductService {
                 .findAny();
     }
 }
+
