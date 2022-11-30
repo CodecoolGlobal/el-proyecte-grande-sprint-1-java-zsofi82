@@ -84,6 +84,7 @@ public class ProductService {
                 .collect(Collectors.toList());
     }
 
+
     public boolean registerUser(AppUser appUser) {
         List<AppUser> allUsers = userDao.getAllUsers();
         long numberOfUsersWithSameName = allUsers.stream()
@@ -95,5 +96,13 @@ public class ProductService {
         }
         System.out.println("Fail! There is a " + appUser);
         return false;
+
+    public List<FoosballTable> getReservedTablesByUser(String userId){
+        return tableDao.getReservedTablesByUser(UUID.fromString(userId));
+    }
+
+    public List<Reservation> getReservationsByTableIdAndUserId(String tableId, String userId){
+        return tableDao.getReservationsByTableIdAndUserId(UUID.fromString(tableId), UUID.fromString(userId));
+
     }
 }

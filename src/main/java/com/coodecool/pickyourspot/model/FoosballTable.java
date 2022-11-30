@@ -2,6 +2,7 @@ package com.coodecool.pickyourspot.model;
 
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class FoosballTable {
     UUID id;
@@ -39,6 +40,13 @@ public class FoosballTable {
 
     public boolean cancelReservation(Reservation reservation) {
         return reservations.remove(reservation);
+    }
+
+    public boolean reservedByUser(UUID userId){
+        return reservations.stream().filter(reservation -> reservation.userId().equals(userId)).collect(Collectors.toSet()).size() > 0;
+    }
+    public List<Reservation> getReservationsByUserId(UUID userId){
+        return reservations.stream().filter(reservation -> reservation.userId().equals(userId)).collect(Collectors.toList());
     }
 
     public String getName() {
@@ -84,4 +92,6 @@ public class FoosballTable {
         return reservations.stream()
                 .noneMatch(res -> res.reservationTime().equals(dateTime));
     }
+
+
 }

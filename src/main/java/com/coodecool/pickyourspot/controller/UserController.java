@@ -1,6 +1,8 @@
 package com.coodecool.pickyourspot.controller;
 
 import com.coodecool.pickyourspot.model.AppUser;
+import com.coodecool.pickyourspot.model.FoosballTable;
+import com.coodecool.pickyourspot.model.Reservation;
 import com.coodecool.pickyourspot.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,5 +34,15 @@ public class UserController {
     @GetMapping("/user")
     public List<AppUser> getAllUsers(){
         return productService.getAllUsers();
+    }
+
+    @GetMapping("/user/{userId}/reservation")
+    public List<FoosballTable> getReservedTables(@PathVariable String userId){
+        return productService.getReservedTablesByUser(userId);
+    }
+
+    @GetMapping("/user/{userId}/reservation/{tableId}")
+    public List<Reservation> getReservationsByTableIdAndUserId(@PathVariable String tableId, @PathVariable String userId){
+        return productService.getReservationsByTableIdAndUserId(tableId,userId);
     }
 }
