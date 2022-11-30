@@ -1,7 +1,8 @@
+import Button from "../reusable_elements/Button"
 
-const TableModal = ({ table, onExit }) => {
+const TableModal = ({ table, onExit, onReserve }) => {
   return (
-    <div className="card position-absolute top-50 start-50 translate-middle">
+    <div className="card position-absolute top-50 start-50 translate-middle ">
       {console.log(table)}
       <div className="card-body">
         <div className="card-title d-flex flex-row">
@@ -9,11 +10,15 @@ const TableModal = ({ table, onExit }) => {
           <div className="btn-close col" onClick={() => { onExit() }} >
           </div>
         </div>
-        <div>
+        <div className="mb-3">
           {table.address}
         </div>
-        <div>
-
+        <div className="flex-row-reverse">
+          <Button 
+          text={"Reserve"} 
+          bootstrapClassname={"btn-success"} 
+          onClick={onReserve}
+          type={"button"}/>
         </div>
       </div>
     </div>
