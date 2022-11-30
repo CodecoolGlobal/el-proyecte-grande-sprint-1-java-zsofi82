@@ -7,9 +7,7 @@ import Logout from './components/logout/Logout';
 import Registration from './components/registration/Registration';
 import About from "./components/About";
 import React from "react";
-import { CookiesProvider, useCookies } from "react-cookie";
 import User from "./components/user/User";
-
 // import User from './components/User';
 import { CookiesProvider, useCookies } from "react-cookie";
 
