@@ -7,7 +7,8 @@ const TableModal = ({ table, onExit, onReserve }) => {
       <div className="card-body">
         <div className="card-title d-flex">
           <div className="card-title col"><h4>{table.name}</h4></div>
-          <div className="btn-close col reverse" onClick={() => { onExit() }} >
+          //TODO: align this to the right and make the whole card more narrow
+          <div className="btn-close col text-end" onClick={() => { onExit() }} >
           </div>
         </div>
         <div className="">
