@@ -19,7 +19,7 @@ function App() {
           <Route path="/logout" element={<Logout />} />
           <Route path="/registration" element={<Registration />} />
           <Route path="/about" element={<About />} />
-          <Route path="/user" element={<User />} />
+          <Route path="/user/:userId" element={<User />} />
           {/* <Route
             // this path will match URLs like
             // - /teams/hotspur
