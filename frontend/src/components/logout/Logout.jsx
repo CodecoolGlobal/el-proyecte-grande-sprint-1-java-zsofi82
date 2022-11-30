@@ -5,9 +5,9 @@ const Logout = ({ removeCookie, loggedIn, setLoggedIn }) => {
   const navigate = useNavigate()
 
   function logoutUser() {
+    setLoggedIn(false)
     removeCookie('userID', { path: '/' });
     removeCookie('userName', { path: '/' });
-    setLoggedIn(false)
   }
 
   useEffect(() => {

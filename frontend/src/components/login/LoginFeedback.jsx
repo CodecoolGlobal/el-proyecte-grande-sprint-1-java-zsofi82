@@ -26,7 +26,6 @@ const LoginFeedback = ({ serverRes, setCookie, cookies, loggedIn, setLoggedIn })
             async function setData() {
                 try {
                     const data = await serverRes.json();
-                    console.log(data)
                     setSessionCookie(data)
                 } catch (err) {
                     console.error(err)
