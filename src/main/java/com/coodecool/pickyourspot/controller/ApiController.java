@@ -48,11 +48,7 @@ public class ApiController {
         Optional<AppUser> potentialUser = productService.loginUser(appUser);
         if (potentialUser.isPresent()) {
             AppUser user = potentialUser.get();
-            String id = user.getId().toString();
-            String name = user.getUsername();
-            // This is very ugly!
-            String res = "{ \"name\": " + "\"" + name + "\"" + ", \"id\": " + id + "}";
-            return ResponseEntity.ok(gson.toJson(res));
+            return ResponseEntity.ok(gson.toJson(user));
         }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson("Invalid username or password!"));
     }

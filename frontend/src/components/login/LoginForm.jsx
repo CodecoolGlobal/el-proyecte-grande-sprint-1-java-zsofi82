@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import Button from "../reusable_elements/Button"
 import LoginFeedback from "./LoginFeedback"
 
-const LoginForm = () => {
+const LoginForm = ({ cookies, setCookie }) => {
     const [loginData, setLoginData] = useState()
     const [serverRes, setServerRes] = useState()
 
@@ -44,7 +44,7 @@ const LoginForm = () => {
                     <input type="password" name="password" required>
                     </input>
                     <Button type='submit' text='Submit' />
-                    <LoginFeedback serverRes={serverRes}/>
+                    <LoginFeedback serverRes={serverRes} setServerRes={setServerRes} cookies={cookies} setCookie={setCookie}/>
                 </form>
             </div>
         </>
