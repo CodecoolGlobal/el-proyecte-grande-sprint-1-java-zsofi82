@@ -2,8 +2,8 @@ import {useState} from "react";
 import DateTimePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-const SearchBar = () => {
-
+const SearchBar = ({filterTable}) => {
+    //TODO: get spots as properties
     const spots = [
         {value: '', text: '-- Pick a spot --'},
         {value: 'alpaka', text: 'Alpaka'},
@@ -11,21 +11,16 @@ const SearchBar = () => {
         {value: 'here', text: 'Here'},
     ];
 
-    const [selectedSpot, setSelectedSpot] = useState(spots[0].value);
+    const [selectedSpot, setSelectedSpot] = useState("");
     const [date, setDate] = useState(new Date());
 
     const handleChange = (e) => {
         setSelectedSpot(e.target.value);
     };
 
-    // TODO: finish method
-    const handleSubmit = () => {
-        alert('This spot and time has been submitted: ' + selectedSpot + date)
-    }
-
     return (
         <div className="container-fluid">
-            <form onSubmit={handleSubmit} className="row g-3 m-2">
+            <form className="row g-3 m-2">
                 <div className="col">
                 <select className="form-select" value={selectedSpot} onChange={handleChange}>
                     {spots.map(spot => (
@@ -46,7 +41,7 @@ const SearchBar = () => {
                 />
                 </div>
                 <div className="col" style={{textAlign:"left"}}>
-                    <button className="btn btn-primary" type="submit">Pick</button>
+                    <button className="btn btn-primary" type="submit" onClick={() => filterTable(selectedSpot, date)}>Pick</button>
                 </div>
             </form>
         </div>

@@ -19,12 +19,17 @@ const Home = () => {
     } catch(err) {
       console.error(err)
     }
-  })
+  }, [])
+
+  //TODO: update Table data from SearchBar
+  const filterTable = (spot, date) => {
+    alert('This spot and time has been submitted: ' + spot + date);
+  }
 
   return (
     <div>
       <Navbar />
-      <SearchBar />
+      <SearchBar filterTable={filterTable}/>
       {tableData.length ? <Tables tables={tableData} /> : 'No tables to show'}
       <Footer />
     </div>
