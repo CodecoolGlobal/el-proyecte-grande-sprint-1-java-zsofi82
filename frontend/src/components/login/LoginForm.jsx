@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react"
 import Button from "../reusable_elements/Button"
+import LoginFeedback from "./LoginFeedback"
 
 const LoginForm = () => {
     const [loginData, setLoginData] = useState()
+    const [serverRes, setServerRes] = useState()
 
     function grabFormData(e) {
         e.preventDefault()
@@ -24,7 +26,7 @@ const LoginForm = () => {
                         'Content-type': 'application/json',
                     },
                     body: JSON.stringify(loginData)
-                })
+                }).then(res => setServerRes(res))
             } catch (err) {
                 console.error(err)
             }
@@ -36,12 +38,13 @@ const LoginForm = () => {
             <div className="loginFormDiv">
                 <form className="loginForm" onSubmit={(e) => grabFormData(e)}>
                     <label>Name:</label>
-                    <input type="text" name="name">
+                    <input type="text" name="name" required>
                     </input>
                     <label>Password:</label>
-                    <input type="password" name="password">
+                    <input type="password" name="password" required>
                     </input>
                     <Button type='submit' text='Submit' />
+                    <LoginFeedback serverRes={serverRes}/>
                 </form>
             </div>
         </>

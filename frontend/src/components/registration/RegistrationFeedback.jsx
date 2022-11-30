@@ -2,7 +2,6 @@
 const RegistrationFeedback = ({ serverRes }) => {
 
     function checkUser() {
-        console.log(serverRes)
         if(!serverRes) {
             return "Please register."
         } else if (serverRes.status === 200){

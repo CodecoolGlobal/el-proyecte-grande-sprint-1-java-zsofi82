@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.google.gson.Gson;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/api")
 public class ApiController {
@@ -36,13 +38,23 @@ public class ApiController {
     }
 
     @PostMapping("/login")
-    public void loginUser(@RequestBody AppUser appuser) {
+    public ResponseEntity<String> loginUser(@RequestBody AppUser appUser) {
 
-        // TODO implement storing user data
         // TODO implement logging in
-        System.out.println(appuser);
+        if (appUser == null || appUser.getUsername().equals("") || appUser.getPassword().equals("")) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson("Invalid username or password!"));
+        }
+
+        Optional<AppUser> potentialUser = productService.loginUser(appUser);
+        if (potentialUser.isPresent()) {
+            AppUser user = potentialUser.get();
+            String id = user.getId().toString();
+            String name = user.getUsername();
+            // This is very ugly!
+            String res = "{ \"name\": " + "\"" + name + "\"" + ", \"id\": " + id + "}";
+            return ResponseEntity.ok(gson.toJson(res));
+        }
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson("Invalid username or password!"));
     }
-
-
 
 }
