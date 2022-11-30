@@ -8,6 +8,7 @@ import Registration from './components/registration/Registration';
 import About from "./components/About";
 import React from "react";
 import { CookiesProvider, useCookies } from "react-cookie";
+import User from "./components/user/User";
 // import User from './components/User';
 
 function App() {
@@ -23,19 +24,6 @@ function App() {
             <Route path="/logout" element={<Logout />} />
             <Route path="/registration" element={<Registration />} />
             <Route path="/about" element={<About />} />
-            {/* <Route
-            // this path will match URLs like
-            // - /teams/hotspur
-            // - /teams/real
-            path="/user/:id"
-            // the matching param will be available to the loader
-            loader={({ params }) => {
-              console.log(params.id); // "hotspur"
-            }}
-            // and the action
-            action={({ params }) => { }}
-            element={<User />}
-          />; */}
           </Routes>
         </Router>
       </CookiesProvider>
