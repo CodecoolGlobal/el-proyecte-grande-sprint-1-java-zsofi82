@@ -1,13 +1,14 @@
 package com.coodecool.pickyourspot.model;
 
+import java.beans.Transient;
 import java.util.Objects;
 import java.util.UUID;
 
 public class AppUser {
     private UUID id;
     private String username;
-    private String email;
-    private String password;
+    private transient String email;
+    private transient String password;
 
 //    public AppUser(){
 //    }

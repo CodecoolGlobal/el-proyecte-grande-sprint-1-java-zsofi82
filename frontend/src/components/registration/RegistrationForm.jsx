@@ -27,7 +27,8 @@ const RegistrationForm = () => {
                         'Content-type': 'application/json',
                     },
                     body: JSON.stringify(userData)
-                }).then(res => setServerRes(res))
+                }).then(res => res.json())
+                .then(res => setServerRes(res))
             } catch (err) {
                 console.error(err)
             }
