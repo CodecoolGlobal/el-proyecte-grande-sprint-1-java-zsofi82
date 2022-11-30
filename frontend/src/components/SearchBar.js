@@ -11,23 +11,23 @@ const SearchBar = () => {
         {value: 'here', text: 'Here'},
     ];
 
-    const [selected, setSelected] = useState(spots[0].value);
+    const [selectedSpot, setSelectedSpot] = useState(spots[0].value);
     const [date, setDate] = useState(new Date());
 
     const handleChange = (e) => {
-        setSelected(e.target.value);
+        setSelectedSpot(e.target.value);
     };
 
     // TODO: finish method
     const handleSubmit = () => {
-        alert('This spot and time has been submitted: ' + selected + date)
+        alert('This spot and time has been submitted: ' + selectedSpot + date)
     }
 
     return (
         <div className="container-fluid">
             <form onSubmit={handleSubmit} className="row g-3 m-2">
                 <div className="col">
-                <select className="form-select" value={selected} onChange={handleChange}>
+                <select className="form-select" value={selectedSpot} onChange={handleChange}>
                     {spots.map(spot => (
                         <option key={spot.value} value={spot.value}>
                             {spot.text}
