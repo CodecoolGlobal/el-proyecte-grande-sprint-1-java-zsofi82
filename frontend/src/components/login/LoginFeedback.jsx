@@ -1,18 +1,28 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
-const LoginFeedback = ({ serverRes, setServerRes, setCookie, cookies }) => {
+const LoginFeedback = ({ serverRes, setCookie, cookies, loggedIn, setLoggedIn }) => {
 
     function setSessionCookie(res) {
         setCookie("userID", res.id, {
             path: "/"
         });
+
+        setCookie("userName", res.username, {
+            path: "/"
+        });
+        setLoggedIn(true)
     }
 
+    useEffect(()=> {
+        if(cookies.userID) {
+            setLoggedIn(true)
+        }
+    },[cookies.userID, setLoggedIn])
 
-    function chechkLogin() {
+    function checkLogin() {
         if (!serverRes && !cookies.userID) {
             return "Please log in."
-        } else if ((serverRes && serverRes.status === 200) || cookies.userID) {
+        } else if ((serverRes && serverRes.status === 200) || loggedIn) {
             async function setData() {
                 try {
                     const data = await serverRes.json();
@@ -29,11 +39,13 @@ const LoginFeedback = ({ serverRes, setServerRes, setCookie, cookies }) => {
         } else if (serverRes && serverRes.status === 400) {
             return "Invalid username or password!"
         }
-
     }
 
     return (
-        <div>{chechkLogin()}</div>
+        <>
+            <div>{"logged in " + loggedIn}</div>
+            <div>{checkLogin()}</div>
+        </>
     )
 }
 
