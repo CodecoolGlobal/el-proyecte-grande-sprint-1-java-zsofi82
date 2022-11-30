@@ -1,8 +1,8 @@
-const Reservation = () => {
-  return(
-      <div>
+import DeleteReservation from "./DeleteReservation";
 
-      </div>
-  )
+const Reservation = ({reservation, tableId}) => {
+    return(
+        <p className="card-text"> {reservation.reservationTime} <DeleteReservation key={reservation.reservationTime} reservation={reservation} tableId={tableId}/> </p>
+    )
 }
 export default Reservation
