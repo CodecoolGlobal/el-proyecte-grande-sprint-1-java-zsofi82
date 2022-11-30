@@ -6,6 +6,7 @@ import Login from './components/login/Login';
 import Logout from './components/logout/Logout';
 import Registration from './components/registration/Registration';
 import About from "./components/About";
+import User from "./components/user/User";
 // import User from './components/User';
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
           <Route path="/logout" element={<Logout />} />
           <Route path="/registration" element={<Registration />} />
           <Route path="/about" element={<About />} />
+          <Route path="/user/:userId" element={<User />} />
           {/* <Route
             // this path will match URLs like
             // - /teams/hotspur
