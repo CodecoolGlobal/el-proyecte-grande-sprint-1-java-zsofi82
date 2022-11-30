@@ -14,7 +14,7 @@ const TableModal = ({ table, onExit, onReserve }) => {
             href={`https://www.google.com/maps/search/${table.address}/`}
             target="_blank">{table.address}</a>
         </div>
-        <div className="flex-row-reverse">
+        <div className="flex-row">
           <Button
             text={"Reserve"}
             bootstrapClassname={"btn-success"}
@@ -24,6 +24,12 @@ const TableModal = ({ table, onExit, onReserve }) => {
       </div>
     </div>
   )
+}
+
+TableModal.propTypes = {
+  table: PropTypes.string,
+  onExit: PropTypes.func,
+  onReserve: PropTypes.func,
 }
 
 export default TableModal
