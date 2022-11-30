@@ -2,6 +2,7 @@ import Footer from "../Footer";
 import Tables from "./Tables";
 import { useEffect, useState } from "react";
 import Navbar from "../Navbar";
+import SearchBar from "../SearchBar";
 
 const Home = () => {
   const [tableData, setTableData] = useState({});
@@ -23,6 +24,7 @@ const Home = () => {
   return (
     <div>
       <Navbar />
+      <SearchBar />
       {tableData.length ? <Tables tables={tableData} /> : 'No tables to show'}
       <Footer />
     </div>
