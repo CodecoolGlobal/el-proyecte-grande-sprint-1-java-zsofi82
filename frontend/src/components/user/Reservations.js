@@ -24,7 +24,7 @@ const Reservations = ({table}) => {
         return(
             <div className="col" >
                 <div className="card bg-info" >
-                    <div className="card-header">{table.name}</div>
+                    <div className="card-header"> <h4 className={"my-0 font-weight-normal"}>{table.name}</h4></div>
                     <div className="card-body">
                         <p className="card-text"> {table.address} </p>
                         {reservationData.map((reservation)=> <Reservation key={reservation.reservationTime} reservation={reservation} tableId={table.id}/> )}
