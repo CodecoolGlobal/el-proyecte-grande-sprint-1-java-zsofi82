@@ -96,6 +96,7 @@ public class ProductService {
         }
         System.out.println("Fail! There is a " + appUser);
         return false;
+    }
 
     public List<FoosballTable> getReservedTablesByUser(String userId){
         return tableDao.getReservedTablesByUser(UUID.fromString(userId));
@@ -104,5 +105,13 @@ public class ProductService {
     public List<Reservation> getReservationsByTableIdAndUserId(String tableId, String userId){
         return tableDao.getReservationsByTableIdAndUserId(UUID.fromString(tableId), UUID.fromString(userId));
 
+    }
+    
+    public  Optional<AppUser> loginUser(AppUser appUser) {
+        List<AppUser> allUsers = userDao.getAllUsers();
+        return allUsers.stream()
+                .filter(user -> user.getUsername().equals(appUser.getUsername()))
+                .filter(user -> user.getPassword().equals(appUser.getPassword()))
+                .findAny();
     }
 }
