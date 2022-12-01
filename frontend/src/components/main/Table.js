@@ -2,7 +2,7 @@ const Table = ({ table, showDetails }) => {
     return (
         <div className="col" onClick={() => { showDetails(table) }}>
             <div className="card bg-info" >
-                <div className="card-body">
+                <div className="card-body modal-style">
                     <h5 className="card-title">{table.name}</h5>
                     <p className="card-text"> {table.address} </p>
                 </div>
