@@ -35,9 +35,8 @@ const LoginForm = ({ loggedIn, setLoggedIn, setUserName, setUserId }) => {
                     .then(res => res.json())
                     .then(res => setServerResponse(res))
                 if (serverResponse  && rawResponse.status === 200) {
-                    setUserName(serverResponse.username)
-                    setUserId(serverResponse.id)
-                    setLoggedIn(true)
+                    sessionStorage.setItem("username", serverResponse.username)
+                    sessionStorage.setItem("userid", serverResponse.id)
                     setDataToServer(null)
                     setRawResponse(null)
                     navigate("/")
@@ -46,7 +45,7 @@ const LoginForm = ({ loggedIn, setLoggedIn, setUserName, setUserId }) => {
                 console.error(err)
             }
         }
-    }, [dataToServer, serverResponse, setLoggedIn, navigate])
+    }, [dataToServer, serverResponse, navigate])
 
 
 

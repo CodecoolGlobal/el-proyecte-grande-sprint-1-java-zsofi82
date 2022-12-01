@@ -5,7 +5,7 @@ import Navbar from "../Navbar";
 import TableModal from "./TableModal";
 import SearchBar from "../SearchBar";
 
-const Home = ({ loggedIn, userName, userId }) => {
+const Home = () => {
   const [tableData, setTableData] = useState({});
   const [clickedTable, setClickedTable] = useState(null);
 
@@ -41,8 +41,8 @@ const Home = ({ loggedIn, userName, userId }) => {
 
   return (
     <div>
-      <Navbar loggedIn={loggedIn} userName={userName} userId={userId} />
-      <SearchBar filterTable={filterTable}/>
+      <Navbar />
+      <SearchBar filterTable={filterTable} />
       {tableData.length ? <Tables tables={tableData} showDetails={showDetails} /> : 'No tables to show'}
       {clickedTable && <TableModal table={clickedTable} onExit={exitModal} onReserve={reserveTable} />}
       <Footer />

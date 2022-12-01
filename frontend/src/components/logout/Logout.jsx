@@ -1,18 +1,16 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom"
 
-const Logout = ({ loggedIn, setLoggedIn, userId, setUserId, userName, setUserName }) => {
+const Logout = () => {
   const navigate = useNavigate()
 
   function logoutUser() {
-    setLoggedIn(false)
-    setUserName(undefined)
-    setUserId(undefined)
+    sessionStorage.clear()
   }
 
   useEffect(() => {
     navigate("/")
-  }, [loggedIn, navigate])
+  }, [])
 
 
   return (
