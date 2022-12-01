@@ -1,9 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import Button from "./reusable_elements/Button"
-import { useEffect, useState } from "react";
 
 
-const Navbar = ({ loggedIn }) => {
+const Navbar = ({ loggedIn, userName, userId }) => {
   const navigate = useNavigate();
 
   return (
@@ -11,7 +10,7 @@ const Navbar = ({ loggedIn }) => {
       <div className="container-fluid">
         <span className="navbar-brand mb-0 h1 text-light backToHome" onClick={() => { navigate("/") }}>Pick Your Spot</span>
         <ul className="flex-row navbar-nav">
-          <div>{"logged in: " + loggedIn}</div>
+          <div>{"logged in: " + loggedIn + " user: " + userName + " id: " + userId}</div>
           {!loggedIn && <li className="nav-item col navbarButton">
             <Button text={"Register"} onClick={() => { navigate("/registration") }}></Button>
           </li>}

@@ -1,13 +1,13 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom"
 
-const Logout = ({  loggedIn, setLoggedIn }) => {
+const Logout = ({ loggedIn, setLoggedIn, userId, setUserId, userName, setUserName }) => {
   const navigate = useNavigate()
 
   function logoutUser() {
     setLoggedIn(false)
-    // removeCookie('userID', { path: '/' });
-    // removeCookie('userName', { path: '/' });
+    setUserName(undefined)
+    setUserId(undefined)
   }
 
   useEffect(() => {

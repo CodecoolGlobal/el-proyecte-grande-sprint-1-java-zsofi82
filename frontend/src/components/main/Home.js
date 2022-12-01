@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Navbar from "../Navbar";
 import SearchBar from "../SearchBar";
 
-const Home = ({ loggedIn }) => {
+const Home = ({ loggedIn, userName, userId }) => {
   const [tableData, setTableData] = useState({});
 
   useEffect(() => {
@@ -28,7 +28,7 @@ const Home = ({ loggedIn }) => {
 
   return (
     <div>
-      <Navbar loggedIn={loggedIn} />
+      <Navbar loggedIn={loggedIn} userName={userName} userId={userId} />
       <SearchBar filterTable={filterTable} />
       {tableData.length ? <Tables tables={tableData} /> : 'No tables to show'}
       <Footer />

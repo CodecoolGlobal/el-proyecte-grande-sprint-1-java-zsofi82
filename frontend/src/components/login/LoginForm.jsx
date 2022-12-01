@@ -2,9 +2,10 @@ import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import Button from "../reusable_elements/Button"
 
-const LoginForm = ({ loggedIn, setLoggedIn }) => {
-    const [loginData, setLoginData] = useState()
-    const [serverRes, setServerRes] = useState()
+const LoginForm = ({ loggedIn, setLoggedIn, setUserName, setUserId }) => {
+    const [dataToServer, setDataToServer] = useState()
+    const [serverResponse, setServerResponse] = useState()
+    const [rawResponse, setRawResponse] = useState()
     const navigate = useNavigate()
 
     function grabFormData(e) {
@@ -13,22 +14,11 @@ const LoginForm = ({ loggedIn, setLoggedIn }) => {
         const userPassword = e.target['password'].value
         const data = { "username": userName, "password": userPassword }
         e.target.reset()
-        setLoginData(data)
+        setDataToServer(data)
     }
 
     useEffect(() => {
-        // function setSessionCookie(res) {
-        //     setCookie("userID", res.id, {
-        //         path: "/"
-        //     });
-    
-        //     setCookie("userName", res.username, {
-        //         path: "/"
-        //     });
-        //     setLoggedIn(true)
-        // }
-
-        if (loginData) {
+        if (dataToServer) {
             try {
                 const backendUrl = `/api/login`
                 fetch(backendUrl, {
@@ -36,19 +26,29 @@ const LoginForm = ({ loggedIn, setLoggedIn }) => {
                     headers: {
                         'Content-type': 'application/json',
                     },
-                    body: JSON.stringify(loginData)
+                    body: JSON.stringify(dataToServer)
                 })
-                // .then(res => setSessionCookie(res))
-                .then(res => setServerRes(res))
-                setLoggedIn(true)
-                navigate("/")
+                    .then(res => {
+                        setRawResponse(res)
+                        return res
+                    })
+                    .then(res => res.json())
+                    .then(res => setServerResponse(res))
+                if (serverResponse  && rawResponse.status === 200) {
+                    setUserName(serverResponse.username)
+                    setUserId(serverResponse.id)
+                    setLoggedIn(true)
+                    setDataToServer(null)
+                    setRawResponse(null)
+                    navigate("/")
+                }
             } catch (err) {
                 console.error(err)
             }
         }
-    }, [loginData, serverRes, setLoggedIn, navigate])
+    }, [dataToServer, serverResponse, setLoggedIn, navigate])
 
-    
+
 
     return (
         <>
