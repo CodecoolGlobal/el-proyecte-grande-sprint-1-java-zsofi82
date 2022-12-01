@@ -21,7 +21,7 @@ const About = () => {
                 <br />
                 <img src={`${process.env.PUBLIC_URL}/assets/images/Foosball_table.jpg`} alt="Foosball table" style={{ width: "50em" }} />
                 <div className="creatorsContainer">
-                    Creators: Jakub Rebeka, Szabó-Gaál Zsófia, Bata Botond, Sarkadi Gergely
+                    Creators: Jákob Rebeka, Szabó-Gaál Zsófia, Bata Botond, Sarkadi Gergely
                 </div>
             </div>
             <Footer />
