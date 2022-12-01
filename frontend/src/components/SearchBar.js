@@ -41,7 +41,7 @@ const SearchBar = ({filterTable}) => {
                 />
                 </div>
                 <div className="col" style={{textAlign:"left"}}>
-                    <button className="btn btn-primary" type="submit" onClick={() => filterTable(selectedSpot, date)}>Pick</button>
+                    <button className="btn btn-primary" style={{backgroundColor:"#004752"}} type="submit" onClick={() => filterTable(selectedSpot, date)}>Pick</button>
                 </div>
             </form>
         </div>
