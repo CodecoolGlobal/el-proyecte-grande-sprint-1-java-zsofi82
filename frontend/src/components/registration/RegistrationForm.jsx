@@ -22,7 +22,6 @@ const RegistrationForm = () => {
         if (!serverRes) {
             return "Please register."
         } else if (serverRes.status === 200) {
-            console.log(serverRes.status)
             navigate("/login")
             return "Success! User registered!"
         } else if (serverRes.status === 400) {
