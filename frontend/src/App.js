@@ -6,7 +6,7 @@ import Login from './components/login/Login';
 import Logout from './components/logout/Logout';
 import Registration from './components/registration/Registration';
 import About from "./components/About";
-import React, { useState } from "react";
+import React from "react";
 import User from "./components/user/User";
 // import User from './components/User';
 

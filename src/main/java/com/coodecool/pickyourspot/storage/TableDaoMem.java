@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 @Component
 public class TableDaoMem implements TableDao {
-    private List<FoosballTable> foosballTables;
+    private final List<FoosballTable> foosballTables;
 
     private static TableDaoMem tableDaoMem = null;
 
@@ -61,6 +61,10 @@ public class TableDaoMem implements TableDao {
 
     @Override
     public List<Reservation> getReservationsByTableIdAndUserId(UUID tableId, UUID userId) {
-        return getTableById(tableId).get().getReservationsByUserId(userId);
+        Optional<FoosballTable> table = getTableById(tableId);
+        if (table.isPresent()) {
+            return table.get().getReservationsByUserId(userId);
+        }
+        return new ArrayList<>();
     }
 }
