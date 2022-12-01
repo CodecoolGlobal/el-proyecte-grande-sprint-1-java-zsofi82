@@ -1,7 +1,7 @@
 import Footer from "./Footer";
 import Navbar from "./Navbar";
 
-const About = () => {
+const About = ({ loggedIn, userName, userId }) => {
     return (
         <div>
             <Navbar />

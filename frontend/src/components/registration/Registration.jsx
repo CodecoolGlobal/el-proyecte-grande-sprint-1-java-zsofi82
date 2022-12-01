@@ -3,7 +3,7 @@ import RegistrationForm from "./RegistrationForm"
 import './Registration.css'
 import Footer from "../Footer"
 
-const Registration = () => {
+const Registration = ({ loggedIn, userName, userId }) => {
   return (
     <div className="registrationContainer">
       <Navbar />

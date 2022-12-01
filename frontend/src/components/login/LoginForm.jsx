@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import Button from "../reusable_elements/Button"
-import LoginFeedback from "./LoginFeedback"
 
-const LoginForm = ({ cookies, setCookie }) => {
-    const [loginData, setLoginData] = useState()
-    const [serverRes, setServerRes] = useState()
+const LoginForm = ({ loggedIn, setLoggedIn, setUserName, setUserId }) => {
+    const [dataToServer, setDataToServer] = useState()
+    const [serverResponse, setServerResponse] = useState()
+    const [rawResponse, setRawResponse] = useState()
+    const navigate = useNavigate()
 
     function grabFormData(e) {
         e.preventDefault()
@@ -12,12 +14,11 @@ const LoginForm = ({ cookies, setCookie }) => {
         const userPassword = e.target['password'].value
         const data = { "username": userName, "password": userPassword }
         e.target.reset()
-        const update = () => { setLoginData(data) }
-        update()
+        setDataToServer(data)
     }
 
     useEffect(() => {
-        if (loginData) {
+        if (dataToServer) {
             try {
                 const backendUrl = `/api/login`
                 fetch(backendUrl, {
@@ -25,13 +26,29 @@ const LoginForm = ({ cookies, setCookie }) => {
                     headers: {
                         'Content-type': 'application/json',
                     },
-                    body: JSON.stringify(loginData)
-                }).then(res => setServerRes(res))
+                    body: JSON.stringify(dataToServer)
+                })
+                    .then(res => {
+                        setRawResponse(res)
+                        return res
+                    })
+                    .then(res => res.json())
+                    .then(res => setServerResponse(res))
+                if (serverResponse  && rawResponse.status === 200) {
+                    setUserName(serverResponse.username)
+                    setUserId(serverResponse.id)
+                    setLoggedIn(true)
+                    setDataToServer(null)
+                    setRawResponse(null)
+                    navigate("/")
+                }
             } catch (err) {
                 console.error(err)
             }
         }
-    }, [loginData])
+    }, [dataToServer, serverResponse, setLoggedIn, navigate])
+
+
 
     return (
         <>
@@ -44,7 +61,7 @@ const LoginForm = ({ cookies, setCookie }) => {
                     <input type="password" name="password" required>
                     </input>
                     <Button type='submit' text='Submit' />
-                    <LoginFeedback serverRes={serverRes} setServerRes={setServerRes} cookies={cookies} setCookie={setCookie}/>
+                    <div>{(serverResponse && rawResponse.status === 400) && "Username or password incorrect!" }</div>
                 </form>
             </div>
         </>

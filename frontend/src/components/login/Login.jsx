@@ -3,13 +3,13 @@ import Navbar from "../Navbar"
 import LoginForm from "./LoginForm"
 import "./Login.css"
 
-const Login = ({ setSession, setCookie, cookies }) => {
- 
+const Login = ({ loggedIn, setLoggedIn, userId, setUserId, userName, setUserName }) => {
+
   return (
     <div className="loginContainer">
-      <Navbar />
+      <Navbar loggedIn={loggedIn} />
       <h1>Login:</h1>
-      <LoginForm setSession={setSession} setCookie={setCookie} cookies={cookies} />
+      <LoginForm loggedIn={loggedIn} setLoggedIn={setLoggedIn} setUserId={setUserId} setUserName={setUserName}/>
       <Footer />
     </div>
   )

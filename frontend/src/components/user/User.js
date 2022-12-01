@@ -1,7 +1,7 @@
 import Navbar from "../Navbar";
 import Footer from "../Footer";
-import {Route, Link, Routes, useParams} from 'react-router-dom';
-import {useEffect, useState} from "react";
+import { Route, Link, Routes, useParams } from 'react-router-dom';
+import { useEffect, useState } from "react";
 import MainInformation from "./MainInformation";
 import ReservedTables from "./ReservedTables";
 
@@ -11,7 +11,7 @@ const User = () => {
     const [loadingData, isLoadingData] = useState(true)
     const params = useParams();
     const userId = params.userId
-    useEffect(()=> {
+    useEffect(() => {
         async function fetchUser() {
             let res = await fetch(`/api/user/${userId}`)
             let data = await res.json()
@@ -24,18 +24,18 @@ const User = () => {
             isLoadingData(false)
         }
         try {
-            Promise.all([fetchUser(),fetchTable()])
-        } catch(err) {
+            Promise.all([fetchUser(), fetchTable()])
+        } catch (err) {
             console.error(err)
         }
-    },[tablesData])
-    if(!loadingData){
-        return(
+    }, [tablesData])
+    if (!loadingData) {
+        return (
             <div>
-                <Navbar/>
+                <Navbar />
                 <MainInformation user={userData} />
-                <ReservedTables tables={tablesData}/>
-                <Footer/>
+                <ReservedTables tables={tablesData} />
+                <Footer />
             </div>
         )
     }
