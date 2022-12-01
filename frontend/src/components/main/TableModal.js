@@ -23,7 +23,7 @@ const TableModal = ({ table, onExit, onReserve, selectedDate }) => {
             <a
             href={`https://www.google.com/maps/search/${table.address}/`}
             target="_blank">{table.address}</a></div>
-            <div>{selectedDate ? "At: " + selectedDate : "Please select a date first to reserve this table"}</div>
+            <div>{selectedDate ? "At: " + selectedDate : "Please log in, and select a date to reserve"}</div>
           </div>
           <div className="modal-footer">
             {(sessionStorage.getItem('username')!== null && selectedDate !== null) && <Button
