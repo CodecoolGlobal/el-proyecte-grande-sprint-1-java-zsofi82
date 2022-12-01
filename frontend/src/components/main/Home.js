@@ -34,23 +34,24 @@ const Home = () => {
   // when the Reserve button is pressed on the table modal
   const reserveTable = async (tableId) => {
     let payload = {
-      'reservationTime' : '2022-12-02T10:00:00',
+      'reservationTime': date,
       'userId': sessionStorage.getItem("userid")
     }
     console.log(sessionStorage.getItem("userid"))
     console.log(tableId)
     console.log(date)
-      let res = await fetch(`/api/table/${tableId}/reservation`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body:
-          JSON.stringify(payload)
-      })
+    let res = await fetch(`/api/table/${tableId}/reservation`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body:
+        JSON.stringify(payload)
+    })
+    exitModal()
   }
-  //TODO: update Table data from SearchBar
   const filterTable = (spot, date) => {
+    //TODO: update Table data from SearchBar
     setDate(date)
   }
 
