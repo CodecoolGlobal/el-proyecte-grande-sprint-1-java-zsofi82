@@ -2,10 +2,12 @@ import Footer from "../Footer";
 import Tables from "./Tables";
 import { useEffect, useState } from "react";
 import Navbar from "../Navbar";
+import TableModal from "./TableModal";
 import SearchBar from "../SearchBar";
 
 const Home = ({ loggedIn, userName, userId }) => {
   const [tableData, setTableData] = useState({});
+  const [clickedTable, setClickedTable] = useState(null);
 
   useEffect(() => {
     async function fetchTables() {
@@ -20,7 +22,18 @@ const Home = ({ loggedIn, userName, userId }) => {
       console.error(err)
     }
   }, [])
-
+  // when clicking on a table's card, show the modal
+  const showDetails = (table) => {
+    setClickedTable(table)
+  }
+  // when clicking on x in modal, don't show modal
+  const exitModal = () => {
+    setClickedTable(null)
+  }
+  // when the Reserve button is pressed on the table modal
+  const reserveTable = () => {
+    // TODO: reserve table
+  }
   //TODO: update Table data from SearchBar
   const filterTable = (spot, date) => {
     alert('This spot and time has been submitted: ' + spot + date);
@@ -29,8 +42,9 @@ const Home = ({ loggedIn, userName, userId }) => {
   return (
     <div>
       <Navbar loggedIn={loggedIn} userName={userName} userId={userId} />
-      <SearchBar filterTable={filterTable} />
-      {tableData.length ? <Tables tables={tableData} /> : 'No tables to show'}
+      <SearchBar filterTable={filterTable}/>
+      {tableData.length ? <Tables tables={tableData} showDetails={showDetails} /> : 'No tables to show'}
+      {clickedTable && <TableModal table={clickedTable} onExit={exitModal} onReserve={reserveTable} />}
       <Footer />
     </div>
   )

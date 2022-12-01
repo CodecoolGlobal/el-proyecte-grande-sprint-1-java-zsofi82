@@ -8,6 +8,7 @@ public class AppUser {
     private UUID id;
     private String username;
     private transient String email;
+
     private transient String password;
 
 //    public AppUser(){

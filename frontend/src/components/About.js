@@ -1,19 +1,23 @@
-import foosball_table from '../Foosball_table.jpg'
+import Footer from "./Footer";
+import Navbar from "./Navbar";
 
 const About = ({ loggedIn, userName, userId }) => {
     return (
-        <div className="about">
-            <div style={{ backgroundImage: `url(${foosball_table})` }}>
+        <div>
+            <Navbar />
+            <div className="p-5">
                 <h1 className="font-weight-light">About</h1>
+                <br/>
                 <p>
                     Pick your spot is a foosball reservation application.
+                    Just follow the below steps and reserve a foosball table with your friends.
                 </p>
-                <ol>
-                    <li>Pick a location</li>
-                    <li>Reserve table</li>
-                    <li>Invite your friends</li>
-                </ol>
+                <br/>
+                <p>1. Pick a location</p>
+                <p>2. Reserve table</p>
+                <p>3. Invite your friends</p>
             </div>
+            <Footer />
         </div>
     );
 }

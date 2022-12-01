@@ -1,6 +1,6 @@
-const Table = ({table}) => {
-    return(
-        <div className="col" >
+const Table = ({ table, showDetails }) => {
+    return (
+        <div className="col" onClick={() => { showDetails(table) }}>
             <div className="card bg-info" >
                 <div className="card-body">
                     <h5 className="card-title">{table.name}</h5>
