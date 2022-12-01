@@ -3,33 +3,36 @@ import PropTypes from 'prop-types'
 
 const TableModal = ({ table, onExit, onReserve }) => {
   return (
-    <div className="card container position-absolute top-50 start-50 translate-middle p-2">
-      <div className="card-body">
-        <div className="card-title d-flex">
-          <div className="card-title col"><h4>{table.name}</h4></div>
-          //TODO: align this to the right and make the whole card more narrow
-          <div className="btn-close col text-end" onClick={() => { onExit() }} >
+    <div
+      className="modal fade show"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+      style={{ display: "block" }}
+      aria-modal="true"
+      role="dialog">
+      <div className="modal-dialog">
+        <div className="modal-content">
+          <div className="modal-header">
+            <h1 className="modal-title fs-5" id="modal-title">{table.name ? table.name : "table-name-placeholder"}</h1>
+            <Button text={""} onClick={onExit} bootstrapClassname={"btn-close"} />
           </div>
-        </div>
-        <div className="">
-          <a
-            href={`https://www.google.com/maps/search/${table.address}/`}
-            target="_blank">{table.address}</a>
-        </div>
-        <div>
-          At: {"[add time here]"}
-        </div>
-        <div className="flex-row">
-          <Button
-            text={"Reserve"}
-            bootstrapClassname={"btn-success col m-1"}
-            onClick={onReserve}
-            type={"button"} />
-          <Button
-            text={"Back"}
-            bootstrapClassname={"btn-danger col m-1"}
-            onClick={() => onExit()}
-            type={"button"} />
+          <div className="modal-body">
+            <div>{table.address ? table.address : "table-address-placeholder"}</div>
+          </div>
+          <div className="modal-footer">
+            <Button
+              text={"Reserve"}
+              bootstrapClassname={"btn-success"}
+              onClick={onReserve}
+              type={"button"} />
+            <Button
+              text={"Close"}
+              bootstrapClassname={"btn-secondary"}
+              onClick={() => onExit()}
+              type={"button"} />
+          </div>
         </div>
       </div>
     </div>
