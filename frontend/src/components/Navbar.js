@@ -11,12 +11,8 @@ const Navbar = () => {
     const userName = sessionStorage.getItem("username")
     const userId = sessionStorage.getItem("userid")
 
-    if (userName && userId) {
-      setLoggedIn(true)
-    } else {
-      setLoggedIn(false)
-    }
-  },[setLoggedIn])
+    setLoggedIn(userName && userId)
+  }, [setLoggedIn])
 
 
   return (
