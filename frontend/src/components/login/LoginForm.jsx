@@ -61,7 +61,7 @@ const LoginForm = ({ loggedIn, setLoggedIn, setUserName, setUserId }) => {
                     <input type="password" name="password" required>
                     </input>
                     <Button type='submit' text='Submit' />
-                    {/* <LoginFeedback serverRes={serverRes} cookies={cookies} setCookie={setCookie} loggedIn={loggedIn} setLoggedIn={setLoggedIn}/> */}
+                    <div>{(serverResponse && rawResponse.status === 400) && "Username or password incorrect!" }</div>
                 </form>
             </div>
         </>

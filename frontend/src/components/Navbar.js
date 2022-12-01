@@ -20,6 +20,7 @@ const Navbar = ({ loggedIn, userName, userId }) => {
           {loggedIn && <li className="nav-item col navbarButton">
             <Button text={"Logout"} classname={"btn-link"} onClick={() => { navigate("/logout") }} ></Button>
           </li>}
+           {/* TODO Profile button comes here */}
           <li className="nav-item col navbarButton">
             <Button text={"About"} classname={"btn-link"} onClick={() => { navigate("/about") }} ></Button>
           </li>
