@@ -4,7 +4,7 @@ import Navbar from "./Navbar";
 const About = ({ loggedIn, userName, userId }) => {
     return (
         <div>
-            <Navbar />
+            <Navbar loggedIn={loggedIn} userName={userName} userId={userId}/>
             <div className="p-5" style={{fontSize: "20px"}}>
                 <h1 className="font-weight-light">About the page</h1>
                 <br/>
