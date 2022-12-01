@@ -1,5 +1,10 @@
 .App {
   text-align: center;
+  font-family: 'Bungee', cursive, 'Montserrat Alternates','Sans-serif';
+}
+
+body{
+  background-color: #cce8e3;
 }
 
 .App-logo {
@@ -37,6 +42,15 @@
   }
 }
 
+.navbar {
+  background-color: white;
+  color:#c9240d !important;
+}
+
+.navbar-brand {
+  color: #c9240d;
+}
+
 .navbarButton {
   margin-left: 0.4em;
 }
@@ -44,3 +58,32 @@
 .backToHome:hover {
   cursor: pointer;
 }
+
+
+.navbar-button-style {
+  background-color: #c9240d;
+  color: white;
+}
+
+.navbar-brand {
+  background-color: #ffab37;
+  color: white;
+  padding: 0.5em;
+  border-radius: 10px;
+}
+
+.modal-style{
+  background-color: #057d80;
+  color: #cce8e3;
+}
+
+.footer {
+  height: 5vh;
+  font-style: italic;
+}
+
+.creatorsContainer {
+  margin: 1%;
+  font-style: italic;
+}
+
