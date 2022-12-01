@@ -1,30 +1,49 @@
 import {useState} from "react";
+import DateTimePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
-const SearchBar = ({spots}) => {
-    const [searchInput, setSearchInput] = useState("");
-    const date = new Date();
+const SearchBar = ({filterTable}) => {
+    //TODO: get spots as properties
+    const spots = [
+        {value: '', text: '-- Pick a spot --'},
+        {value: 'alpaka', text: 'Alpaka'},
+        {value: 'tableSpot', text: 'TableSpot'},
+        {value: 'here', text: 'Here'},
+    ];
+
+    const [selectedSpot, setSelectedSpot] = useState("");
+    const [date, setDate] = useState(new Date());
 
     const handleChange = (e) => {
-        e.preventDefault();
-        setSearchInput(e.target.value);
+        setSelectedSpot(e.target.value);
     };
 
-    if (searchInput > 0) {
-        spots.filter((spot) => {
-            return spot.name.match(searchInput);
-        });
-    }
-
     return (
-        <div className="input-group rounded">
-            <input type="search" className="input-group-prepend" placeholder="Pick a spot" onChange={handleChange} value={searchInput}/>
-            <label htmlFor="meeting-time"></label>
-            <input type="datetime-local" id="meeting-time"
-                   name="meeting-time" value={date.getDate()}
-            />
-            <div className="input-group-append">
-                <button className="btn btn-outline-secondary" type="button">Reserve</button>
-            </div>
+        <div className="container-fluid">
+            <form className="row g-3 m-2">
+                <div className="col">
+                <select className="form-select" value={selectedSpot} onChange={handleChange}>
+                    {spots.map(spot => (
+                        <option key={spot.value} value={spot.value}>
+                            {spot.text}
+                        </option>
+                    ))}
+                </select>
+                </div>
+                <div className="col">
+                <DateTimePicker className="form-select"
+                            selected={date}
+                            onChange={date => setDate(date)}
+                            showTimeSelect
+                            dateFormat="y MMMM d. HH:mm"
+                            timeFormat="HH:mm"
+                            timeIntervals={60}
+                />
+                </div>
+                <div className="col" style={{textAlign:"left"}}>
+                    <button className="btn btn-primary" type="submit" onClick={() => filterTable(selectedSpot, date)}>Pick</button>
+                </div>
+            </form>
         </div>
     );
 };

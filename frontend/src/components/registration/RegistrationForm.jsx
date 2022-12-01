@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react"
 import Button from '../reusable_elements/Button.js'
+import RegistrationFeedback from "./RegistrationFeedback.jsx"
 
 const RegistrationForm = () => {
     const [userData, setUserData] = useState()
+    const [serverRes, setServerRes] = useState()
 
     function grabFormData(e) {
         e.preventDefault()
@@ -25,7 +27,8 @@ const RegistrationForm = () => {
                         'Content-type': 'application/json',
                     },
                     body: JSON.stringify(userData)
-                })
+                }).then(res => res.json())
+                .then(res => setServerRes(res))
             } catch (err) {
                 console.error(err)
             }
@@ -37,15 +40,16 @@ const RegistrationForm = () => {
             <div className="registrationFormDiv">
                 <form className="registrationForm" onSubmit={(e) => grabFormData(e)}>
                     <label>Name:</label>
-                    <input type="text" name="name">
+                    <input type="text" name="name" required>
                     </input>
                     <label>Password:</label>
-                    <input type="password" name="password">
+                    <input type="password" name="password" required>
                     </input>
                     <label>Email:</label>
-                    <input type="email" name="email">
+                    <input type="email" name="email" required>
                     </input>
                     <Button type='submit' text='Submit' />
+                    <RegistrationFeedback serverRes={serverRes} />
                 </form>
             </div>
         </>

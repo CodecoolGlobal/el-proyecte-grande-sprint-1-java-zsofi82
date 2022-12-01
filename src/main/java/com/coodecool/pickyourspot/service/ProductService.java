@@ -5,6 +5,7 @@ import com.coodecool.pickyourspot.model.FoosballTable;
 import com.coodecool.pickyourspot.model.Reservation;
 import com.coodecool.pickyourspot.storage.TableDao;
 import com.coodecool.pickyourspot.storage.UserDao;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -82,4 +83,36 @@ public class ProductService {
                 .filter(table -> table.isFreeAt(dateTime))
                 .collect(Collectors.toList());
     }
+
+
+    public boolean registerUser(AppUser appUser) {
+        List<AppUser> allUsers = userDao.getAllUsers();
+        long numberOfUsersWithSameName = allUsers.stream()
+                .filter(user -> user.getUsername().equals(appUser.getUsername()))
+                .count();
+        if (numberOfUsersWithSameName == 0) {
+            userDao.addUser(appUser);
+            return true;
+        }
+        System.out.println("Fail! There is a " + appUser);
+        return false;
+    }
+
+    public List<FoosballTable> getReservedTablesByUser(String userId ){
+        return tableDao.getReservedTablesByUser(UUID.fromString(userId));
+    }
+
+    public List<Reservation> getReservationsByTableIdAndUserId(String tableId, String userId){
+        return tableDao.getReservationsByTableIdAndUserId(UUID.fromString(tableId), UUID.fromString(userId));
+
+    }
+
+    public  Optional<AppUser> loginUser(AppUser appUser) {
+        List<AppUser> allUsers = userDao.getAllUsers();
+        return allUsers.stream()
+                .filter(user -> user.getUsername().equals(appUser.getUsername()))
+                .filter(user -> user.getPassword().equals(appUser.getPassword()))
+                .findAny();
+    }
 }
+

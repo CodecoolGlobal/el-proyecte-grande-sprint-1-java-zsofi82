@@ -1,5 +1,5 @@
 
-const Logout = () => {
+const Logout = ({ setSession }) => {
   return (
     <div>Logout</div>
   )
