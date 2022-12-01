@@ -32,12 +32,12 @@ const Home = () => {
     setClickedTable(null)
   }
   // when the Reserve button is pressed on the table modal
-  const reserveTable = async (tableId) => {
+  const reserveTable = (tableId) => {
     let payload = {
       'reservationTime': date,
       'userId': sessionStorage.getItem("userid")
     }
-    let res = await fetch(`/api/table/${tableId}/reservation`, {
+    fetch(`/api/table/${tableId}/reservation`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
