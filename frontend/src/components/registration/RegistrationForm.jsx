@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import Button from '../reusable_elements/Button.js'
-import RegistrationFeedback from "./RegistrationFeedback.jsx"
 
 const RegistrationForm = () => {
     const [userData, setUserData] = useState()
     const [serverRes, setServerRes] = useState()
+    const navigate = useNavigate()
 
     function grabFormData(e) {
         e.preventDefault()
@@ -17,8 +18,25 @@ const RegistrationForm = () => {
         update()
     }
 
+    function calculateFeedback() {
+        if (!serverRes) {
+            return "Please register."
+        } else if (serverRes.status === 200) {
+            console.log(serverRes.status)
+            navigate("/login")
+            return "Success! User registered!"
+        } else if (serverRes.status === 400) {
+            console.log(serverRes.status)
+            return "Invalid user data!"
+        } else if (serverRes.status === 409) {
+            console.log(serverRes.status)
+            return "User already exists!"
+        }
+    }
+
     useEffect(() => {
         if (userData) {
+            setServerRes(null)
             try {
                 const backendUrl = `/api/registration`
                 fetch(backendUrl, {
@@ -27,8 +45,10 @@ const RegistrationForm = () => {
                         'Content-type': 'application/json',
                     },
                     body: JSON.stringify(userData)
-                }).then(res => res.json())
-                .then(res => setServerRes(res))
+                }).then(res => setServerRes(res))
+                    .catch((err) => {
+                        console.error(err)
+                    })
             } catch (err) {
                 console.error(err)
             }
@@ -49,7 +69,7 @@ const RegistrationForm = () => {
                     <input type="email" name="email" required>
                     </input>
                     <Button type='submit' text='Submit' />
-                    <RegistrationFeedback serverRes={serverRes} />
+                    <div>{calculateFeedback()}</div>
                 </form>
             </div>
         </>
