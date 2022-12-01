@@ -15,17 +15,18 @@ const TableModal = ({ table, onExit, onReserve }) => {
       <div className="modal-dialog">
         <div className="modal-content">
           <div className="modal-header">
-            <h1 className="modal-title fs-5" id="modal-title">{table.name ? table.name : "table-name-placeholder"}</h1>
+            <h1 className="modal-title fs-5" id="modal-title">{table.name}</h1>
             <Button text={""} onClick={onExit} bootstrapClassname={"btn-close"} />
           </div>
           <div className="modal-body">
-            <div>{table.address ? table.address : "table-address-placeholder"}</div>
+            <div>{table.address}</div>
+            <div>At: {"[TODO: put currently selected reservation time here]"}</div>
           </div>
           <div className="modal-footer">
             <Button
               text={"Reserve"}
               bootstrapClassname={"btn-success"}
-              onClick={onReserve}
+              onClick={()=>onReserve(table.id)}
               type={"button"} />
             <Button
               text={"Close"}

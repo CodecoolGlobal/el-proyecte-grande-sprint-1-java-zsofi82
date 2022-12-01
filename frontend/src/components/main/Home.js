@@ -21,18 +21,24 @@ const Home = () => {
       console.error(err)
     }
   }, [])
+  // when clicking on a table's card, show the modal
   const showDetails = (table) => {
     setClickedTable(table)
   }
+  // when clicking on x in modal, don't show modal
   const exitModal = () => {
     setClickedTable(null)
+  }
+  // when the Reserve button is pressed on the table modal
+  const reserveTable = () => {
+    // TODO: reserve table
   }
 
   return (
     <div>
       <Navbar />
       {tableData.length ? <Tables tables={tableData} showDetails={showDetails} /> : 'No tables to show'}
-      {clickedTable && <TableModal table={clickedTable} onExit={exitModal} />}
+      {clickedTable && <TableModal table={clickedTable} onExit={exitModal} onReserve={reserveTable} />}
       <Footer />
     </div>
   )
