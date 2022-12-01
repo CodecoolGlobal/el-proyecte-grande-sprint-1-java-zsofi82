@@ -37,9 +37,6 @@ const Home = () => {
       'reservationTime': date,
       'userId': sessionStorage.getItem("userid")
     }
-    console.log(sessionStorage.getItem("userid"))
-    console.log(tableId)
-    console.log(date)
     let res = await fetch(`/api/table/${tableId}/reservation`, {
       method: 'POST',
       headers: {
@@ -60,7 +57,7 @@ const Home = () => {
       <Navbar />
       <SearchBar filterTable={filterTable} />
       {tableData.length ? <Tables tables={tableData} showDetails={showDetails} /> : 'No tables to show'}
-      {clickedTable && <TableModal table={clickedTable} onExit={exitModal} onReserve={reserveTable} />}
+      {clickedTable && <TableModal table={clickedTable} onExit={exitModal} onReserve={reserveTable} selectedDate={date}/>}
       <Footer />
     </div>
   )
