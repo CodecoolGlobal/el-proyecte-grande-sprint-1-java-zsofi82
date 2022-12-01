@@ -11,6 +11,7 @@ import User from "./components/user/User";
 // import User from './components/User';
 
 function App() {
+  document.title = "Pick your spot"
 
   return (
     <div className="App">
