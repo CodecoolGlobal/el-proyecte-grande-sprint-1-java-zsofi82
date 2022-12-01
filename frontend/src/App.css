@@ -44,3 +44,13 @@
 .backToHome:hover {
   cursor: pointer;
 }
+
+.footer {
+  height: 5vh;
+  font-style: italic;
+}
+
+.creatorsContainer {
+  margin: 1%;
+  font-style: italic;
+}
