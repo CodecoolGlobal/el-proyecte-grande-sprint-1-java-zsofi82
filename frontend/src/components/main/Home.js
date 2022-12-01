@@ -33,7 +33,7 @@ const Home = () => {
   // when the Reserve button is pressed on the table modal
   const reserveTable = () => {
     // TODO: reserve table
-
+  }
   //TODO: update Table data from SearchBar
   const filterTable = (spot, date) => {
     alert('This spot and time has been submitted: ' + spot + date);
