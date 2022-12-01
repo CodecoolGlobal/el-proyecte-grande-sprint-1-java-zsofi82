@@ -5,7 +5,6 @@ import com.coodecool.pickyourspot.model.FoosballTable;
 import com.coodecool.pickyourspot.model.Reservation;
 import com.coodecool.pickyourspot.storage.TableDao;
 import com.coodecool.pickyourspot.storage.UserDao;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -47,11 +46,7 @@ public class ProductService {
     }
 
     public boolean addNewTable(FoosballTable foosballTable) {
-        if (tableDao.addTable(new FoosballTable(foosballTable.getName(), foosballTable.getAddress()))) {
-            System.out.println(tableDao.getAllTables());
-            return true;
-        }
-        return false;
+        return tableDao.addTable(new FoosballTable(foosballTable.getName(), foosballTable.getAddress()));
     }
 
     public Optional<FoosballTable> getTableById(String id) {
@@ -94,7 +89,6 @@ public class ProductService {
             userDao.addUser(appUser);
             return true;
         }
-        System.out.println("Fail! There is a " + appUser);
         return false;
     }
 

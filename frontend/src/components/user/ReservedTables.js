@@ -1,4 +1,3 @@
-import Table from "../main/Table";
 import Reservations from "./Reservations";
 
 const ReservedTables = ({tables}) => {
