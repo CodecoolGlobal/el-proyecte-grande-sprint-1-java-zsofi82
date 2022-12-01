@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import Button from "../reusable_elements/Button"
-import LoginFeedback from "./LoginFeedback"
 
-const LoginForm = ({ cookies, setCookie, loggedIn, setLoggedIn }) => {
+const LoginForm = ({ loggedIn, setLoggedIn }) => {
     const [loginData, setLoginData] = useState()
     const [serverRes, setServerRes] = useState()
+    const navigate = useNavigate()
 
     function grabFormData(e) {
         e.preventDefault()
@@ -12,11 +13,21 @@ const LoginForm = ({ cookies, setCookie, loggedIn, setLoggedIn }) => {
         const userPassword = e.target['password'].value
         const data = { "username": userName, "password": userPassword }
         e.target.reset()
-        const update = () => { setLoginData(data) }
-        update()
+        setLoginData(data)
     }
 
     useEffect(() => {
+        // function setSessionCookie(res) {
+        //     setCookie("userID", res.id, {
+        //         path: "/"
+        //     });
+    
+        //     setCookie("userName", res.username, {
+        //         path: "/"
+        //     });
+        //     setLoggedIn(true)
+        // }
+
         if (loginData) {
             try {
                 const backendUrl = `/api/login`
@@ -26,12 +37,18 @@ const LoginForm = ({ cookies, setCookie, loggedIn, setLoggedIn }) => {
                         'Content-type': 'application/json',
                     },
                     body: JSON.stringify(loginData)
-                }).then(res => setServerRes(res))
+                })
+                // .then(res => setSessionCookie(res))
+                .then(res => setServerRes(res))
+                setLoggedIn(true)
+                navigate("/")
             } catch (err) {
                 console.error(err)
             }
         }
-    }, [loginData])
+    }, [loginData, serverRes, setLoggedIn, navigate])
+
+    
 
     return (
         <>
@@ -44,7 +61,7 @@ const LoginForm = ({ cookies, setCookie, loggedIn, setLoggedIn }) => {
                     <input type="password" name="password" required>
                     </input>
                     <Button type='submit' text='Submit' />
-                    <LoginFeedback serverRes={serverRes} cookies={cookies} setCookie={setCookie} loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>
+                    {/* <LoginFeedback serverRes={serverRes} cookies={cookies} setCookie={setCookie} loggedIn={loggedIn} setLoggedIn={setLoggedIn}/> */}
                 </form>
             </div>
         </>

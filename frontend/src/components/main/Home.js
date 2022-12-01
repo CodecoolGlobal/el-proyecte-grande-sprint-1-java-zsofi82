@@ -4,10 +4,10 @@ import { useEffect, useState } from "react";
 import Navbar from "../Navbar";
 import SearchBar from "../SearchBar";
 
-const Home = () => {
+const Home = ({ loggedIn }) => {
   const [tableData, setTableData] = useState({});
 
-  useEffect(()=> {
+  useEffect(() => {
     async function fetchTables() {
       let res = await fetch(`/api/table`)
       let data = await res.json()
@@ -16,7 +16,7 @@ const Home = () => {
 
     try {
       fetchTables()
-    } catch(err) {
+    } catch (err) {
       console.error(err)
     }
   }, [])
@@ -28,8 +28,8 @@ const Home = () => {
 
   return (
     <div>
-      <Navbar />
-      <SearchBar filterTable={filterTable}/>
+      <Navbar loggedIn={loggedIn} />
+      <SearchBar filterTable={filterTable} />
       {tableData.length ? <Tables tables={tableData} /> : 'No tables to show'}
       <Footer />
     </div>
