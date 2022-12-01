@@ -26,7 +26,7 @@ public class ProductService {
         this.userDao = userDao;
 
         // TODO adding default tables, just for testing, delete later
-        tableDao.addTable(new FoosballTable("testTable", "testAddress"));
+        tableDao.addTable(new FoosballTable("Codecool-foosball table", "Budapest, Nagymező u. 44-1st Floor, 1065"));
     }
 
     public List<FoosballTable> getAllTables() {
