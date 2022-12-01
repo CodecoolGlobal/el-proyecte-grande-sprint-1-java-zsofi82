@@ -16,7 +16,7 @@ const Navbar = () => {
     } else {
       setLoggedIn(false)
     }
-  })
+  },[setLoggedIn])
 
 
   return (
@@ -24,8 +24,6 @@ const Navbar = () => {
       <div className="container-fluid">
         <span className="navbar-brand mb-0 h1 text-light backToHome" onClick={() => { navigate("/") }}>Pick Your Spot</span>
         <ul className="flex-row navbar-nav">
-          <div>{"logged in: " + loggedIn + " user: " + sessionStorage.getItem("username") + " id: " + sessionStorage.getItem("userid")
-}</div>
           {!loggedIn && <li className="nav-item col navbarButton">
             <Button text={"Register"} onClick={() => { navigate("/registration") }}></Button>
           </li>}
@@ -33,9 +31,11 @@ const Navbar = () => {
             <Button text={"Login"} onClick={() => { navigate("/login") }}></Button>
           </li>}
           {loggedIn && <li className="nav-item col navbarButton">
+            <Button text={"Profile"} classname={"btn-link"} onClick={() => { navigate(`/user/${sessionStorage.getItem("userid")}`) }} ></Button>
+          </li>}
+          {loggedIn && <li className="nav-item col navbarButton">
             <Button text={"Logout"} classname={"btn-link"} onClick={() => { navigate("/logout") }} ></Button>
           </li>}
-          {/* TODO Profile button comes here */}
           <li className="nav-item col navbarButton">
             <Button text={"About"} classname={"btn-link"} onClick={() => { navigate("/about") }} ></Button>
           </li>
