@@ -59,6 +59,7 @@ body{
   cursor: pointer;
 }
 
+
 .navbar-button-style {
   background-color: #c9240d;
   color: white;
@@ -75,3 +76,14 @@ body{
   background-color: #057d80;
   color: #cce8e3;
 }
+
+.footer {
+  height: 5vh;
+  font-style: italic;
+}
+
+.creatorsContainer {
+  margin: 1%;
+  font-style: italic;
+}
+
