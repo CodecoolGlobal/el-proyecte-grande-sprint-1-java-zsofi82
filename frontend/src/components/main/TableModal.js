@@ -19,7 +19,10 @@ const TableModal = ({ table, onExit, onReserve }) => {
             <Button text={""} onClick={onExit} bootstrapClassname={"btn-close"} />
           </div>
           <div className="modal-body">
-            <div>{table.address}</div>
+            <div>
+            <a
+            href={`https://www.google.com/maps/search/${table.address}/`}
+            target="_blank">{table.address}</a></div>
             <div>At: {"[TODO: put currently selected reservation time here]"}</div>
           </div>
           <div className="modal-footer">
