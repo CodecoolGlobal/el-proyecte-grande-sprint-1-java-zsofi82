@@ -26,11 +26,12 @@ const TableModal = ({ table, onExit, onReserve }) => {
             <div>At: {"[TODO: put currently selected reservation time here]"}</div>
           </div>
           <div className="modal-footer">
-            <Button
-              text={"Reserve"}
-              bootstrapClassname={"btn-success"}
-              onClick={()=>onReserve(table.id)}
-              type={"button"} />
+            {sessionStorage.getItem('username')!== null && <Button
+                text={"Reserve"}
+                bootstrapClassname={"btn-success"}
+                onClick={()=>onReserve(table.id)}
+                type={"button"} /> }
+
             <Button
               text={"Close"}
               bootstrapClassname={"btn-secondary"}

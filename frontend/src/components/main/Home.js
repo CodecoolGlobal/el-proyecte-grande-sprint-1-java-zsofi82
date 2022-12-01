@@ -8,6 +8,7 @@ import SearchBar from "../SearchBar";
 const Home = () => {
   const [tableData, setTableData] = useState({});
   const [clickedTable, setClickedTable] = useState(null);
+  const [date, setDate] = useState(null)
 
   useEffect(() => {
     async function fetchTables() {
@@ -31,12 +32,26 @@ const Home = () => {
     setClickedTable(null)
   }
   // when the Reserve button is pressed on the table modal
-  const reserveTable = () => {
-    // TODO: reserve table
+  const reserveTable = async (tableId) => {
+    let payload = {
+      'reservationTime' : '2022-12-02T10:00:00',
+      'userId': sessionStorage.getItem("userid")
+    }
+    console.log(sessionStorage.getItem("userid"))
+    console.log(tableId)
+    console.log(date)
+      let res = await fetch(`/api/table/${tableId}/reservation`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body:
+          JSON.stringify(payload)
+      })
   }
   //TODO: update Table data from SearchBar
   const filterTable = (spot, date) => {
-    alert('This spot and time has been submitted: ' + spot + date);
+    setDate(date)
   }
 
   return (
