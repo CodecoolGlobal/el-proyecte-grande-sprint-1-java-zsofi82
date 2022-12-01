@@ -49,6 +49,7 @@ body{
 
 .navbar-brand {
   color: #c9240d;
+  font-weight: bold;
 }
 
 .navbarButton {
