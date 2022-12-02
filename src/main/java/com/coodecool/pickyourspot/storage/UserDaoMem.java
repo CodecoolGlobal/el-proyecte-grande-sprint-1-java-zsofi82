@@ -28,7 +28,7 @@ public class UserDaoMem implements UserDao {
 
     @Override
     public List<AppUser> getAllUsers() {
-        return appUsers;
+        return List.copyOf(appUsers);
     }
 
     @Override
