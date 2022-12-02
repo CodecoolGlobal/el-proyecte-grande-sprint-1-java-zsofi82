@@ -1,7 +1,5 @@
-import Footer from "../Footer";
 import Tables from "./Tables";
 import { useEffect, useState } from "react";
-import Navbar from "../Navbar";
 import TableModal from "./TableModal";
 import SearchBar from "../SearchBar";
 
@@ -54,11 +52,9 @@ const Home = () => {
 
   return (
     <div>
-      <Navbar />
       <SearchBar filterTable={filterTable} />
       {tableData.length ? <Tables tables={tableData} showDetails={showDetails} /> : 'No tables to show'}
       {clickedTable && <TableModal table={clickedTable} onExit={exitModal} onReserve={reserveTable} selectedDate={date}/>}
-      <Footer />
     </div>
   )
 
