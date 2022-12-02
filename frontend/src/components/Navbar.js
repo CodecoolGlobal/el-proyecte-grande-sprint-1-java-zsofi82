@@ -14,6 +14,10 @@ const Navbar = () => {
     setLoggedIn(userName && userId)
   }, [setLoggedIn])
 
+  function clearSession()  {
+    sessionStorage.clear();
+    setLoggedIn(false)
+  }
 
   return (
     <nav className="navbar sticky-top">
@@ -30,7 +34,7 @@ const Navbar = () => {
             <Button bootstrapClassname={"navbar-button-style"} text={"Profile"} classname={"btn-link"} className="navbar-button-style" onClick={() => { navigate(`/user/${sessionStorage.getItem("userid")}`) }} ></Button>
           </li>}
           {loggedIn && <li className="nav-item col navbarButton">
-            <Button bootstrapClassname={"navbar-button-style"} text={"Logout"} classname={"btn-link"} onClick={() => { navigate("/logout") }} ></Button>
+            <Button bootstrapClassname={"navbar-button-style"} text={"Logout"} classname={"btn-link"} onClick={() => { clearSession() }} ></Button>
           </li>}
           <li className="nav-item col navbarButton">
             <Button bootstrapClassname={"navbar-button-style"} text={"About"} classname={"btn-link"} onClick={() => { navigate("/about") }} ></Button>
