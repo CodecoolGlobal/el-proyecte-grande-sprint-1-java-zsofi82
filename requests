@@ -1,0 +1,24 @@
+# -*- mode: restclient; restclient-inhibit-cookies: t; -*-
+
+### Register my user
+
+POST http://localhost:8080/api/registration
+Content-Type: application/json
+
+{
+  "username": "benec",
+  "email": "bence.fabian@codecool.com",
+  "password": "myverycoolpassword"
+}
+
+
+## Log in with my user
+
+POST http://localhost:8080/api/login
+Content-Type: application/json
+
+{
+  "username": "benec",
+  "email": "bence.fabian@codecool.com",
+  "password": "myverycoolpassword"
+}

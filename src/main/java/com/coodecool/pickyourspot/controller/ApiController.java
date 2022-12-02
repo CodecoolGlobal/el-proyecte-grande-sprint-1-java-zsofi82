@@ -38,19 +38,19 @@ public class ApiController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> loginUser(@RequestBody AppUser appUser) {
+    public ResponseEntity<?> loginUser(@RequestBody AppUser appUser) {
 
         // TODO implement logging in
         if (appUser == null || appUser.getUsername().equals("") || appUser.getPassword().equals("")) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson("Invalid username or password!"));
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid username or password!");
         }
 
         Optional<AppUser> potentialUser = productService.loginUser(appUser);
         if (potentialUser.isPresent()) {
             AppUser user = potentialUser.get();
-            return ResponseEntity.ok(gson.toJson(user));
+            return ResponseEntity.ok(user);
         }
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson("Invalid username or password!"));
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid username or password!");
     }
 
 }
