@@ -1,12 +1,13 @@
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from "react";
 import MainInformation from "./MainInformation";
 import ReservedTables from "./ReservedTables";
 
-const User = () => {
+const User = ({ loggedIn }) => {
     const [userData, setUserData] = useState({});
     const [tablesData, setTablesData] = useState({});
     const [loadingData, isLoadingData] = useState(true)
+    const navigate = useNavigate()
     const params = useParams();
     const userId = params.userId
     useEffect(() => {
@@ -27,12 +28,25 @@ const User = () => {
             console.error(err)
         }
     }, [tablesData])
+
+    function getCorrectRoute() {
+        if (!loggedIn) {
+            navigate("/")
+        } else {
+            return (
+                <div>
+                    <MainInformation user={userData} />
+                    <ReservedTables tables={tablesData} />
+                </div>)
+        }
+    }
+
+
     if (!loadingData) {
         return (
-            <div>
-                <MainInformation user={userData} />
-                <ReservedTables tables={tablesData} />
-            </div>
+            <>
+                {getCorrectRoute()}
+            </>
         )
     }
 

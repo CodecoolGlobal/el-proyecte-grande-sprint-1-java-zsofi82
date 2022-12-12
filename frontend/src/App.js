@@ -26,9 +26,9 @@ function App() {
                     <Route path="/" element={<Layout loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>}>
                         <Route path="/" element={<Home />} />
                         <Route path="/login" element={<Login loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>} />
-                        <Route path="/registration" element={<Registration />} />
+                        <Route path="/registration" element={<Registration loggedIn={loggedIn}/>} />
                         <Route path="/about" element={<About />} />
-                        <Route path="/user/:userId" element={<User />} />
+                        <Route path="/user/:userId" element={<User loggedIn={loggedIn}/>} />
                     </Route>
                 </Routes>
             </Router>
