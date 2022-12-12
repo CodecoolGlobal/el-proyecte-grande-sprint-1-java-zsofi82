@@ -1,6 +1,8 @@
 package com.coodecool.pickyourspot.storage;
 
 import com.coodecool.pickyourspot.model.AppUser;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -8,19 +10,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 @Component
+@Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
 public class UserDaoMem implements UserDao {
     private final List<AppUser> appUsers = new ArrayList<>();
-    private static UserDaoMem userDaoMem = null;
-
-    private UserDaoMem() {
-    }
-
-    public static UserDaoMem getInstance() {
-        if(userDaoMem == null) {
-            userDaoMem = new UserDaoMem();
-        }
-        return userDaoMem;
-    }
 
     @Override
     public void addUser(AppUser appUser) {
