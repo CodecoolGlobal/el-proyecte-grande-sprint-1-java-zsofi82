@@ -3,16 +3,16 @@ import { useNavigate } from "react-router-dom";
 import Button from "./reusable_elements/Button"
 
 
-const Navbar = () => {
+const Navbar = ({loggedIn, setLoggedIn}) => {
   const navigate = useNavigate();
-  const [loggedIn, setLoggedIn] = useState()
+//   const [loggedIn, setLoggedIn] = useState()
 
-  useEffect(() => {
-    const userName = sessionStorage.getItem("username")
-    const userId = sessionStorage.getItem("userid")
+//   useEffect(() => {
+//     const userName = sessionStorage.getItem("username")
+//     const userId = sessionStorage.getItem("userid")
 
-    setLoggedIn(userName && userId)
-  }, [setLoggedIn])
+//     setLoggedIn(userName && userId)
+//   }, [loggedIn, setLoggedIn])
 
   function clearSession()  {
     sessionStorage.clear();

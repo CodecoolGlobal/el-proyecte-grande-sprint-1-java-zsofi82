@@ -4,7 +4,6 @@ import Navbar from "./Navbar";
 const About = () => {
     return (
         <div>
-            <Navbar />
             <div className="p-5" style={{ fontSize: "20px" }}>
                 <h1 className="font-weight-light">About the page</h1>
                 <br />
@@ -24,7 +23,6 @@ const About = () => {
                     Creators: Jákob Rebeka, Szabó-Gaál Zsófia, Bata Botond, Sarkadi Gergely
                 </div>
             </div>
-            <Footer />
         </div>
     );
 }

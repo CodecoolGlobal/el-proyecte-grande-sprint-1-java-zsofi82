@@ -32,10 +32,8 @@ const User = () => {
     if (!loadingData) {
         return (
             <div>
-                <Navbar />
                 <MainInformation user={userData} />
                 <ReservedTables tables={tablesData} />
-                <Footer />
             </div>
         )
     }
