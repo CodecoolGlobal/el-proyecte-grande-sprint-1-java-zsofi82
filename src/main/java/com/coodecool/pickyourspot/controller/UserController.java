@@ -3,7 +3,8 @@ package com.coodecool.pickyourspot.controller;
 import com.coodecool.pickyourspot.model.AppUser;
 import com.coodecool.pickyourspot.model.FoosballTable;
 import com.coodecool.pickyourspot.model.Reservation;
-import com.coodecool.pickyourspot.service.ProductService;
+import com.coodecool.pickyourspot.service.UserService;
+import com.coodecool.pickyourspot.service.TableService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,16 +16,19 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api")
 public class UserController {
-    ProductService productService;
+    UserService userService;
+
+    TableService tableService;
 
     @Autowired
-    public UserController(ProductService productService) {
-        this.productService = productService;
+    public UserController(UserService userService, TableService tableService) {
+        this.userService = userService;
+        this.tableService = tableService;
     }
 
     @GetMapping("/user/{userId}")
     public ResponseEntity<AppUser> getUserById(@PathVariable String userId){
-        Optional<AppUser> user = productService.getUserById(userId);
+        Optional<AppUser> user = userService.getUserById(userId);
         if (user.isPresent()) {
             return ResponseEntity.ok(user.get());
         }
@@ -33,16 +37,16 @@ public class UserController {
 
     @GetMapping("/user")
     public List<AppUser> getAllUsers(){
-        return productService.getAllUsers();
+        return userService.getAllUsers();
     }
 
     @GetMapping("/user/{userId}/reservation")
     public List<FoosballTable> getReservedTables(@PathVariable String userId){
-        return productService.getReservedTablesByUser(userId);
+        return tableService.getReservedTablesByUser(userId);
     }
 
     @GetMapping("/user/{userId}/reservation/{tableId}")
     public List<Reservation> getReservationsByTableIdAndUserId(@PathVariable String tableId, @PathVariable String userId){
-        return productService.getReservationsByTableIdAndUserId(tableId,userId);
+        return tableService.getReservationsByTableIdAndUserId(tableId,userId);
     }
 }

@@ -1,7 +1,7 @@
 package com.coodecool.pickyourspot.controller;
 
 import com.coodecool.pickyourspot.model.AppUser;
-import com.coodecool.pickyourspot.service.ProductService;
+import com.coodecool.pickyourspot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 public class PageController {
 
     @Autowired
-    private ProductService productService;
+    private UserService userService;
     @GetMapping
     public String index() {
         return "index";
@@ -29,7 +29,7 @@ public class PageController {
 
     @PostMapping(value = "registration")
     public String handleRegistration(@ModelAttribute("user") AppUser appUser) {
-        productService.addNewUser(appUser);
+        userService.addNewUser(appUser);
         return "redirect:";
     }
 

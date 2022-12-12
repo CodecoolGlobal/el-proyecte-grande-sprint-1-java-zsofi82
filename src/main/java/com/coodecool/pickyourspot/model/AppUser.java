@@ -1,5 +1,9 @@
 package com.coodecool.pickyourspot.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.beans.Transient;
 import java.util.Objects;
 import java.util.UUID;
@@ -14,10 +18,12 @@ public class AppUser {
 //    public AppUser(){
 //    }
 
-    public AppUser(String username, String email, String hashedPassword) {
+    @JsonCreator
+    public AppUser(String username, String email, String password) {
         this.id = UUID.randomUUID();
         this.username = username;
         this.email = email;
+        var hashedPassword = hash(password);
         this.password = hashedPassword;
     }
 /*
@@ -27,9 +33,12 @@ public class AppUser {
         this.email = email;
         this.password = hashedPassword;
     }
-
 */
 
+    private String hash(String password) {
+        // TODO: remove this eventually
+        return password;
+    }
     public String getUsername() {
         return username;
     }
@@ -61,10 +70,12 @@ public class AppUser {
         return id;
     }
 
+    @JsonIgnore
     public String getEmail() {
         return email;
     }
 
+    @JsonIgnore
     public String getPassword() {
         return password;
     }
@@ -77,10 +88,12 @@ public class AppUser {
         this.username = username;
     }
 
+    @JsonProperty
     public void setEmail(String email) {
         this.email = email;
     }
 
+    @JsonProperty
     public void setPassword(String password) {
         this.password = password;
     }
