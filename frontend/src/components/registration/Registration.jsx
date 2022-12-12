@@ -1,17 +1,28 @@
-import Navbar from "../Navbar"
 import RegistrationForm from "./RegistrationForm"
 import './Registration.css'
-import Footer from "../Footer"
+import { useNavigate } from "react-router-dom"
 
-const Registration = () => {
-  return (
-    <div className="registrationContainer">
-      <Navbar />
-      <h1>Registration:</h1>
-      <RegistrationForm />
-      <Footer />
-    </div>
-  )
+const Registration = ({loggedIn}) => {
+    const navigate = useNavigate()
+
+    function getCorrectRoute() {
+        if (loggedIn) {
+            navigate("/")
+        } else {
+            return (
+                <div className="registrationContainer">
+                    <h1>Registration:</h1>
+                    <RegistrationForm />
+                </div>)
+        }
+    }
+
+
+    return (
+        <>
+            {getCorrectRoute()}
+        </>
+    )
 }
 
 export default Registration

@@ -2,7 +2,8 @@ package com.coodecool.pickyourspot.controller;
 
 import com.coodecool.pickyourspot.model.FoosballTable;
 import com.coodecool.pickyourspot.model.Reservation;
-import com.coodecool.pickyourspot.service.ProductService;
+import com.coodecool.pickyourspot.service.UserService;
+import com.coodecool.pickyourspot.service.TableService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,21 +14,23 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 public class TableController {
-    ProductService productService;
+    UserService userService;
+    TableService tableService;
 
     @Autowired
-    public TableController(ProductService productService) {
-        this.productService = productService;
+    public TableController(UserService userService, TableService tableService) {
+        this.userService = userService;
+        this.tableService = tableService;
     }
 
     @GetMapping("/table")
     public List<FoosballTable> getAllTable() {
-        return productService.getAllTables();
+        return tableService.getAllTables();
     }
 
     @PostMapping("/table")
     public ResponseEntity<String> addTable(@RequestBody FoosballTable foosballTable) {
-        if (productService.addNewTable(foosballTable)) {
+        if (tableService.addNewTable(foosballTable)) {
             return ResponseEntity.ok("Added table");
         }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid table data");
@@ -36,7 +39,7 @@ public class TableController {
 
     @PostMapping("/table/{tableId}/reservation")
     public ResponseEntity<String> addReservation(@RequestBody Reservation reservation, @PathVariable String tableId) throws IllegalAccessException {
-        if (productService.addReservation(tableId, reservation)) {
+        if (tableService.addReservation(tableId, reservation)) {
             return ResponseEntity.ok("Added reservation " + reservation + " to table");
         }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Table reservation failed");
@@ -44,7 +47,7 @@ public class TableController {
 
     @DeleteMapping("/table/{tableId}/reservation")
     public ResponseEntity<String> deleteReservation(@RequestBody Reservation reservation, @PathVariable String tableId) {
-        if (productService.removeReservation(tableId, reservation)){
+        if (tableService.removeReservation(tableId, reservation)){
             return ResponseEntity.ok("Removed reservation " + reservation + " from table");
         }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Table reservation cancelling failed");
@@ -52,6 +55,6 @@ public class TableController {
 
     @GetMapping("/table/free-tables/{dateTimeString}")
     public List<FoosballTable> getFreeTables(@PathVariable String dateTimeString) {
-        return productService.getFreeTables(dateTimeString);
+        return tableService.getFreeTables(dateTimeString);
     }
 }

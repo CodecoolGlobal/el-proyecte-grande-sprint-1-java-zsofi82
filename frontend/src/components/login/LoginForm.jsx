@@ -39,6 +39,7 @@ const LoginForm = ({ loggedIn, setLoggedIn, setUserName, setUserId }) => {
                     sessionStorage.setItem("userid", serverResponse.id)
                     setDataToServer(null)
                     setRawResponse(null)
+                    setLoggedIn(true)
                     navigate("/")
                 }
             } catch (err) {

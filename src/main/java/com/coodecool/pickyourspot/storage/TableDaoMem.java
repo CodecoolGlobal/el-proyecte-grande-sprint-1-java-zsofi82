@@ -2,6 +2,8 @@ package com.coodecool.pickyourspot.storage;
 
 import com.coodecool.pickyourspot.model.FoosballTable;
 import com.coodecool.pickyourspot.model.Reservation;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -11,21 +13,9 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Component
+@Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
 public class TableDaoMem implements TableDao {
-    private final List<FoosballTable> foosballTables;
-
-    private static TableDaoMem tableDaoMem = null;
-
-    private TableDaoMem() {
-        this.foosballTables = new ArrayList<>();
-    }
-
-    public static TableDaoMem getInstance() {
-        if (tableDaoMem == null) {
-            tableDaoMem = new TableDaoMem();
-        }
-        return tableDaoMem;
-    }
+    private final List<FoosballTable> foosballTables = new ArrayList<>();
 
     @Override
     public boolean addTable(FoosballTable foosballTable) {
