@@ -2,6 +2,7 @@ package com.coodecool.pickyourspot.storage;
 
 import com.coodecool.pickyourspot.model.FoosballTable;
 import com.coodecool.pickyourspot.model.Reservation;
+import com.coodecool.pickyourspot.storage.repositories.ReservationRepository;
 import com.coodecool.pickyourspot.storage.repositories.TableRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
@@ -15,9 +16,12 @@ import java.util.UUID;
 public class TableDaoDatabase implements TableDao {
     TableRepository tableRepository;
 
+    ReservationRepository reservationRepository;
+
     @Autowired
-    public TableDaoDatabase(TableRepository tableRepository) {
+    public TableDaoDatabase(TableRepository tableRepository, ReservationRepository reservationRepository) {
         this.tableRepository = tableRepository;
+        this.reservationRepository = reservationRepository;
     }
 
     @Override
@@ -48,7 +52,8 @@ public class TableDaoDatabase implements TableDao {
 
     @Override
     public List<FoosballTable> getReservedTablesByUser(UUID userId) {
-        return null;
+        List<FoosballTable> result = tableRepository.getReservedTablesByUser(userId);
+        return result;
     }
 
     @Override

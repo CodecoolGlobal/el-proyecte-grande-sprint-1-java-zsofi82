@@ -3,6 +3,7 @@ package com.coodecool.pickyourspot.model;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -18,10 +19,11 @@ import java.util.stream.Collectors;
 public class FoosballTable {
     @Id
 //    @Type(type = "uuid-char")
-    UUID id = UUID.randomUUID();
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    UUID id;
     String name;
     String address;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.PERSIST)
     List<Reservation> reservations;
 
     /*
@@ -57,10 +59,10 @@ public class FoosballTable {
     }
 
     public boolean reservedByUser(UUID userId){
-        return reservations.stream().filter(reservation -> reservation.getUserId().equals(userId)).collect(Collectors.toSet()).size() > 0;
+        return reservations.stream().filter(reservation -> reservation.getUser().getId().equals(userId)).collect(Collectors.toSet()).size() > 0;
     }
     public List<Reservation> getReservationsByUserId(UUID userId){
-        return reservations.stream().filter(reservation -> reservation.getUserId().equals(userId)).collect(Collectors.toList());
+        return reservations.stream().filter(reservation -> reservation.getUser().getId().equals(userId)).collect(Collectors.toList());
     }
 
     public String getName() {

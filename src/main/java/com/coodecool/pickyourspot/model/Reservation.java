@@ -1,11 +1,10 @@
 package com.coodecool.pickyourspot.model;
 
 import lombok.*;
+import org.apache.catalina.User;
 import org.hibernate.annotations.Type;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -18,7 +17,9 @@ import java.util.UUID;
 public class Reservation{
     @Id
 //    @Type(type = "uuid-char")
-    private UUID id = UUID.randomUUID();
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID id;
     private LocalDateTime reservationTime;
-    private UUID userId;
+    @ManyToOne
+    private AppUser user;
 }

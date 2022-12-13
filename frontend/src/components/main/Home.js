@@ -35,7 +35,9 @@ const Home = () => {
   const reserveTable = (tableId) => {
     let payload = {
       'reservationTime': date,
-      'userId': sessionStorage.getItem("userid")
+      'user': {
+        "id":sessionStorage.getItem("userid")
+      }
     }
     fetch(`/api/table/${tableId}/reservation`, {
       method: 'POST',

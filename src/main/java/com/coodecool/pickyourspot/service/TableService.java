@@ -4,6 +4,8 @@ import com.coodecool.pickyourspot.model.FoosballTable;
 import com.coodecool.pickyourspot.model.Reservation;
 import com.coodecool.pickyourspot.storage.TableDao;
 import com.coodecool.pickyourspot.storage.UserDao;
+import com.coodecool.pickyourspot.storage.repositories.ReservationRepository;
+import com.coodecool.pickyourspot.storage.repositories.TableRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,13 +19,16 @@ import java.util.stream.Collectors;
 public class TableService {
 
     private final TableDao tableDao;
+    private final ReservationRepository reservationRepository;
 
     @Autowired
-    public TableService(TableDao tableDao) {
+    public TableService(TableDao tableDao,
+                        ReservationRepository reservationRepository) {
         this.tableDao = tableDao;
 
         // TODO adding default tables, just for testing, delete later
         tableDao.addTable(new FoosballTable("Codecool-foosball table", "Budapest, Nagymező u. 44-1st Floor, 1065"));
+        this.reservationRepository = reservationRepository;
     }
 
     public List<FoosballTable> getAllTables() {
@@ -41,9 +46,11 @@ public class TableService {
     public boolean addReservation(String tableId, Reservation reservation) throws IllegalAccessException {
         Optional<FoosballTable> currentTable = getTableById(tableId);
         if (currentTable.isPresent()) {
-            if (currentTable.get().reserve(reservation)) {
-                return true;
-            }
+            FoosballTable table = currentTable.get();
+            reservationRepository.save(reservation);
+            table.reserve(reservation);
+            tableDao.updateTable(table);
+            return true;
         }
         return false;
     }

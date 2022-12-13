@@ -10,7 +10,9 @@ const Reservations = ({ table }) => {
     useEffect(() => {
         async function fetchReservation() {
             let res = await fetch(`/api/user/${userId}/reservation/${table.id}`)
+            console.log(res)
             let data = await res.json()
+            console.log(data)
             setReservationData(data)
             isLoadingData(false)
         }
