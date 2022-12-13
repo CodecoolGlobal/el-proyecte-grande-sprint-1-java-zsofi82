@@ -3,13 +3,25 @@ package com.coodecool.pickyourspot.model;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Type;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.beans.Transient;
 import java.util.Objects;
 import java.util.UUID;
 
+@Entity
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class AppUser {
-    private UUID id;
+    @Id
+//    @Type(type = "uuid-char")
+    private UUID id = UUID.randomUUID();
     private String username;
     private transient String email;
 

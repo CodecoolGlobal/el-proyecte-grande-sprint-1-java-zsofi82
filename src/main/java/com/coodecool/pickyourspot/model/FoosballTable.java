@@ -1,13 +1,27 @@
 package com.coodecool.pickyourspot.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Type;
+
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
+
+@Entity
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class FoosballTable {
-    UUID id;
+    @Id
+//    @Type(type = "uuid-char")
+    UUID id = UUID.randomUUID();
     String name;
     String address;
+    @OneToMany
     List<Reservation> reservations;
 
     /*
@@ -35,7 +49,7 @@ public class FoosballTable {
 
     private boolean isTimeTaken(Reservation reservation) {
         return reservations.stream()
-                .anyMatch(res -> res.reservationTime().equals(reservation.reservationTime()));
+                .anyMatch(res -> res.getReservationTime().equals(reservation.getReservationTime()));
     }
 
     public boolean cancelReservation(Reservation reservation) {
@@ -43,10 +57,10 @@ public class FoosballTable {
     }
 
     public boolean reservedByUser(UUID userId){
-        return reservations.stream().filter(reservation -> reservation.userId().equals(userId)).collect(Collectors.toSet()).size() > 0;
+        return reservations.stream().filter(reservation -> reservation.getUserId().equals(userId)).collect(Collectors.toSet()).size() > 0;
     }
     public List<Reservation> getReservationsByUserId(UUID userId){
-        return reservations.stream().filter(reservation -> reservation.userId().equals(userId)).collect(Collectors.toList());
+        return reservations.stream().filter(reservation -> reservation.getUserId().equals(userId)).collect(Collectors.toList());
     }
 
     public String getName() {
@@ -90,7 +104,7 @@ public class FoosballTable {
 
     public boolean isFreeAt(LocalDateTime dateTime) {
         return reservations.stream()
-                .noneMatch(res -> res.reservationTime().equals(dateTime));
+                .noneMatch(res -> res.getReservationTime().equals(dateTime));
     }
 
 

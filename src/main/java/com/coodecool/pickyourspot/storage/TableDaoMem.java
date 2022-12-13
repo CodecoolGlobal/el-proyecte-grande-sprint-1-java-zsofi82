@@ -12,7 +12,7 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-@Component
+//@Component
 @Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
 public class TableDaoMem implements TableDao {
     private final List<FoosballTable> foosballTables = new ArrayList<>();
