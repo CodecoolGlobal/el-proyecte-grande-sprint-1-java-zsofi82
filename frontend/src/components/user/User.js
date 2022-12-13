@@ -27,7 +27,7 @@ const User = ({ loggedIn }) => {
         } catch (err) {
             console.error(err)
         }
-    }, [tablesData])
+    }, [loadingData])
 
     function getCorrectRoute() {
         if (!loggedIn) {
