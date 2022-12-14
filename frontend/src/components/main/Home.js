@@ -32,14 +32,14 @@ const Home = () => {
     setClickedTable(null)
   }
   // when the Reserve button is pressed on the table modal
-  const reserveTable = (tableId) => {
+  const reserveTable = async (tableId) => {
     let payload = {
       'reservationTime': date,
       'user': {
         "id":sessionStorage.getItem("userid")
       }
     }
-    fetch(`/api/table/${tableId}/reservation`, {
+    let res = await fetch(`/api/table/${tableId}/reservation`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -47,6 +47,12 @@ const Home = () => {
       body:
         JSON.stringify(payload)
     })
+    const responseStatus = res.headers.get("status")
+    if (responseStatus == 200){
+      // TODO: show succesful table reservation message
+    } else {
+      // TODO: show Failed reservation message
+    }
     exitModal()
   }
   const filterTable = (spot, date) => {
