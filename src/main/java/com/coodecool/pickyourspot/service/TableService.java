@@ -3,13 +3,12 @@ package com.coodecool.pickyourspot.service;
 import com.coodecool.pickyourspot.model.FoosballTable;
 import com.coodecool.pickyourspot.model.Reservation;
 import com.coodecool.pickyourspot.storage.TableDao;
-import com.coodecool.pickyourspot.storage.UserDao;
 import com.coodecool.pickyourspot.storage.repositories.ReservationRepository;
-import com.coodecool.pickyourspot.storage.repositories.TableRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -27,7 +26,7 @@ public class TableService {
         this.tableDao = tableDao;
 
         // TODO adding default tables, just for testing, delete later
-        //tableDao.addTable(new FoosballTable("Codecool-foosball table", "Budapest, Nagymező u. 44-1st Floor, 1065"));
+//        tableDao.addTable(new FoosballTable("Codecool-foosball table", "Budapest, Nagymező u. 44-1st Floor, 1065"));
         this.reservationRepository = reservationRepository;
     }
 
@@ -67,11 +66,9 @@ public class TableService {
 
     }
 
-    public List<FoosballTable> getFreeTables(String dateTimeString) {
-        LocalDateTime dateTime = LocalDateTime.parse(dateTimeString);
-        return tableDao.getAllTables().stream()
-                .filter(table -> table.isFreeAt(dateTime))
-                .collect(Collectors.toList());
+    public List<FoosballTable> getFreeTables(LocalDateTime dateTime, String locationString) {
+        dateTime = dateTime.truncatedTo(ChronoUnit .HOURS);
+        return tableDao.getFreeTablesAt(locationString, dateTime);
     }
 
     public List<FoosballTable> getReservedTablesByUser(String userId ){

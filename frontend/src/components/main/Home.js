@@ -55,8 +55,22 @@ const Home = () => {
     }
     exitModal()
   }
-  const filterTable = (spot, date) => {
-    //TODO: update Table data from SearchBar
+  const filterTable = async (spot, date) => {
+    console.log("hello im in filter table func")
+    let payload = {
+      "location": spot,
+      "dateTime": date
+    }
+    let res = await fetch(`/api/table/free-tables`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body:
+          JSON.stringify(payload)
+    })
+    let data = res.json();
+    setTableData(data)
     setDate(date)
   }
 

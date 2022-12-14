@@ -3,6 +3,7 @@ package com.coodecool.pickyourspot.storage;
 import com.coodecool.pickyourspot.model.FoosballTable;
 import com.coodecool.pickyourspot.model.Reservation;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -15,4 +16,6 @@ public interface TableDao {
     Optional<FoosballTable> getTableById(UUID id);
     List<FoosballTable> getReservedTablesByUser(UUID userId);
     List<Reservation> getReservationsByTableIdAndUserId(UUID tableId, UUID userId);
+
+    List<FoosballTable> getFreeTablesAt(String locationString, LocalDateTime dateTime);
 }

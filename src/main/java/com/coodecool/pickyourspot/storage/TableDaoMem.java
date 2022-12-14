@@ -6,6 +6,7 @@ import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -56,5 +57,12 @@ public class TableDaoMem implements TableDao {
             return table.get().getReservationsByUserId(userId);
         }
         return new ArrayList<>();
+    }
+
+    @Override
+    public List<FoosballTable> getFreeTablesAt(String locationString, LocalDateTime dateTime) {
+        return foosballTables.stream()
+                .filter(table -> table.isFreeAt(dateTime))
+                .collect(Collectors.toList());
     }
 }

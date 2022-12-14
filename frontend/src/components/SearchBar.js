@@ -6,6 +6,7 @@ const SearchBar = ({ filterTable }) => {
     //TODO: get spots as properties
     const spots = [
         { value: '', text: '-- Pick a spot --' },
+        { value: 'Budapest', text: 'Budapest' },
         { value: 'alpaka', text: 'Alpaka' },
         { value: 'tableSpot', text: 'TableSpot' },
         { value: 'here', text: 'Here' },
