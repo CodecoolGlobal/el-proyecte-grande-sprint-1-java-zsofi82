@@ -2,7 +2,7 @@
 // import { useParams } from 'react-router-dom';
 import Reservation from "./Reservation";
 
-const Reservations = ({ table }) => {
+const Reservations = ({ table, setDelete }) => {
     // const [reservationData, setReservationData] = useState({});
     // const [loadingData, isLoadingData] = useState(true)
     // const params = useParams();
@@ -26,7 +26,7 @@ const Reservations = ({ table }) => {
                 <div className="card-header"> <h4 className={"my-0 font-weight-normal"}>{table.name}</h4></div>
                 <div className="card-body">
                     <p className="card-text"> {table.address} </p>
-                    {table.reservations.map((reservation) => <Reservation key={reservation.reservationTime} reservation={reservation} tableId={table.id} />)}
+                    {table.reservations.map((reservation) => <Reservation key={reservation.reservationTime} reservation={reservation} tableId={table.id} setDelete={setDelete} />)}
                 </div>
             </div>
         </div>

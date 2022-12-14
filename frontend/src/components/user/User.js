@@ -7,6 +7,7 @@ const User = ({ loggedIn }) => {
     const [userData, setUserData] = useState({});
     const [tablesData, setTablesData] = useState({});
     const [loadingData, isLoadingData] = useState(true)
+    const [isDelete, setDelete] = useState(false)
     const navigate = useNavigate()
     const params = useParams();
     const userId = params.userId
@@ -27,7 +28,8 @@ const User = ({ loggedIn }) => {
         } catch (err) {
             console.error(err)
         }
-    }, [loadingData])
+    }, [isDelete])
+    console.log(tablesData)
 
     function getCorrectRoute() {
         if (!loggedIn) {
@@ -36,7 +38,7 @@ const User = ({ loggedIn }) => {
             return (
                 <div>
                     <MainInformation user={userData} />
-                    <ReservedTables tables={tablesData} />
+                    <ReservedTables tables={tablesData} setDelete={setDelete} />
                 </div>)
         }
     }

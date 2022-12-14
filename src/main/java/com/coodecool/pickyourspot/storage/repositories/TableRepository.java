@@ -11,12 +11,9 @@ import java.util.UUID;
 
 @Repository
 public interface TableRepository extends JpaRepository<FoosballTable, UUID> {
-    @Query(value = "SELECT * FROM foosball_table\n" +
-            "JOIN foosball_table_reservations ftr on foosball_table.id = ftr.foosball_table_id\n" +
-            "JOIN reservation r on ftr.reservations_id = r.id\n" +
-            "JOIN app_user au on au.id = r.user_id\n" +
-            "WHERE au.id = :user_id", nativeQuery = true)
+    @Query(value = "select f from FoosballTable f join f.reservations as r where r.user.id = :user_id group by f")
     List<FoosballTable> getReservedTablesByUser(@Param("user_id") UUID userId);
+
 
     // TODO
 //    List<FoosballTable> findAllByReservationsContaining(UUID userId);

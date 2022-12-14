@@ -23,7 +23,7 @@ public class FoosballTable {
     UUID id;
     String name;
     String address;
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @OneToMany(orphanRemoval = true, cascade = {CascadeType.ALL})
     List<Reservation> reservations;
 
     /*

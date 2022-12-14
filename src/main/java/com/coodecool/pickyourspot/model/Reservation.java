@@ -14,6 +14,7 @@ import java.util.UUID;
 @Builder
 @Setter
 @Getter
+@EqualsAndHashCode
 public class Reservation{
     @Id
 //    @Type(type = "uuid-char")

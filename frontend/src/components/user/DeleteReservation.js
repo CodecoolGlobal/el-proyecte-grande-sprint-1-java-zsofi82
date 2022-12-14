@@ -1,4 +1,4 @@
-const DeleteReservation = ({tableId, reservation}) => {
+const DeleteReservation = ({tableId, reservation, setDelete}) => {
     async function fetchDeleteReservation() {
         let res = await fetch(`/api/table/${tableId}/reservation`, {
             method: 'DELETE',
@@ -7,7 +7,7 @@ const DeleteReservation = ({tableId, reservation}) => {
             },
             body: JSON.stringify(reservation)
         })
-
+        setDelete(prev => !prev);
     }
     return(
         <button className={"btn bg-info shadow-none"} onClick={fetchDeleteReservation}>&#10060;</button>

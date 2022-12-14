@@ -27,7 +27,7 @@ public class TableService {
         this.tableDao = tableDao;
 
         // TODO adding default tables, just for testing, delete later
-        tableDao.addTable(new FoosballTable("Codecool-foosball table", "Budapest, Nagymező u. 44-1st Floor, 1065"));
+        //tableDao.addTable(new FoosballTable("Codecool-foosball table", "Budapest, Nagymező u. 44-1st Floor, 1065"));
         this.reservationRepository = reservationRepository;
     }
 
@@ -58,7 +58,10 @@ public class TableService {
     public boolean removeReservation(String tableId, Reservation reservation) {
         Optional<FoosballTable> currentTable = getTableById(tableId);
         if (currentTable.isPresent()) {
-            return currentTable.get().cancelReservation(reservation);
+            FoosballTable foosballTable = currentTable.get();
+            foosballTable.cancelReservation(reservation);
+            tableDao.updateTable(foosballTable);
+            return true;
         }
         return false;
 
