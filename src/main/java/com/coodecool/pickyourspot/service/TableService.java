@@ -67,7 +67,7 @@ public class TableService {
     }
 
     public List<FoosballTable> getFreeTables(LocalDateTime dateTime, String locationString) {
-        dateTime = dateTime.truncatedTo(ChronoUnit .HOURS);
+        dateTime = dateTime.truncatedTo(ChronoUnit.HOURS);
         return tableDao.getFreeTablesAt(locationString, dateTime);
     }
 

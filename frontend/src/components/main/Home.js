@@ -56,28 +56,28 @@ const Home = () => {
     exitModal()
   }
   const filterTable = async (spot, date) => {
-    console.log("hello im in filter table func")
     let payload = {
       "location": spot,
       "dateTime": date
     }
     let res = await fetch(`/api/table/free-tables`, {
-      method: 'GET',
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body:
           JSON.stringify(payload)
     })
-    let data = res.json();
+    let data = await res.json();
     setTableData(data)
     setDate(date)
   }
 
+
   return (
     <div>
       <SearchBar filterTable={filterTable} />
-      {tableData.length ? <Tables tables={tableData} showDetails={showDetails} /> : 'No tables to show'}
+      {tableData.length ? <Tables tables={tableData} showDetails={showDetails} /> : 'No available tables'}
       {clickedTable && <TableModal table={clickedTable} onExit={exitModal} onReserve={reserveTable} selectedDate={date}/>}
     </div>
   )

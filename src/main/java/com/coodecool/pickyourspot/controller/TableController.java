@@ -57,10 +57,8 @@ public class TableController {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Table reservation cancelling failed");
     }
 
-    @GetMapping("/table/free-tables")
+    @PostMapping("/table/free-tables")
     public List<FoosballTable> getFreeTables(@RequestBody SearchFilters searchFilters) {
-        System.out.println(searchFilters.getLocation());
-        System.out.println(searchFilters.getDateTime());
         return tableService.getFreeTables(searchFilters.getDateTime(), searchFilters.getLocation());
     }
 }

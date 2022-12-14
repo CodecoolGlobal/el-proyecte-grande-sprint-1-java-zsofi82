@@ -15,11 +15,10 @@ public interface TableRepository extends JpaRepository<FoosballTable, UUID> {
     @Query(value = "select f from FoosballTable f join f.reservations as r where r.user.id = :user_id group by f")
     List<FoosballTable> getReservedTablesByUser(@Param("user_id") UUID userId);
 
-    @Query("select f " +
-            "from FoosballTable f " +
-            "where not exists(select 1 from f.reservations r where r.reservationTime = :reservationTime) " +
-            "AND f.address like :location")
-//    f.address like :location and r.reservationTime <> :date
+    @Query("SELECT f " +
+            "FROM FoosballTable f " +
+            "WHERE not exists(select 1 from f.reservations r where r.reservationTime = :reservationTime) " +
+            "AND f.address LIKE :location")
     List<FoosballTable> getFreeTablesByLocationAndDate(@Param("location") String locationString, @Param("reservationTime") LocalDateTime dateTime);
 
 }

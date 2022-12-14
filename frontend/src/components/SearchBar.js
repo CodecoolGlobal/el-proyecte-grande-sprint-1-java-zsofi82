@@ -7,7 +7,7 @@ const SearchBar = ({ filterTable }) => {
     const spots = [
         { value: '', text: '-- Pick a spot --' },
         { value: 'Budapest', text: 'Budapest' },
-        { value: 'alpaka', text: 'Alpaka' },
+        { value: 'Budapest, Nagymező u. 44-1st Floor, 1065', text: 'exact address' },
         { value: 'tableSpot', text: 'TableSpot' },
         { value: 'here', text: 'Here' },
     ];

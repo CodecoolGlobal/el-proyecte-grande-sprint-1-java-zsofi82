@@ -63,6 +63,7 @@ public class TableDaoDatabase implements TableDao {
 
     @Override
     public List<FoosballTable> getFreeTablesAt(String locationString, LocalDateTime dateTime) {
+        locationString = "%" + locationString + "%";
         return tableRepository.getFreeTablesByLocationAndDate(locationString, dateTime);
     }
 }
