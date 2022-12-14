@@ -6,7 +6,7 @@ import SearchBar from "../SearchBar";
 const Home = () => {
     const [tableData, setTableData] = useState({});
     const [clickedTable, setClickedTable] = useState(null);
-    const [date, setDate] = useState(new Date().setMinutes(0));
+    const [date, setDate] = useState(new Date());
     const [location, setLocation] = useState("");
 
     useEffect(() => {
