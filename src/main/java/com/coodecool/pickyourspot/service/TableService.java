@@ -12,7 +12,6 @@ import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service
 public class TableService {
@@ -26,7 +25,10 @@ public class TableService {
         this.tableDao = tableDao;
 
         // TODO adding default tables, just for testing, delete later
-//        tableDao.addTable(new FoosballTable("Codecool-foosball table", "Budapest, Nagymező u. 44-1st Floor, 1065"));
+//        tableDao.addTable(new FoosballTable("Codecool", "Budapest, Nagymező utca 44."));
+//        tableDao.addTable(new FoosballTable("Vault 51", "Budapest, Ó utca 51."));
+//        tableDao.addTable(new FoosballTable("Füge udvar", "Budapest, Klauzál utca 19."));
+//        tableDao.addTable(new FoosballTable("Noiret bar", "Budapest, Dessewffy utca 8."));
         this.reservationRepository = reservationRepository;
     }
 
