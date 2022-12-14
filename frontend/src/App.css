@@ -85,13 +85,29 @@ body{
   font-style: italic;
 }
 
-.card {
+.tables-container { 
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 2%;
+    margin-bottom: 8vh;
+}
+
+.tables-col {
+    justify-self: center;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tables-card {
     width: 40vw;
     height: 40vh;
     border-radius: 10px;
+    
 }
 
-.card-body {
+.tables-card-body {
     border-radius: 10px;
 }
 
