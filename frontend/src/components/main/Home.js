@@ -49,7 +49,7 @@ const Home = () => {
     })
     const responseStatus = res.headers.get("status")
     if (responseStatus == 200){
-      // TODO: show succesful table reservation message
+      // TODO: show successful table reservation message
     } else {
       // TODO: show Failed reservation message
     }
