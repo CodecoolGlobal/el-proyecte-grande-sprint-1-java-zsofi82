@@ -5,9 +5,9 @@ import com.coodecool.pickyourspot.model.Reservation;
 import com.coodecool.pickyourspot.storage.repositories.ReservationRepository;
 import com.coodecool.pickyourspot.storage.repositories.TableRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -59,5 +59,11 @@ public class TableDaoDatabase implements TableDao {
     @Override
     public List<Reservation> getReservationsByTableIdAndUserId(UUID tableId, UUID userId) {
         return null;
+    }
+
+    @Override
+    public List<FoosballTable> getFreeTablesAt(String locationString, LocalDateTime dateTime) {
+        locationString = "%" + locationString + "%";
+        return tableRepository.getFreeTablesByLocationAndDate(locationString, dateTime);
     }
 }

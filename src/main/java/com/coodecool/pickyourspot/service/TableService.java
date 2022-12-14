@@ -3,17 +3,15 @@ package com.coodecool.pickyourspot.service;
 import com.coodecool.pickyourspot.model.FoosballTable;
 import com.coodecool.pickyourspot.model.Reservation;
 import com.coodecool.pickyourspot.storage.TableDao;
-import com.coodecool.pickyourspot.storage.UserDao;
 import com.coodecool.pickyourspot.storage.repositories.ReservationRepository;
-import com.coodecool.pickyourspot.storage.repositories.TableRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service
 public class TableService {
@@ -70,11 +68,9 @@ public class TableService {
 
     }
 
-    public List<FoosballTable> getFreeTables(String dateTimeString) {
-        LocalDateTime dateTime = LocalDateTime.parse(dateTimeString);
-        return tableDao.getAllTables().stream()
-                .filter(table -> table.isFreeAt(dateTime))
-                .collect(Collectors.toList());
+    public List<FoosballTable> getFreeTables(LocalDateTime dateTime, String locationString) {
+        dateTime = dateTime.truncatedTo(ChronoUnit.HOURS);
+        return tableDao.getFreeTablesAt(locationString, dateTime);
     }
 
     public List<FoosballTable> getReservedTablesByUser(String userId ){
