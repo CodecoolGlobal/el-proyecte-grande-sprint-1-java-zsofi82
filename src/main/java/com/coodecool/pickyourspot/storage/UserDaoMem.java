@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-@Component
+//@Component
 @Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
 public class UserDaoMem implements UserDao {
     private final List<AppUser> appUsers = new ArrayList<>();
