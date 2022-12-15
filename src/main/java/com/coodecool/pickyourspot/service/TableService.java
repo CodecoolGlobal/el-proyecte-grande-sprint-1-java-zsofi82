@@ -47,11 +47,17 @@ public class TableService {
     public boolean addReservation(String tableId, Reservation reservation) throws IllegalAccessException {
         Optional<FoosballTable> currentTable = getTableById(tableId);
         if (currentTable.isPresent()) {
-            FoosballTable table = currentTable.get();
-            reservationRepository.save(reservation);
-            table.reserve(reservation);
-            tableDao.updateTable(table);
-            return true;
+            boolean isTimeReserved = currentTable.get()
+                    .getReservations()
+                    .stream()
+                    .anyMatch(r -> r.getReservationTime().equals(reservation.getReservationTime()));
+            if (!isTimeReserved) {
+                FoosballTable table = currentTable.get();
+                reservationRepository.save(reservation);
+                table.reserve(reservation);
+                tableDao.updateTable(table);
+                return true;
+            }
         }
         return false;
     }
@@ -73,11 +79,11 @@ public class TableService {
         return tableDao.getFreeTablesAt(locationString, dateTime);
     }
 
-    public List<FoosballTable> getReservedTablesByUser(String userId ){
+    public List<FoosballTable> getReservedTablesByUser(String userId) {
         return tableDao.getReservedTablesByUser(UUID.fromString(userId));
     }
 
-    public List<Reservation> getReservationsByTableIdAndUserId(String tableId, String userId){
+    public List<Reservation> getReservationsByTableIdAndUserId(String tableId, String userId) {
         return tableDao.getReservationsByTableIdAndUserId(UUID.fromString(tableId), UUID.fromString(userId));
     }
 }
