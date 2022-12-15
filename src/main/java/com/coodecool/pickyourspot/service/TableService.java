@@ -44,7 +44,7 @@ public class TableService {
         return tableDao.getTableById(UUID.fromString(id));
     }
 
-    public boolean addReservation(String tableId, Reservation reservation) throws IllegalAccessException {
+    public boolean addReservation(String tableId, Reservation reservation) {
         Optional<FoosballTable> currentTable = getTableById(tableId);
         if (currentTable.isPresent()) {
             boolean isTimeReserved = currentTable.get()
