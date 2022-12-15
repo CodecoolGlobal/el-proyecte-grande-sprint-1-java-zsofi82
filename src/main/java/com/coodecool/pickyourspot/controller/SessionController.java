@@ -42,7 +42,7 @@ public class SessionController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid username or password!");
         }
 
-        Optional<AppUser> potentialUser = userService.loginUser(appUser);
+        Optional<AppUser> potentialUser = userService.checkIfUserInDatabase(appUser);
         if (potentialUser.isPresent()) {
             AppUser user = potentialUser.get();
             return ResponseEntity.ok(user);
