@@ -1,17 +1,19 @@
-package com.coodecool.pickyourspot.controller;
 
-import com.coodecool.pickyourspot.model.AppUser;
-import com.coodecool.pickyourspot.service.UserService;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+//package com.coodecool.pickyourspot.controller;
+//
+//import com.coodecool.pickyourspot.model.AppUser;
+//import com.coodecool.pickyourspot.service.UserService;
+//import org.junit.jupiter.api.Test;
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.boot.test.context.SpringBootTest;
+//
+//import java.util.List;
+//
+//import static org.junit.jupiter.api.Assertions.*;
+//
+//@SpringBootTest
+//class APIControllerTest {
 
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
-
-@SpringBootTest
-class APIControllerTest {
 //    @Autowired
 //    UserService userService;
 //
@@ -39,5 +41,5 @@ class APIControllerTest {
 //        assertTrue(foundAppUser.contains(appUser2));
 //        assertEquals(2, foundAppUser.size());
 //    }
-
-}
+//
+//}
