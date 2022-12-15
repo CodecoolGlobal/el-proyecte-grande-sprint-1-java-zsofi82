@@ -63,8 +63,6 @@ const Home = () => {
         await filterTable()
     }
     const filterTable = async () => {
-        console.log("trigger")
-        console.log(location)
         let payload = {
             "location": location,
             "dateTime": date

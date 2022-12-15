@@ -10,8 +10,13 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/")
 public class PageController {
 
-    @Autowired
     private UserService userService;
+
+    @Autowired
+    public PageController(UserService userService) {
+        this.userService = userService;
+    }
+
     @GetMapping
     public String index() {
         return "index";

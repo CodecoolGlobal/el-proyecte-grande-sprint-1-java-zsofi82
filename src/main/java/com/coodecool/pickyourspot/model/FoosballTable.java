@@ -3,8 +3,6 @@ package com.coodecool.pickyourspot.model;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -25,15 +23,6 @@ public class FoosballTable {
     String address;
     @OneToMany(orphanRemoval = true, cascade = {CascadeType.ALL})
     List<Reservation> reservations;
-
-    /*
-        public Table(UUID id, String name, String address, Map<LocalDateTime, UUID> reservations) {
-            this.id = id;
-            this.name = name;
-            this.address = address;
-            this.reservations = reservations;
-        }
-    */
     public FoosballTable(String name, String address) {
         this.id = UUID.randomUUID();
         this.name = name;

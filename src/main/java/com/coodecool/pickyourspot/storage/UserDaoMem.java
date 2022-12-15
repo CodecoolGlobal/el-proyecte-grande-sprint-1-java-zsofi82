@@ -3,7 +3,6 @@ package com.coodecool.pickyourspot.storage;
 import com.coodecool.pickyourspot.model.AppUser;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
