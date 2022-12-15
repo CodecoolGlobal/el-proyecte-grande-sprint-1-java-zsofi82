@@ -13,8 +13,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.*;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 
@@ -64,9 +63,15 @@ class UserServiceTest {
     }
 
     @Test
+    public void givenNotValidUserIdThenShouldReturnOptionalEmpty() {
+        when(userDao.getUserById(UUID.fromString("c8b2a7ba-7c5c-11ed-a1eb-0242ac120002"))).thenReturn(Optional.empty());
+        Optional<AppUser> user = userService.getUserById("c8b2a7ba-7c5c-11ed-a1eb-0242ac120002");
+        assertFalse(user.isPresent());
+    }
+
+    @Test
     public void givenGetAllUsersShouldReturnListOfAllUsers() {
         when(userDao.getAllUsers()).thenReturn(appUsers);
-
         List<AppUser> userList = userService.getAllUsers();
         assertEquals(2, userList.size());
         verify(userDao, times(1)).getAllUsers();
