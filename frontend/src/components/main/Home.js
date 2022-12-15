@@ -6,8 +6,15 @@ import SearchBar from "../SearchBar";
 const Home = () => {
     const [tableData, setTableData] = useState({});
     const [clickedTable, setClickedTable] = useState(null);
-    const [date, setDate] = useState(new Date());
+    const [date, setDate] = useState(currentDateRoundedToHours());
     const [location, setLocation] = useState("");
+
+
+    function currentDateRoundedToHours() {
+        let currentDate = new Date();
+        currentDate.setMinutes(0, 0, 0);
+        return currentDate;
+    }
 
     useEffect(() => {
         async function fetchTables() {
@@ -47,12 +54,13 @@ const Home = () => {
                 JSON.stringify(payload)
         })
         const responseStatus = res.headers.get("status")
-        if (responseStatus == 200) {
+        if (responseStatus === 200) {
             // TODO: show successful table reservation message
         } else {
             // TODO: show Failed reservation message
         }
         exitModal()
+        await filterTable()
     }
     const filterTable = async () => {
         console.log("trigger")
