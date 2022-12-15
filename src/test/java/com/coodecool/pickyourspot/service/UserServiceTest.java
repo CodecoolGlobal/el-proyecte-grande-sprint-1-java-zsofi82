@@ -78,10 +78,29 @@ class UserServiceTest {
     }
 
     @Test
-    void registerUser() {
+    public void ifUserRegistrationIsOkShouldReturnTrue() {
+        when(userDao.getAllUsers()).thenReturn(appUsers);
+        AppUser newUser = new AppUser(UUID.fromString("00000000-7c5c-11ed-a1eb-0242ac120002"), "Géza", "geza@email.com", "Geza");
+        assertTrue(userService.registerUser(newUser));
+    }
+    @Test
+    public void ifUserAlreadyRegisteredShouldReturnFalse() {
+        when(userDao.getAllUsers()).thenReturn(appUsers);
+        assertFalse(userService.registerUser(user1));
     }
 
     @Test
-    void loginUser() {
+    public void checkIfUserInDbShouldReturnOptionalAppUser() {
+        when(userDao.getAllUsers()).thenReturn(appUsers);
+        Optional<AppUser> loggedInUser = userService.checkIfUserInDatabase(user1);
+        assertTrue(loggedInUser.isPresent());
+    }
+
+    @Test
+    public void checkNotValidUserShouldReturnOptionalEmpty() {
+        AppUser newUser = new AppUser(UUID.fromString("00000000-7c5c-11ed-a1eb-0242ac120002"), "Géza", "geza@email.com", "Geza");
+        when(userDao.getAllUsers()).thenReturn(appUsers);
+        Optional<AppUser> loggedInUser = userService.checkIfUserInDatabase(newUser);
+        assertFalse(loggedInUser.isPresent());
     }
 }
