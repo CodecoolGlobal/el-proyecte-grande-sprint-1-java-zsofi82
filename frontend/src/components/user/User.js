@@ -29,7 +29,6 @@ const User = ({ loggedIn }) => {
             console.error(err)
         }
     }, [isDelete])
-    console.log(tablesData)
 
     function getCorrectRoute() {
         if (!loggedIn) {

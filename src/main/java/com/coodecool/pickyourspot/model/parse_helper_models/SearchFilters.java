@@ -1,4 +1,4 @@
-package com.coodecool.pickyourspot.model.perse_helper_models;
+package com.coodecool.pickyourspot.model.parse_helper_models;
 
 import lombok.*;
 

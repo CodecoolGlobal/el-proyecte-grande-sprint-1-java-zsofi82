@@ -52,8 +52,7 @@ public class TableDaoDatabase implements TableDao {
 
     @Override
     public List<FoosballTable> getReservedTablesByUser(UUID userId) {
-        List<FoosballTable> result = tableRepository.getReservedTablesByUser(userId);
-        return result;
+        return tableRepository.getReservedTablesByUser(userId);
     }
 
     @Override

@@ -29,6 +29,10 @@ public class TableService {
 //        tableDao.addTable(new FoosballTable("Vault 51", "Budapest, Ó utca 51."));
 //        tableDao.addTable(new FoosballTable("Füge udvar", "Budapest, Klauzál utca 19."));
 //        tableDao.addTable(new FoosballTable("Noiret bar", "Budapest, Dessewffy utca 8."));
+//        tableDao.addTable(new FoosballTable("Petz söröző", "Székesfehérvár, Bőrgyár utca 23."));
+//        tableDao.addTable(new FoosballTable("Kaiser Retro Club", "Székesfehérvár, Távirda utca 14."));
+
+
         this.reservationRepository = reservationRepository;
     }
 

@@ -1,6 +1,6 @@
 const DeleteReservation = ({tableId, reservation, setDelete}) => {
     async function fetchDeleteReservation() {
-        let res = await fetch(`/api/table/${tableId}/reservation`, {
+        await fetch(`/api/table/${tableId}/reservation`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'

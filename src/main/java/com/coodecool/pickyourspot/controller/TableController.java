@@ -2,11 +2,10 @@ package com.coodecool.pickyourspot.controller;
 
 import com.coodecool.pickyourspot.model.FoosballTable;
 import com.coodecool.pickyourspot.model.Reservation;
-import com.coodecool.pickyourspot.model.perse_helper_models.SearchFilters;
+import com.coodecool.pickyourspot.model.parse_helper_models.SearchFilters;
 import com.coodecool.pickyourspot.service.TableService;
 import com.coodecool.pickyourspot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

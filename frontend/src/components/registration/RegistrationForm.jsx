@@ -25,10 +25,10 @@ const RegistrationForm = () => {
             navigate("/login")
             return "Success! User registered!"
         } else if (serverRes.status === 400) {
-            console.log(serverRes.status)
+            console.error(serverRes.status)
             return "Invalid user data!"
         } else if (serverRes.status === 409) {
-            console.log(serverRes.status)
+            console.error(serverRes.status)
             return "User already exists!"
         }
     }

@@ -6,7 +6,7 @@ const EmbeddedMap = ({ className, source }) => {
 
     const url = `https://www.google.com/maps/embed/v1/place?key=${API_KEY}&q=${source}&zoom=${zoom}`
     return (
-        <iframe className={className} loading="lazy" allowFullScreen title='test'
+        <iframe className={className} loading="lazy" allowFullScreen title={className}
             src={url}></iframe>
     )
 }

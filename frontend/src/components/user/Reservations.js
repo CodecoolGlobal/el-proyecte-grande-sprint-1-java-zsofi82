@@ -1,25 +1,6 @@
-// import { useEffect, useState } from "react";
-// import { useParams } from 'react-router-dom';
 import Reservation from "./Reservation";
 
 const Reservations = ({ table, setDelete }) => {
-    // const [reservationData, setReservationData] = useState({});
-    // const [loadingData, isLoadingData] = useState(true)
-    // const params = useParams();
-    // const userId = params.userId
-    // useEffect(() => {
-    //     async function fetchReservation() {
-    //         let res = await fetch(`/api/user/${userId}/reservation/${table.id}`)
-    //         let data = await res.json()
-    //         setReservationData(data)
-    //         isLoadingData(false)
-    //     }
-    //     try {
-    //         Promise.all([fetchReservation()])
-    //     } catch (err) {
-    //         console.error(err)
-    //     }
-    // }, [reservationData])
 
     function fromUTCtoLocale(date) {
         const newDate = new Date(date)
@@ -37,8 +18,6 @@ const Reservations = ({ table, setDelete }) => {
             </div>
         </div>
     )
-    // if (loadingData) {
-    // }
 
 }
 export default Reservations
