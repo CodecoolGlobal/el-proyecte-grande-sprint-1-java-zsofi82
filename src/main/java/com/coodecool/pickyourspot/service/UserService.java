@@ -43,7 +43,7 @@ public class UserService {
         return false;
     }
 
-    public  Optional<AppUser> loginUser(AppUser appUser) {
+    public  Optional<AppUser> checkIfUserInDatabase(AppUser appUser) {
         List<AppUser> allUsers = userDao.getAllUsers();
         return allUsers.stream()
                 .filter(user -> user.getUsername().equals(appUser.getUsername()))
