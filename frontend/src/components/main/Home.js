@@ -53,6 +53,7 @@ const Home = () => {
             // TODO: show Failed reservation message
         }
         exitModal()
+        await filterTable()
     }
     const filterTable = async () => {
         console.log("trigger")
