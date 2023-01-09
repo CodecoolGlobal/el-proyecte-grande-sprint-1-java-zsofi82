@@ -2,7 +2,6 @@ package com.coodecool.pickyourspot.controller;
 
 import com.coodecool.pickyourspot.model.AppUser;
 import com.coodecool.pickyourspot.model.FoosballTable;
-import com.coodecool.pickyourspot.model.Reservation;
 import com.coodecool.pickyourspot.service.UserService;
 import com.coodecool.pickyourspot.service.TableService;
 import org.springframework.beans.factory.annotation.Autowired;
