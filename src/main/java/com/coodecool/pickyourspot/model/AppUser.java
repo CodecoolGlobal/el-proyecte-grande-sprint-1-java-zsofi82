@@ -14,7 +14,6 @@ import java.util.UUID;
 @Setter
 public class AppUser {
     @Id
-//    @Type(type = "uuid-char")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     private String username;

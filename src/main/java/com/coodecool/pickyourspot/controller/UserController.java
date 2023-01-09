@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/user")
 public class UserController {
     UserService userService;
 
@@ -26,7 +26,7 @@ public class UserController {
         this.tableService = tableService;
     }
 
-    @GetMapping("/user/{userId}")
+    @GetMapping("/{userId}")
     public ResponseEntity<AppUser> getUserById(@PathVariable String userId){
         Optional<AppUser> user = userService.getUserById(userId);
         if (user.isPresent()) {
@@ -35,12 +35,12 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
     }
 
-    @GetMapping("/user")
+    @GetMapping
     public List<AppUser> getAllUsers(){
         return userService.getAllUsers();
     }
 
-    @GetMapping("/user/{userId}/reservation")
+    @GetMapping("/{userId}/reservation")
     public List<FoosballTable> getReservedTables(@PathVariable String userId){
         return tableService.getReservedTablesByUser(userId);
     }

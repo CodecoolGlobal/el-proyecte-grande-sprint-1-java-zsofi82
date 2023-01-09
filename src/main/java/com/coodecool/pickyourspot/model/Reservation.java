@@ -14,7 +14,6 @@ import java.util.UUID;
 @EqualsAndHashCode
 public class Reservation{
     @Id
-//    @Type(type = "uuid-char")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     private LocalDateTime reservationTime;
