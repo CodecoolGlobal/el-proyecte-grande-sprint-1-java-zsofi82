@@ -2,8 +2,8 @@ package com.coodecool.pickyourspot.service;
 
 import com.coodecool.pickyourspot.model.FoosballTable;
 import com.coodecool.pickyourspot.model.Reservation;
-import com.coodecool.pickyourspot.storage.TableDao;
 import com.coodecool.pickyourspot.storage.repositories.ReservationRepository;
+import com.coodecool.pickyourspot.storage.repositories.TableRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,14 +16,13 @@ import java.util.UUID;
 @Service
 public class TableService {
 
-    private final TableDao tableDao;
+    private final TableRepository tableRepository;
     private final ReservationRepository reservationRepository;
 
     @Autowired
-    public TableService(TableDao tableDao,
+    public TableService(TableRepository tableRepository,
                         ReservationRepository reservationRepository) {
-        this.tableDao = tableDao;
-
+        this.tableRepository = tableRepository;
         // TODO adding default tables, just for testing, delete later
 //        tableDao.addTable(new FoosballTable("Codecool", "Budapest, Nagymező utca 44."));
 //        tableDao.addTable(new FoosballTable("Vault 51", "Budapest, Ó utca 51."));
@@ -37,15 +36,16 @@ public class TableService {
     }
 
     public List<FoosballTable> getAllTables() {
-        return tableDao.getAllTables();
+        return tableRepository.findAll();
     }
 
     public boolean addNewTable(FoosballTable foosballTable) {
-        return tableDao.addTable(new FoosballTable(foosballTable.getName(), foosballTable.getAddress()));
+        FoosballTable savedTable = tableRepository.save(foosballTable);
+        return savedTable != null;
     }
 
     public Optional<FoosballTable> getTableById(String id) {
-        return tableDao.getTableById(UUID.fromString(id));
+        return tableRepository.findById(UUID.fromString(id));
     }
 
     public boolean addReservation(String tableId, Reservation reservation) {
@@ -59,7 +59,7 @@ public class TableService {
                 FoosballTable table = currentTable.get();
                 reservationRepository.save(reservation);
                 table.reserve(reservation);
-                tableDao.updateTable(table);
+                tableRepository.save(table);
                 return true;
             }
         }
@@ -71,7 +71,7 @@ public class TableService {
         if (currentTable.isPresent()) {
             FoosballTable foosballTable = currentTable.get();
             foosballTable.cancelReservation(reservation);
-            tableDao.updateTable(foosballTable);
+            tableRepository.save(foosballTable);
             return true;
         }
         return false;
@@ -80,14 +80,11 @@ public class TableService {
 
     public List<FoosballTable> getFreeTables(LocalDateTime dateTime, String locationString) {
         dateTime = dateTime.truncatedTo(ChronoUnit.HOURS);
-        return tableDao.getFreeTablesAt(locationString, dateTime);
+        locationString = "%" + locationString + "%";
+        return tableRepository.getFreeTablesByLocationAndDate(locationString, dateTime);
     }
 
     public List<FoosballTable> getReservedTablesByUser(String userId) {
-        return tableDao.getReservedTablesByUser(UUID.fromString(userId));
-    }
-
-    public List<Reservation> getReservationsByTableIdAndUserId(String tableId, String userId) {
-        return tableDao.getReservationsByTableIdAndUserId(UUID.fromString(tableId), UUID.fromString(userId));
+        return tableRepository.getReservedTablesByUser(UUID.fromString(userId));
     }
 }

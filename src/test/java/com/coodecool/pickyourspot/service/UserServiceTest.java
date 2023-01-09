@@ -2,7 +2,7 @@ package com.coodecool.pickyourspot.service;
 
 import com.coodecool.pickyourspot.controller.UserController;
 import com.coodecool.pickyourspot.model.AppUser;
-import com.coodecool.pickyourspot.storage.UserDao;
+import com.coodecool.pickyourspot.storage.repositories.UserRepository;
 import org.junit.Before;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -22,7 +22,7 @@ import static org.mockito.Mockito.*;
 //@RunWith(SpringJUnit4ClassRunner.class)
 class UserServiceTest {
     @Mock
-    private UserDao userDao;
+    private UserRepository userRepository;
     @Mock
     private UserController userController;
 
@@ -39,7 +39,7 @@ class UserServiceTest {
     }
     @BeforeEach
     public void setUp() {
-        userService = new UserService(userDao);
+        userService = new UserService(userRepository);
         appUsers = new ArrayList<>();
         user1 = new AppUser(UUID.fromString("c8b2a7ba-7c5c-11ed-a1eb-0242ac120002"), "Aniko Bradshow", "aniko.bradshow@email.com", "AnikoBradshow79");
         user2 = new AppUser(UUID.randomUUID(), "Denes Donovan", "denes.donovan@email.com", "DenesDonovan90");
@@ -55,7 +55,7 @@ class UserServiceTest {
 
     @Test
     public void givenUserIdThenShouldReturnUserOfThatId() {
-        when(userDao.getUserById(UUID.fromString("c8b2a7ba-7c5c-11ed-a1eb-0242ac120002"))).thenReturn(Optional.ofNullable(user1));
+        when(userRepository.findById(UUID.fromString("c8b2a7ba-7c5c-11ed-a1eb-0242ac120002"))).thenReturn(Optional.ofNullable(user1));
 
         Optional<AppUser> user = userService.getUserById("c8b2a7ba-7c5c-11ed-a1eb-0242ac120002");
         assertTrue(user.isPresent());
@@ -64,34 +64,34 @@ class UserServiceTest {
 
     @Test
     public void givenNotValidUserIdThenShouldReturnOptionalEmpty() {
-        when(userDao.getUserById(UUID.fromString("c8b2a7ba-7c5c-11ed-a1eb-0242ac120002"))).thenReturn(Optional.empty());
+        when(userRepository.findById(UUID.fromString("c8b2a7ba-7c5c-11ed-a1eb-0242ac120002"))).thenReturn(Optional.empty());
         Optional<AppUser> user = userService.getUserById("c8b2a7ba-7c5c-11ed-a1eb-0242ac120002");
         assertFalse(user.isPresent());
     }
 
     @Test
     public void givenGetAllUsersShouldReturnListOfAllUsers() {
-        when(userDao.getAllUsers()).thenReturn(appUsers);
+        when(userRepository.findAll()).thenReturn(appUsers);
         List<AppUser> userList = userService.getAllUsers();
         assertEquals(2, userList.size());
-        verify(userDao, times(1)).getAllUsers();
+        verify(userRepository, times(1)).findAll();
     }
 
     @Test
     public void ifUserRegistrationIsOkShouldReturnTrue() {
-        when(userDao.getAllUsers()).thenReturn(appUsers);
+        when(userRepository.findAll()).thenReturn(appUsers);
         AppUser newUser = new AppUser(UUID.fromString("00000000-7c5c-11ed-a1eb-0242ac120002"), "Géza", "geza@email.com", "Geza");
         assertTrue(userService.registerUser(newUser));
     }
     @Test
     public void ifUserAlreadyRegisteredShouldReturnFalse() {
-        when(userDao.getAllUsers()).thenReturn(appUsers);
+        when(userRepository.findAll()).thenReturn(appUsers);
         assertFalse(userService.registerUser(user1));
     }
 
     @Test
     public void checkIfUserInDbShouldReturnOptionalAppUser() {
-        when(userDao.getAllUsers()).thenReturn(appUsers);
+        when(userRepository.findAll()).thenReturn(appUsers);
         Optional<AppUser> loggedInUser = userService.checkIfUserInDatabase(user1);
         assertTrue(loggedInUser.isPresent());
     }
@@ -99,7 +99,7 @@ class UserServiceTest {
     @Test
     public void checkNotValidUserShouldReturnOptionalEmpty() {
         AppUser newUser = new AppUser(UUID.fromString("00000000-7c5c-11ed-a1eb-0242ac120002"), "Géza", "geza@email.com", "Geza");
-        when(userDao.getAllUsers()).thenReturn(appUsers);
+        when(userRepository.findAll()).thenReturn(appUsers);
         Optional<AppUser> loggedInUser = userService.checkIfUserInDatabase(newUser);
         assertFalse(loggedInUser.isPresent());
     }

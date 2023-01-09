@@ -44,9 +44,4 @@ public class UserController {
     public List<FoosballTable> getReservedTables(@PathVariable String userId){
         return tableService.getReservedTablesByUser(userId);
     }
-
-    @GetMapping("/user/{userId}/reservation/{tableId}")
-    public List<Reservation> getReservationsByTableIdAndUserId(@PathVariable String tableId, @PathVariable String userId){
-        return tableService.getReservationsByTableIdAndUserId(tableId,userId);
-    }
 }
