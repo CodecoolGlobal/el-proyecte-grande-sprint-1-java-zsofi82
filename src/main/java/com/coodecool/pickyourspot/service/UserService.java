@@ -18,8 +18,6 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-
-
     public void addNewUser(AppUser appUser) {
         //TODO: user validation (is username exists?), password hashing
         userRepository.save(appUser);
@@ -46,6 +44,9 @@ public class UserService {
     }
 
     public  Optional<AppUser> checkIfUserInDatabase(AppUser appUser) {
+
+        // TODO refactor? or let the Security handle it?
+
         List<AppUser> allUsers = userRepository.findAll();
         return allUsers.stream()
                 .filter(user -> user.getUsername().equals(appUser.getUsername()))

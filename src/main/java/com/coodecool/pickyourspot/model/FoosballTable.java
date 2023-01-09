@@ -1,8 +1,6 @@
 package com.coodecool.pickyourspot.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -14,6 +12,8 @@ import java.util.stream.Collectors;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@EqualsAndHashCode
 public class FoosballTable {
     @Id
 //    @Type(type = "uuid-char")
@@ -23,12 +23,6 @@ public class FoosballTable {
     String address;
     @OneToMany(orphanRemoval = true, cascade = {CascadeType.ALL})
     List<Reservation> reservations;
-    public FoosballTable(String name, String address) {
-        this.id = UUID.randomUUID();
-        this.name = name;
-        this.address = address;
-        this.reservations = new ArrayList<>();
-    }
 
     public boolean reserve(Reservation reservation) {
         if (isTimeTaken(reservation)) {
@@ -43,8 +37,8 @@ public class FoosballTable {
                 .anyMatch(res -> res.getReservationTime().equals(reservation.getReservationTime()));
     }
 
-    public boolean cancelReservation(Reservation reservation) {
-        return reservations.remove(reservation);
+    public void cancelReservation(Reservation reservation) {
+        reservations.remove(reservation);
     }
 
     public boolean reservedByUser(UUID userId){
@@ -52,18 +46,6 @@ public class FoosballTable {
     }
     public List<Reservation> getReservationsByUserId(UUID userId){
         return reservations.stream().filter(reservation -> reservation.getUser().getId().equals(userId)).collect(Collectors.toList());
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public List<Reservation> getReservations() {
-        return reservations;
     }
 
     @Override

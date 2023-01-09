@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/table")
 public class TableController {
     UserService userService;
     TableService tableService;
@@ -26,12 +26,12 @@ public class TableController {
         this.tableService = tableService;
     }
 
-    @GetMapping("/table")
+    @GetMapping
     public List<FoosballTable> getAllTable() {
         return tableService.getAllTables();
     }
 
-    @PostMapping("/table")
+    @PostMapping
     public ResponseEntity<String> addTable(@RequestBody FoosballTable foosballTable) {
         if (tableService.addNewTable(foosballTable)) {
             return ResponseEntity.ok("Added table");
@@ -40,7 +40,7 @@ public class TableController {
 
     }
 
-    @PostMapping("/table/{tableId}/reservation")
+    @PostMapping("/{tableId}/reservation")
     public ResponseEntity<String> addReservation(@RequestBody Reservation reservation, @PathVariable String tableId) throws IllegalAccessException {
         if (tableService.addReservation(tableId, reservation)) {
             return ResponseEntity.ok("Added reservation " + reservation + " to table");
@@ -48,7 +48,7 @@ public class TableController {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Table reservation failed");
     }
 
-    @DeleteMapping("/table/{tableId}/reservation")
+    @DeleteMapping("/{tableId}/reservation")
     public ResponseEntity<String> deleteReservation(@RequestBody Reservation reservation, @PathVariable String tableId) {
         if (tableService.removeReservation(tableId, reservation)) {
             return ResponseEntity.ok("Removed reservation " + reservation + " from table");
@@ -56,7 +56,7 @@ public class TableController {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Table reservation cancelling failed");
     }
 
-    @PostMapping("/table/free-tables")
+    @PostMapping("/free-tables")
     public List<FoosballTable> getFreeTables(@RequestBody SearchFilters searchFilters) {
         return tableService.getFreeTables(searchFilters.getDateTime(), searchFilters.getLocation());
     }

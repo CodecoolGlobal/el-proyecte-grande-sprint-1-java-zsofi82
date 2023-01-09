@@ -24,13 +24,30 @@ public class TableService {
                         ReservationRepository reservationRepository) {
         this.tableRepository = tableRepository;
         // TODO adding default tables, just for testing, delete later
-//        tableDao.addTable(new FoosballTable("Codecool", "Budapest, Nagymező utca 44."));
-//        tableDao.addTable(new FoosballTable("Vault 51", "Budapest, Ó utca 51."));
-//        tableDao.addTable(new FoosballTable("Füge udvar", "Budapest, Klauzál utca 19."));
-//        tableDao.addTable(new FoosballTable("Noiret bar", "Budapest, Dessewffy utca 8."));
-//        tableDao.addTable(new FoosballTable("Petz söröző", "Székesfehérvár, Bőrgyár utca 23."));
-//        tableDao.addTable(new FoosballTable("Kaiser Retro Club", "Székesfehérvár, Távirda utca 14."));
-
+//        tableRepository.save(FoosballTable.builder()
+//                .name("Codecool")
+//                .address("Budapest, Nagymező utca 44.")
+//                .build());
+//        tableRepository.save(FoosballTable.builder()
+//                .name("Vault 51")
+//                .address("Budapest, Ó utca 51.")
+//                .build());
+//        tableRepository.save(FoosballTable.builder()
+//                .name("Füge udvar")
+//                .address("Budapest, Klauzál utca 19.")
+//                .build());
+//        tableRepository.save(FoosballTable.builder()
+//                .name("Noiret bar")
+//                .address("Budapest, Dessewffy utca 8.")
+//                .build());
+//        tableRepository.save(FoosballTable.builder()
+//                .name("Petz söröző")
+//                .address("Székesfehérvár, Bőrgyár utca 23.")
+//                .build());
+//        tableRepository.save(FoosballTable.builder()
+//                .name("Kaiser Retro Club")
+//                .address("Székesfehérvár, Távirda utca 14.")
+//                .build());
 
         this.reservationRepository = reservationRepository;
     }
