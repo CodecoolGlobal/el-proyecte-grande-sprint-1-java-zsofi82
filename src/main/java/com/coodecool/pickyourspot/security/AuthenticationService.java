@@ -2,6 +2,7 @@ package com.coodecool.pickyourspot.security;
 
 import com.coodecool.pickyourspot.config.JwtService;
 import com.coodecool.pickyourspot.model.AppUser;
+import com.coodecool.pickyourspot.model.Role;
 import com.coodecool.pickyourspot.security.helper_models.AuthRequest;
 import com.coodecool.pickyourspot.security.helper_models.AuthResponse;
 import com.coodecool.pickyourspot.security.helper_models.RegisterRequest;
@@ -25,7 +26,7 @@ public class AuthenticationService {
                 .username(request.getUsername())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .email(request.getEmail())
-//                .role(Role.USER) TODO implement roles
+                .role(Role.USER)
                 .build();
         repository.save(user);
         var jwtToken = jwtService.generateToken(user);
@@ -37,11 +38,11 @@ public class AuthenticationService {
     public AuthResponse authenticate(AuthRequest request) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        request.getEmail(),
+                        request.getUsername(),
                         request.getPassword()
                 )
         );
-        var user = repository.findByUsername(request.getEmail())
+        var user = repository.findByUsername(request.getUsername())
                 .orElseThrow();
         var jwtToken = jwtService.generateToken(user);
         return AuthResponse.builder()
