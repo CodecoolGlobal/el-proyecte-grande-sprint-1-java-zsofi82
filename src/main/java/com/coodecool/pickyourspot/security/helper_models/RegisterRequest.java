@@ -1,4 +1,4 @@
-package com.coodecool.pickyourspot.security;
+package com.coodecool.pickyourspot.security.helper_models;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class AuthRequest {
-    private String email;
+public class RegisterRequest {
+    private String username;
     private String password;
+    private String email;
 }

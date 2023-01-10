@@ -1,8 +1,7 @@
-package com.coodecool.pickyourspot.security;
+package com.coodecool.pickyourspot.config;
 
 import com.coodecool.pickyourspot.model.AppUser;
 import com.coodecool.pickyourspot.storage.repositories.UserRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -28,8 +27,9 @@ public class UserDetailsService implements org.springframework.security.core.use
         }
         AppUser user = optionalUser.get();
 
-        return User.builder()
+        return AppUser.builder()
                 .username(user.getUsername())
+                .email(user.getEmail())
                 .password(user.getPassword())
 //               .roles(user.getRoles) //TODO add roles to user
                 .build();

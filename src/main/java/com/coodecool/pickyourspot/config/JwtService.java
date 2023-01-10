@@ -1,11 +1,23 @@
-package com.coodecool.pickyourspot.security;
+package com.coodecool.pickyourspot.config;
 
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.io.Decoders;
+import io.jsonwebtoken.security.Keys;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+
+import java.security.Key;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Function;
 
 @Service
 public class JwtService {
 
-    private static final String SECRET_KEY = System.getenv("SERVER_KEY");
+    private static final String SECRET_KEY = System.getenv("SECRET_KEY");
     public String extractUserName(String token) {
         return extractClaim(token, Claims::getSubject);
     }
