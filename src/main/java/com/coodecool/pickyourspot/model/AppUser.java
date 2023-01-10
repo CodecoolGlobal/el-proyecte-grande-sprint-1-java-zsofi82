@@ -2,10 +2,12 @@ package com.coodecool.pickyourspot.model;
 
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -23,6 +25,9 @@ public class AppUser implements UserDetails {
     private String email;
 
     private String password;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     private String hash(String password) {
         // TODO: remove this eventually
@@ -54,7 +59,7 @@ public class AppUser implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null; // TODO Implement roles/authorities
+        return List.of(new SimpleGrantedAuthority(String.valueOf(role)));
     }
 
     @Override

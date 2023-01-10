@@ -1,6 +1,7 @@
 package com.coodecool.pickyourspot.security;
 
 import com.coodecool.pickyourspot.config.JwtAuthenticationFilter;
+import com.coodecool.pickyourspot.model.Role;
 import com.coodecool.pickyourspot.storage.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -40,6 +41,7 @@ public class SecurityConfig {
                 .authorizeRequests()
                 .antMatchers(HttpMethod.GET, "/", "/api/login", "/api/registration").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/login", "/api/registration").permitAll()
+                .antMatchers(HttpMethod.GET, "/admin").hasRole(Role.ADMIN.name())
                 .anyRequest().authenticated()
                 .and()
                 .sessionManagement()
