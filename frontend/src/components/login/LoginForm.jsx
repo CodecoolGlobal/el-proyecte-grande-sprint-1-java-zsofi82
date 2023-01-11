@@ -10,7 +10,7 @@ const LoginForm = ({ loggedIn, setLoggedIn, setUserName, setUserId }) => {
 
     function grabFormData(e) {
         e.preventDefault()
-        const userName = e.target['name'].value
+        const userName = e.target['username'].value
         const userPassword = e.target['password'].value
         const data = { "username": userName, "password": userPassword }
         e.target.reset()
@@ -35,8 +35,11 @@ const LoginForm = ({ loggedIn, setLoggedIn, setUserName, setUserId }) => {
                     .then(res => res.json())
                     .then(res => setServerResponse(res))
                 if (serverResponse  && rawResponse.status === 200) {
-                    sessionStorage.setItem("username", serverResponse.username)
-                    sessionStorage.setItem("userid", serverResponse.id)
+                    localStorage.setItem("token", serverResponse.token)
+                    console.log(localStorage.getItem("token"));
+                    // setUserName()
+                    // localStorage.setItem("username", serverResponse.username)
+                    // sessionStorage.setItem("userid", serverResponse.id)
                     setDataToServer(null)
                     setRawResponse(null)
                     setLoggedIn(true)
@@ -55,7 +58,7 @@ const LoginForm = ({ loggedIn, setLoggedIn, setUserName, setUserId }) => {
             <div className="loginFormDiv">
                 <form className="loginForm" onSubmit={(e) => grabFormData(e)}>
                     <label>Name:</label>
-                    <input type="text" name="name" required>
+                    <input type="text" name="username" required>
                     </input>
                     <label>Password:</label>
                     <input type="password" name="password" required>
