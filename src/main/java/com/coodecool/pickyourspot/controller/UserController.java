@@ -25,9 +25,9 @@ public class UserController {
         this.tableService = tableService;
     }
 
-    @GetMapping("/{userId}")
-    public ResponseEntity<AppUser> getUserById(@PathVariable String userId){
-        Optional<AppUser> user = userService.getUserById(userId);
+    @GetMapping("/{username}")
+    public ResponseEntity<AppUser> getUserByUsername(@PathVariable String username){
+        Optional<AppUser> user = userService.getUserByUsername(username);
         if (user.isPresent()) {
             return ResponseEntity.ok(user.get());
         }
@@ -39,8 +39,8 @@ public class UserController {
         return userService.getAllUsers();
     }
 
-    @GetMapping("/{userId}/reservation")
-    public List<FoosballTable> getReservedTables(@PathVariable String userId){
-        return tableService.getReservedTablesByUser(userId);
+    @GetMapping("/{username}/reservation")
+    public List<FoosballTable> getReservedTables(@PathVariable String username){
+        return tableService.getReservedTablesByUser(username);
     }
 }

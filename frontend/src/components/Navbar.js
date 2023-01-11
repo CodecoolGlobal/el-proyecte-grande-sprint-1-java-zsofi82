@@ -2,11 +2,15 @@ import { useNavigate } from "react-router-dom";
 import Button from "./reusable_elements/Button"
 import {useContext} from "react";
 import {TokenContext} from "../App";
+import jwtDecode from "jwt-decode";
 
 
 const Navbar = () => {
   const {token, setToken} = useContext(TokenContext)
   const navigate = useNavigate();
+
+  const decodedToken = jwtDecode(token)
+  const username = decodedToken.sub
   function clearLocalStorage()  {
     localStorage.clear()
     setToken(null)
@@ -24,7 +28,7 @@ const Navbar = () => {
             <Button bootstrapClassname={"navbar-button-style"} text={"Login"} onClick={() => { navigate("/login") }}></Button>
           </li>}
           {token && <li className="nav-item col navbarButton">
-            <Button bootstrapClassname={"navbar-button-style"} text={"Profile"} classname={"btn-link"} className="navbar-button-style" onClick={() => { navigate(`/user/${sessionStorage.getItem("userid")}`) }} ></Button>
+            <Button bootstrapClassname={"navbar-button-style"} text={"Profile"} classname={"btn-link"} className="navbar-button-style" onClick={() => { navigate(`/user/${username}`) }} ></Button>
           </li>}
           {token && <li className="nav-item col navbarButton">
             <Button bootstrapClassname={"navbar-button-style"} text={"Logout"} classname={"btn-link"} onClick={() => { clearLocalStorage() }} ></Button>

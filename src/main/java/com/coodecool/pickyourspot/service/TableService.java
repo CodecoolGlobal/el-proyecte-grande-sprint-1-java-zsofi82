@@ -101,7 +101,7 @@ public class TableService {
         return tableRepository.getFreeTablesByLocationAndDate(locationString, dateTime);
     }
 
-    public List<FoosballTable> getReservedTablesByUser(String userId) {
-        return tableRepository.getReservedTablesByUser(UUID.fromString(userId));
+    public List<FoosballTable> getReservedTablesByUser(String username) {
+        return tableRepository.getReservedTablesByUser(username);
     }
 }

@@ -22,6 +22,8 @@ class TableServiceTest {
     private final TableRepository tableRepository = Mockito.mock(TableRepository.class);
     private final ReservationRepository reservationRepository = Mockito.mock(ReservationRepository.class);
     private FoosballTable mockTable;
+    private final String goodUsername = "Béla";
+    private final String badUsername = "Péter";
     private final String goodFakeID = "111111-1111-1111-1111-111111111111";
     private final String badFakeID = "00000000-0000-0000-0000-000000000000";
 
@@ -90,15 +92,15 @@ class TableServiceTest {
 
     @Test
     void testGetReservedTablesByUserBad() {
-        when(tableRepository.getReservedTablesByUser(UUID.fromString(goodFakeID))).thenReturn(new ArrayList<>());
-        assertEquals(new ArrayList<>(), tableService.getReservedTablesByUser(goodFakeID));
+        when(tableRepository.getReservedTablesByUser(badUsername)).thenReturn(new ArrayList<>());
+        assertEquals(new ArrayList<>(), tableService.getReservedTablesByUser(goodUsername));
     }
 
     @Test
     void testGetReservedTablesByUserGood() {
         List<FoosballTable> mockList = new ArrayList<>();
         mockList.add(mockTable);
-        when(tableRepository.getReservedTablesByUser(UUID.fromString(goodFakeID))).thenReturn(mockList);
-        assertEquals(mockList, tableService.getReservedTablesByUser(goodFakeID));
+        when(tableRepository.getReservedTablesByUser(goodUsername)).thenReturn(mockList);
+        assertEquals(mockList, tableService.getReservedTablesByUser(goodUsername));
     }
 }
