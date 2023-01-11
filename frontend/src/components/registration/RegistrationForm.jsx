@@ -59,7 +59,7 @@ const RegistrationForm = () => {
             <div className="registrationFormDiv">
                 <form className="registrationForm" onSubmit={(e) => grabFormData(e)}>
                     <label>Name:</label>
-                    <input type="text" name="name" required>
+                    <input type="text" name="username" required>
                     </input>
                     <label>Password:</label>
                     <input type="password" name="password" required>
