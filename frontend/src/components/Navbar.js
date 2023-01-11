@@ -9,8 +9,8 @@ const Navbar = () => {
     const {token, setToken} = useContext(TokenContext)
     const navigate = useNavigate();
 
-    function clearLocalStorage() {
-        localStorage.clear()
+    function removeToken() {
+        localStorage.removeItem("token")
         setToken(null)
     }
 
@@ -45,7 +45,7 @@ const Navbar = () => {
                     {token && <li className="nav-item col navbarButton">
                         <Button bootstrapClassname={"navbar-button-style"} text={"Logout"} classname={"btn-link"}
                                 onClick={() => {
-                                    clearLocalStorage()
+                                    removeToken()
                                 }}></Button>
                     </li>}
                     <li className="nav-item col navbarButton">
