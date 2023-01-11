@@ -1,6 +1,7 @@
 package com.coodecool.pickyourspot.service;
 
 import com.coodecool.pickyourspot.model.AppUser;
+import com.coodecool.pickyourspot.model.Role;
 import com.coodecool.pickyourspot.storage.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,17 @@ public class UserService {
     @Autowired
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
+//        // Hardcode an admin to the database
+//        addAdminToDatabase();
+    }
+
+    private void addAdminToDatabase() {
+        AppUser admin = new AppUser(UUID.randomUUID(),
+                "Admin Antal",
+                "admin@mail.com",
+                "password",
+                Role.ADMIN);
+        userRepository.save(admin);
     }
 
     public void addNewUser(AppUser appUser) {
