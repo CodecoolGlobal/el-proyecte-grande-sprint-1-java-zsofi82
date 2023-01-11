@@ -2,6 +2,7 @@ package com.coodecool.pickyourspot.service;
 
 import com.coodecool.pickyourspot.controller.UserController;
 import com.coodecool.pickyourspot.model.AppUser;
+import com.coodecool.pickyourspot.model.Role;
 import com.coodecool.pickyourspot.storage.repositories.UserRepository;
 import org.junit.Before;
 import org.junit.jupiter.api.*;
@@ -41,8 +42,8 @@ class UserServiceTest {
     public void setUp() {
         userService = new UserService(userRepository);
         appUsers = new ArrayList<>();
-        user1 = new AppUser(UUID.fromString("c8b2a7ba-7c5c-11ed-a1eb-0242ac120002"), "Aniko Bradshow", "aniko.bradshow@email.com", "AnikoBradshow79");
-        user2 = new AppUser(UUID.randomUUID(), "Denes Donovan", "denes.donovan@email.com", "DenesDonovan90");
+        user1 = new AppUser(UUID.fromString("c8b2a7ba-7c5c-11ed-a1eb-0242ac120002"), "Aniko Bradshow", "aniko.bradshow@email.com", "AnikoBradshow79", Role.USER);
+        user2 = new AppUser(UUID.randomUUID(), "Denes Donovan", "denes.donovan@email.com", "DenesDonovan90", Role.USER);
         appUsers.add(user1);
         appUsers.add(user2);
     }
@@ -80,7 +81,7 @@ class UserServiceTest {
     @Test
     public void ifUserRegistrationIsOkShouldReturnTrue() {
         when(userRepository.findAll()).thenReturn(appUsers);
-        AppUser newUser = new AppUser(UUID.fromString("00000000-7c5c-11ed-a1eb-0242ac120002"), "Géza", "geza@email.com", "Geza");
+        AppUser newUser = new AppUser(UUID.fromString("00000000-7c5c-11ed-a1eb-0242ac120002"), "Géza", "geza@email.com", "Geza", Role.USER);
         assertTrue(userService.registerUser(newUser));
     }
     @Test
@@ -98,7 +99,7 @@ class UserServiceTest {
 
     @Test
     public void checkNotValidUserShouldReturnOptionalEmpty() {
-        AppUser newUser = new AppUser(UUID.fromString("00000000-7c5c-11ed-a1eb-0242ac120002"), "Géza", "geza@email.com", "Geza");
+        AppUser newUser = new AppUser(UUID.fromString("00000000-7c5c-11ed-a1eb-0242ac120002"), "Géza", "geza@email.com", "Geza", Role.USER);
         when(userRepository.findAll()).thenReturn(appUsers);
         Optional<AppUser> loggedInUser = userService.checkIfUserInDatabase(newUser);
         assertFalse(loggedInUser.isPresent());

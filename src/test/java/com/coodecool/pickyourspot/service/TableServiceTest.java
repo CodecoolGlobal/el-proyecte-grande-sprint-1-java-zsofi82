@@ -1,17 +1,19 @@
 package com.coodecool.pickyourspot.service;
 
+import com.coodecool.pickyourspot.model.AppUser;
 import com.coodecool.pickyourspot.model.FoosballTable;
 import com.coodecool.pickyourspot.model.Reservation;
+import com.coodecool.pickyourspot.model.Role;
 import com.coodecool.pickyourspot.storage.repositories.ReservationRepository;
 import com.coodecool.pickyourspot.storage.repositories.TableRepository;
+import com.coodecool.pickyourspot.storage.repositories.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
@@ -21,17 +23,22 @@ class TableServiceTest {
     private TableService tableService;
     private final TableRepository tableRepository = Mockito.mock(TableRepository.class);
     private final ReservationRepository reservationRepository = Mockito.mock(ReservationRepository.class);
+    private final UserRepository userRepository = Mockito.mock((UserRepository.class));
     private FoosballTable mockTable;
     private final String goodUsername = "Béla";
     private final String badUsername = "Péter";
+    private AppUser user;
     private final String goodFakeID = "111111-1111-1111-1111-111111111111";
     private final String badFakeID = "00000000-0000-0000-0000-000000000000";
 
     @BeforeEach
     void initService() {
-        tableService = new TableService(tableRepository, reservationRepository);
+        user = new AppUser(UUID.randomUUID(), goodUsername, "email", "password", Role.USER);
+        tableService = new TableService(tableRepository, reservationRepository, userRepository);
         mockTable = Mockito.mock(FoosballTable.class);
+        when(mockTable.getId()).thenReturn(UUID.fromString(goodFakeID));
         when(tableRepository.save(mockTable)).thenReturn(mockTable);
+        when(userRepository.findByUsername(goodUsername)).thenReturn(Optional.ofNullable(user));
     }
 
     @Test
@@ -60,7 +67,7 @@ class TableServiceTest {
 
     @Test
     void testAddReservationToBadTable() {
-        Reservation reservation = new Reservation();
+        Reservation reservation = new Reservation(UUID.fromString(goodFakeID), LocalDateTime.now(), user);
         when(mockTable.getId()).thenReturn(UUID.fromString(badFakeID));
         tableService.addNewTable(mockTable);
         assertFalse(tableService.addReservation(goodFakeID, reservation));
@@ -68,7 +75,7 @@ class TableServiceTest {
 
     @Test
     void testAddReservationToGoodTable() {
-        Reservation reservation = new Reservation();
+        Reservation reservation = new Reservation(UUID.fromString(goodFakeID), LocalDateTime.now(), user);
         when(tableRepository.findById(UUID.fromString(goodFakeID))).thenReturn(Optional.of(mockTable));
         tableService.addNewTable(mockTable);
         assertTrue(tableService.addReservation(goodFakeID, reservation));
@@ -76,7 +83,7 @@ class TableServiceTest {
 
     @Test
     void testRemoveReservationToBadTable() {
-        Reservation reservation = new Reservation();
+        Reservation reservation = new Reservation(UUID.fromString(goodFakeID), LocalDateTime.now(), user);
         when(mockTable.getId()).thenReturn(UUID.fromString(badFakeID));
         tableService.addNewTable(mockTable);
         assertFalse(tableService.removeReservation(goodFakeID, reservation));
@@ -84,7 +91,7 @@ class TableServiceTest {
 
     @Test
     void testRemoveReservation() {
-        Reservation reservation = new Reservation();
+        Reservation reservation = new Reservation(UUID.fromString(goodFakeID), LocalDateTime.now(), user);
         when(tableRepository.findById(UUID.fromString(goodFakeID))).thenReturn(Optional.of(mockTable));
         tableService.addNewTable(mockTable);
         assertTrue(tableService.removeReservation(goodFakeID, reservation));

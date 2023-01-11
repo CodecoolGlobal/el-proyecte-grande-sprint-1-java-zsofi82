@@ -30,11 +30,6 @@ public class AppUser implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    private String hash(String password) {
-        // TODO: remove this eventually
-        return password;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
