@@ -42,7 +42,7 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.GET, "/", "/api/login", "/api/registration").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/table/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/login", "/api/registration", "/api/table/free-tables").permitAll()
-                .antMatchers("/api/table/*/reservation").hasRole(Role.USER.name())
+                .antMatchers("/reservation").hasRole(Role.USER.name())
                 .antMatchers(HttpMethod.GET, "/admin").hasRole(Role.ADMIN.name())
                 .anyRequest().authenticated()
                 .and()
