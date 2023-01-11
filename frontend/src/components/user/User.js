@@ -1,9 +1,10 @@
 import { useNavigate, useParams } from 'react-router-dom';
-import { useEffect, useState } from "react";
+import {useContext, useEffect, useState} from "react";
 import MainInformation from "./MainInformation";
 import ReservedTables from "./ReservedTables";
+import {TokenContext} from "../../App";
 
-const User = ({ loggedIn }) => {
+const User = () => {
     const [userData, setUserData] = useState({});
     const [tablesData, setTablesData] = useState({});
     const [loadingData, isLoadingData] = useState(true)
@@ -11,6 +12,8 @@ const User = ({ loggedIn }) => {
     const navigate = useNavigate()
     const params = useParams();
     const userId = params.userId
+    const {token} = useContext(TokenContext)
+
     useEffect(() => {
         async function fetchUser() {
             let res = await fetch(`/api/user/${userId}`)
@@ -31,7 +34,7 @@ const User = ({ loggedIn }) => {
     }, [isDelete])
 
     function getCorrectRoute() {
-        if (!loggedIn) {
+        if (!token) {
             navigate("/")
         } else {
             return (

@@ -1,12 +1,16 @@
-import { useEffect, useState } from "react"
+import {useContext, useEffect, useState} from "react"
 import { useNavigate } from "react-router-dom"
 import Button from "../reusable_elements/Button"
+import jwtDecode from "jwt-decode";
+import {TokenContext} from "../../App";
 
-const LoginForm = ({ loggedIn, setLoggedIn, setUserName, setUserId }) => {
+const LoginForm = () => {
     const [dataToServer, setDataToServer] = useState()
     const [serverResponse, setServerResponse] = useState()
     const [rawResponse, setRawResponse] = useState()
     const navigate = useNavigate()
+    const {setToken} = useContext(TokenContext)
+
 
     function grabFormData(e) {
         e.preventDefault()
@@ -16,6 +20,7 @@ const LoginForm = ({ loggedIn, setLoggedIn, setUserName, setUserId }) => {
         e.target.reset()
         setDataToServer(data)
     }
+
 
     useEffect(() => {
         if (dataToServer) {
@@ -36,13 +41,11 @@ const LoginForm = ({ loggedIn, setLoggedIn, setUserName, setUserId }) => {
                     .then(res => setServerResponse(res))
                 if (serverResponse  && rawResponse.status === 200) {
                     localStorage.setItem("token", serverResponse.token)
-                    console.log(localStorage.getItem("token"));
-                    // setUserName()
-                    // localStorage.setItem("username", serverResponse.username)
-                    // sessionStorage.setItem("userid", serverResponse.id)
+                    const token = localStorage.getItem("token")
+                    let jwtDecoded = jwtDecode(token)
+                    setToken(token)
                     setDataToServer(null)
                     setRawResponse(null)
-                    setLoggedIn(true)
                     navigate("/")
                 }
             } catch (err) {
@@ -64,7 +67,7 @@ const LoginForm = ({ loggedIn, setLoggedIn, setUserName, setUserId }) => {
                     <input type="password" name="password" required>
                     </input>
                     <Button type='submit' text='Submit' />
-                    <div>{(serverResponse && rawResponse.status === 400) && "Username or password incorrect!" }</div>
+                    <div>{(serverResponse && rawResponse.status !== 200) && "Username or password incorrect!" }</div>
                 </form>
             </div>
         </>

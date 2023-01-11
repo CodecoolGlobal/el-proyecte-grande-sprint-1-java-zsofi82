@@ -1,12 +1,15 @@
 import RegistrationForm from "./RegistrationForm"
 import './Registration.css'
 import { useNavigate } from "react-router-dom"
+import {useContext} from "react";
+import {TokenContext} from "../../App";
 
-const Registration = ({loggedIn}) => {
+const Registration = () => {
+    const {token} = useContext(TokenContext)
     const navigate = useNavigate()
 
     function getCorrectRoute() {
-        if (loggedIn) {
+        if (token) {
             navigate("/")
         } else {
             return (
