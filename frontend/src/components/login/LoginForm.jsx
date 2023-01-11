@@ -66,7 +66,6 @@ const LoginForm = () => {
                     <input type="password" name="password" required>
                     </input>
                     <Button type='submit' text='Submit' />
-                    {console.log(rawResponse)}
                     <div>{(rawResponse && rawResponse.status !== 200) && "Username or password incorrect!" }</div>
                 </form>
             </div>
