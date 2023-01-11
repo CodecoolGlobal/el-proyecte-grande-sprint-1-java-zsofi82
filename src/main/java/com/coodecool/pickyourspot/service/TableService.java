@@ -97,6 +97,14 @@ public class TableService {
     }
 
     public boolean removeReservation(String tableId, Reservation reservation) {
+        // Fetch user data from database
+        Optional<AppUser> optUser = userRepository.findByUsername(reservation.getUser().getUsername());
+        if (optUser.isEmpty()) {
+            return false;
+        }
+        AppUser user = optUser.get();
+        reservation.setUser(user);
+
         Optional<FoosballTable> currentTable = getTableById(tableId);
         if (currentTable.isPresent()) {
             FoosballTable foosballTable = currentTable.get();

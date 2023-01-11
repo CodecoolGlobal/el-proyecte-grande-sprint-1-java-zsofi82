@@ -1,6 +1,5 @@
 import {useContext} from "react";
 import {TokenContext} from "../../App";
-import jwtDecode from "jwt-decode";
 
 const DeleteReservation = ({tableId, reservation, setDelete}) => {
     const {token} = useContext(TokenContext)
