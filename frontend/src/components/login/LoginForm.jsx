@@ -42,7 +42,6 @@ const LoginForm = () => {
                 if (serverResponse  && rawResponse.status === 200) {
                     localStorage.setItem("token", serverResponse.token)
                     const token = localStorage.getItem("token")
-                    let jwtDecoded = jwtDecode(token)
                     setToken(token)
                     setDataToServer(null)
                     setRawResponse(null)
@@ -67,7 +66,8 @@ const LoginForm = () => {
                     <input type="password" name="password" required>
                     </input>
                     <Button type='submit' text='Submit' />
-                    <div>{(serverResponse && rawResponse.status !== 200) && "Username or password incorrect!" }</div>
+                    {console.log(rawResponse)}
+                    <div>{(rawResponse && rawResponse.status !== 200) && "Username or password incorrect!" }</div>
                 </form>
             </div>
         </>
