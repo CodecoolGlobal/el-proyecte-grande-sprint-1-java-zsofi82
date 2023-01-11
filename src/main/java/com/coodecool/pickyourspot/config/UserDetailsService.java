@@ -31,7 +31,7 @@ public class UserDetailsService implements org.springframework.security.core.use
                 .username(user.getUsername())
                 .email(user.getEmail())
                 .password(user.getPassword())
-//               .roles(user.getRoles) //TODO add roles to user
+                .role(user.getRole())
                 .build();
     }
 }
