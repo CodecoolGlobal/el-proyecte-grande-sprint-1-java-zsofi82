@@ -9,18 +9,20 @@ const Admin = () => {
     const [isLoading, setLoading] = useState(true);
 
     useEffect(() => {
-        async function fetchUsers() {
-            let res = await fetch(`/api/user`,
-                {
-                    headers: {
-                        "Authorization": "Bearer " + token
-                    }
-                })
-            let data = await res.json()
-            setUsers(data)
-            setLoading(false)
+        if (token) {
+            async function fetchUsers() {
+                let res = await fetch(`/api/user`,
+                    {
+                        headers: {
+                            "Authorization": "Bearer " + token
+                        }
+                    })
+                let data = await res.json()
+                setUsers(data)
+                setLoading(false)
+            }
+            fetchUsers()
         }
-        fetchUsers()
     },[token])
 
     function parseRole(token) {
