@@ -1,7 +1,7 @@
 import {useContext} from "react";
 import {TokenContext} from "../../App";
 
-const DeleteReservation = ({tableId, reservation, setDelete}) => {
+const DeleteReservationButton = ({tableId, reservation, setDelete}) => {
     const {token} = useContext(TokenContext)
 
     async function fetchDeleteReservation() {
@@ -22,4 +22,4 @@ const DeleteReservation = ({tableId, reservation, setDelete}) => {
 
 
 }
-export default DeleteReservation
+export default DeleteReservationButton

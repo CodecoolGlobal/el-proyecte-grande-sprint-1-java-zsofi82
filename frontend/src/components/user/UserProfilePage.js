@@ -1,18 +1,17 @@
-import { useNavigate, useParams } from 'react-router-dom';
-import {useContext, useEffect, useState} from "react";
-import MainInformation from "./MainInformation";
-import ReservedTables from "./ReservedTables";
-import {TokenContext} from "../../App";
+import { Navigate } from 'react-router-dom';
+import { useContext, useEffect, useState } from "react";
+import ProfilePageHeader from "./ProfilePageHeader";
+import ProfilePageContent from "./ProfilePageContent";
+import { TokenContext } from "../../App";
 import jwtDecode from "jwt-decode";
 
-const User = () => {
+const UserProfilePage = () => {
     const [userData, setUserData] = useState({});
     const [tablesData, setTablesData] = useState({});
     const [loadingData, isLoadingData] = useState(true)
     const [isDelete, setDelete] = useState(false)
-    const navigate = useNavigate()
 
-    const {token} = useContext(TokenContext)
+    const { token } = useContext(TokenContext)
     const decodedToken = jwtDecode(token)
     const username = decodedToken.sub
     useEffect(() => {
@@ -44,27 +43,20 @@ const User = () => {
         }
     }, [isDelete])
 
-    function getCorrectRoute() {
-        if (!token) {
-            navigate("/")
-        } else {
-            return (
+    return (
+        <>
+            {!loadingData && 
+                (token ?
                 <div>
-                    <MainInformation user={userData} />
-                    <ReservedTables tables={tablesData} setDelete={setDelete} />
-                </div>)
-        }
-    }
-
-
-    if (!loadingData) {
-        return (
-            <>
-                {getCorrectRoute()}
-            </>
-        )
-    }
+                    <ProfilePageHeader user={userData} />
+                    <ProfilePageContent tables={tablesData} setDelete={setDelete} />
+                </div>
+                :
+                <Navigate to="/" replace />)
+            }
+        </>
+    )
 
 
 }
-export default User
+export default UserProfilePage

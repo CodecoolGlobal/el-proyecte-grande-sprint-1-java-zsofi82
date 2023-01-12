@@ -1,4 +1,4 @@
-const MainInformation = ({user}) => {
+const ProfilePageHeader = ({user}) => {
     return(
         <div>
             <h1 className={"display-4"}> Hello {user.username}! </h1>
@@ -6,4 +6,4 @@ const MainInformation = ({user}) => {
         </div>
     )
 }
-export default MainInformation
+export default ProfilePageHeader

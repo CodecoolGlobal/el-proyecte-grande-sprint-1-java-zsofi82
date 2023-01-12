@@ -5,7 +5,7 @@ import Login from './components/login/Login';
 import Registration from './components/registration/Registration';
 import About from "./components/About";
 import React, {createContext, useState} from "react";
-import User from "./components/user/User";
+import UserProfilePage from "./components/user/UserProfilePage";
 import Layout from "./components/Layout";
 import Admin from "./components/admin/Admin";
 
@@ -21,11 +21,11 @@ function App() {
                 <Router>
                     <Routes>
                         <Route path="/" element={<Layout/>}>
-                            <Route path="/" element={<Home/>}/>
+                            <Route index element={<Home/>}/>
                             <Route path="/login" element={<Login/>}/>
                             <Route path="/registration" element={<Registration/>}/>
                             <Route path="/about" element={<About/>}/>
-                            <Route path="/user/:userId" element={<User/>}/>
+                            <Route path="/user/:userId" element={<UserProfilePage/>}/>
                             <Route path="/admin" element={<Admin/>}/>
                         </Route>
                     </Routes>

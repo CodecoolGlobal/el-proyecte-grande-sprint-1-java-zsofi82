@@ -1,6 +1,6 @@
 import Reservations from "./Reservations";
 
-const ReservedTables = ({ tables, setDelete }) => {
+const ProfilePageContent = ({ tables, setDelete }) => {
     return (
         <div>
             <h4 className="text-left display-4" style={{ marginTop: "2em" }}>Your reservations: </h4>
@@ -10,4 +10,4 @@ const ReservedTables = ({ tables, setDelete }) => {
         </div>
     )
 }
-export default ReservedTables
+export default ProfilePageContent
