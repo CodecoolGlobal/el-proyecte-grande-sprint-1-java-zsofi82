@@ -1,5 +1,4 @@
 import RegistrationForm from "./RegistrationForm"
-import './Registration.css'
 import { Navigate } from "react-router-dom"
 import { useContext } from "react";
 import { TokenContext } from "../../App";
