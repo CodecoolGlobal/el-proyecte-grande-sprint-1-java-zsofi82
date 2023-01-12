@@ -41,7 +41,7 @@ public class JwtService {
                 .claim("role", userDetails.getAuthorities())
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + (1000 * 60 * 24)))  // The token will expire in 1 day
+                .setExpiration(new Date(System.currentTimeMillis() + (1000 * 60 * 60 * 24)))  // The token will expire in 1 day
                 .signWith(getSignIngKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
