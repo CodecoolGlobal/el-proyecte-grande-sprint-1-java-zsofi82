@@ -53,8 +53,6 @@ const LoginForm = () => {
         }
     }, [dataToServer, serverResponse, navigate])
 
-
-
     return (
         <>
             <div className="loginFormDiv">

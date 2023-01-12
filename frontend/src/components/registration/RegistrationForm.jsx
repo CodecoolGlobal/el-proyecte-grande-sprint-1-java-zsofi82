@@ -36,42 +36,36 @@ const RegistrationForm = () => {
     useEffect(() => {
         if (userData) {
             setServerRes(null)
-            try {
-                const backendUrl = `/api/registration`
-                fetch(backendUrl, {
-                    method: 'POST',
-                    headers: {
-                        'Content-type': 'application/json',
-                    },
-                    body: JSON.stringify(userData)
-                }).then(res => setServerRes(res))
-                    .catch((err) => {
-                        console.error(err)
-                    })
-            } catch (err) {
-                console.error(err)
-            }
+            const backendUrl = `/api/registration`
+            fetch(backendUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json',
+                },
+                body: JSON.stringify(userData)
+            }).then(res => setServerRes(res))
+                .catch((err) => {
+                    console.error(err)
+                })
         }
     }, [userData])
 
     return (
-        <>
-            <div className="registrationFormDiv">
-                <form className="registrationForm" onSubmit={(e) => grabFormData(e)}>
-                    <label>Name:</label>
-                    <input type="text" name="username" required>
-                    </input>
-                    <label>Password:</label>
-                    <input type="password" name="password" required>
-                    </input>
-                    <label>Email:</label>
-                    <input type="email" name="email" required>
-                    </input>
-                    <Button type='submit' text='Submit' />
-                    <div>{calculateFeedback()}</div>
-                </form>
-            </div>
-        </>
+        <div className="registrationFormDiv">
+            <form className="registrationForm" onSubmit={(e) => grabFormData(e)}>
+                <label>Name:</label>
+                <input type="text" name="username" required>
+                </input>
+                <label>Password:</label>
+                <input type="password" name="password" required>
+                </input>
+                <label>Email:</label>
+                <input type="email" name="email" required>
+                </input>
+                <Button type='submit' text='Submit' />
+                <div>{calculateFeedback()}</div>
+            </form>
+        </div>
     )
 }
 

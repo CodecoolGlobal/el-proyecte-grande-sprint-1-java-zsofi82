@@ -39,7 +39,7 @@ const Navbar = () => {
                 }}>Pick Your Spot</span>
                 <ul className="flex-row navbar-nav">
                     {checkIfUserIsAdmin() && <li className="nav-item col navbarButton">
-                        <Button bootstrapClassname={"navbar-button-style"} text={"Users"} onClick={() => {
+                        <Button bootstrapClassname={"navbar-button-style"} text={"Admin"} onClick={() => {
                             navigate("/admin")
                         }}></Button>
                     </li>}
