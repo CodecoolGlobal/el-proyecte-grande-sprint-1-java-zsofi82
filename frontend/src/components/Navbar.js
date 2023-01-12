@@ -18,10 +18,12 @@ const Navbar = () => {
         const decodedToken = jwtDecode(token)
         return decodedToken.sub
     }
+
     function parseRole(token) {
         const decodedToken = jwtDecode(token)
         return decodedToken.role[0].authority
     }
+    
     function checkIfUserIsAdmin(){
         if (token ==null){
             return false;

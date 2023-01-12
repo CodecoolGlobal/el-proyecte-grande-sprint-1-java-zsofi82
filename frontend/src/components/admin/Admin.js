@@ -1,10 +1,13 @@
+import jwtDecode from "jwt-decode";
 import {useContext, useEffect, useState} from "react";
+import { Navigate } from "react-router-dom";
 import {TokenContext} from "../../App";
 
 const Admin = () => {
     const {token} = useContext(TokenContext)
     const [users, setUsers] = useState({});
     const [isLoading, setLoading] = useState(true);
+
     useEffect(() => {
         async function fetchUsers() {
             let res = await fetch(`/api/user`,
@@ -18,11 +21,28 @@ const Admin = () => {
             setLoading(false)
         }
         fetchUsers()
+    },[token])
 
-    },[])
+    function parseRole(token) {
+        const decodedToken = jwtDecode(token)
+        return decodedToken.role[0].authority
+    }
+
+    function checkIfUserIsAdmin(){
+        if (token == null){
+            return false;
+        }
+        return parseRole(token) === "ADMIN"
+    }
+
+    if (!checkIfUserIsAdmin()) {
+        return <Navigate to="/" replace />;
+    }
 
     if (!isLoading){
         return(
+            <>
+            <h3>Admin page</h3>
             <table className="table table-borderless">
                 <thead>
                     <tr>
@@ -43,6 +63,7 @@ const Admin = () => {
                     })}
                 </tbody>
             </table>
+            </>
         )
     }
     else{
@@ -50,8 +71,6 @@ const Admin = () => {
             <p>Loading</p>
         )
     }
-
-
 }
 
 export default Admin
