@@ -1,9 +1,11 @@
 package com.coodecool.pickyourspot.service;
 
+import com.coodecool.pickyourspot.model.AppUser;
 import com.coodecool.pickyourspot.model.FoosballTable;
 import com.coodecool.pickyourspot.model.Reservation;
 import com.coodecool.pickyourspot.storage.repositories.ReservationRepository;
 import com.coodecool.pickyourspot.storage.repositories.TableRepository;
+import com.coodecool.pickyourspot.storage.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,10 +20,12 @@ public class TableService {
 
     private final TableRepository tableRepository;
     private final ReservationRepository reservationRepository;
+    private final UserRepository userRepository;
 
     @Autowired
     public TableService(TableRepository tableRepository,
-                        ReservationRepository reservationRepository) {
+                        ReservationRepository reservationRepository,
+                        UserRepository userRepository) {
         this.tableRepository = tableRepository;
         // TODO adding default tables, just for testing, delete later
 //        tableRepository.save(FoosballTable.builder()
@@ -50,6 +54,7 @@ public class TableService {
 //                .build());
 
         this.reservationRepository = reservationRepository;
+        this.userRepository = userRepository;
     }
 
     public List<FoosballTable> getAllTables() {
@@ -66,6 +71,14 @@ public class TableService {
     }
 
     public boolean addReservation(String tableId, Reservation reservation) {
+        // Fetch user data from database
+        Optional<AppUser> optUser = userRepository.findByUsername(reservation.getUser().getUsername());
+        if (optUser.isEmpty()) {
+            return false;
+        }
+        AppUser user = optUser.get();
+        reservation.setUser(user);
+
         Optional<FoosballTable> currentTable = getTableById(tableId);
         if (currentTable.isPresent()) {
             boolean isTimeReserved = currentTable.get()
@@ -84,6 +97,14 @@ public class TableService {
     }
 
     public boolean removeReservation(String tableId, Reservation reservation) {
+        // Fetch user data from database
+        Optional<AppUser> optUser = userRepository.findByUsername(reservation.getUser().getUsername());
+        if (optUser.isEmpty()) {
+            return false;
+        }
+        AppUser user = optUser.get();
+        reservation.setUser(user);
+
         Optional<FoosballTable> currentTable = getTableById(tableId);
         if (currentTable.isPresent()) {
             FoosballTable foosballTable = currentTable.get();
@@ -101,7 +122,7 @@ public class TableService {
         return tableRepository.getFreeTablesByLocationAndDate(locationString, dateTime);
     }
 
-    public List<FoosballTable> getReservedTablesByUser(String userId) {
-        return tableRepository.getReservedTablesByUser(UUID.fromString(userId));
+    public List<FoosballTable> getReservedTablesByUser(String username) {
+        return tableRepository.getReservedTablesByUser(username);
     }
 }

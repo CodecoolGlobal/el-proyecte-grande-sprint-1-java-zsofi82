@@ -9,7 +9,7 @@ const RegistrationForm = () => {
 
     function grabFormData(e) {
         e.preventDefault()
-        const userName = e.target['name'].value
+        const userName = e.target['username'].value
         const userPassword = e.target['password'].value
         const userEmail = e.target['email'].value
         const data = { "username": userName, "password": userPassword, "email": userEmail }

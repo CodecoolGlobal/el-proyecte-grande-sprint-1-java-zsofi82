@@ -1,21 +1,26 @@
-import { useEffect, useState } from "react"
+import {useContext, useEffect, useState} from "react"
 import { useNavigate } from "react-router-dom"
 import Button from "../reusable_elements/Button"
+import jwtDecode from "jwt-decode";
+import {TokenContext} from "../../App";
 
-const LoginForm = ({ loggedIn, setLoggedIn, setUserName, setUserId }) => {
+const LoginForm = () => {
     const [dataToServer, setDataToServer] = useState()
     const [serverResponse, setServerResponse] = useState()
     const [rawResponse, setRawResponse] = useState()
     const navigate = useNavigate()
+    const {setToken} = useContext(TokenContext)
+
 
     function grabFormData(e) {
         e.preventDefault()
-        const userName = e.target['name'].value
+        const userName = e.target['username'].value
         const userPassword = e.target['password'].value
         const data = { "username": userName, "password": userPassword }
         e.target.reset()
         setDataToServer(data)
     }
+
 
     useEffect(() => {
         if (dataToServer) {
@@ -35,11 +40,11 @@ const LoginForm = ({ loggedIn, setLoggedIn, setUserName, setUserId }) => {
                     .then(res => res.json())
                     .then(res => setServerResponse(res))
                 if (serverResponse  && rawResponse.status === 200) {
-                    sessionStorage.setItem("username", serverResponse.username)
-                    sessionStorage.setItem("userid", serverResponse.id)
+                    localStorage.setItem("token", serverResponse.token)
+                    const token = localStorage.getItem("token")
+                    setToken(token)
                     setDataToServer(null)
                     setRawResponse(null)
-                    setLoggedIn(true)
                     navigate("/")
                 }
             } catch (err) {
@@ -55,13 +60,13 @@ const LoginForm = ({ loggedIn, setLoggedIn, setUserName, setUserId }) => {
             <div className="loginFormDiv">
                 <form className="loginForm" onSubmit={(e) => grabFormData(e)}>
                     <label>Name:</label>
-                    <input type="text" name="name" required>
+                    <input type="text" name="username" required>
                     </input>
                     <label>Password:</label>
                     <input type="password" name="password" required>
                     </input>
                     <Button type='submit' text='Submit' />
-                    <div>{(serverResponse && rawResponse.status === 400) && "Username or password incorrect!" }</div>
+                    <div>{(rawResponse && rawResponse.status !== 200) && "Username or password incorrect!" }</div>
                 </form>
             </div>
         </>

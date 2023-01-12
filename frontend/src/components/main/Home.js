@@ -1,13 +1,16 @@
 import Tables from "./Tables";
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import TableModal from "./TableModal";
 import SearchBar from "../SearchBar";
+import {TokenContext} from "../../App";
+import jwtDecode from "jwt-decode";
 
 const Home = () => {
     const [tableData, setTableData] = useState({});
     const [clickedTable, setClickedTable] = useState(null);
     const [date, setDate] = useState(currentDateRoundedToHours());
     const [location, setLocation] = useState("");
+    const {token} = useContext(TokenContext)
 
 
     function currentDateRoundedToHours() {
@@ -37,18 +40,27 @@ const Home = () => {
     const exitModal = () => {
         setClickedTable(null)
     }
+
+
+    function parseOutUsername(token){
+        const decodedToken = jwtDecode(token)
+        return decodedToken.sub
+    }
+
+
     // when the Reserve button is pressed on the table modal
     const reserveTable = async (tableId) => {
         let payload = {
             'reservationTime': date,
             'user': {
-                "id": sessionStorage.getItem("userid")
+                "username": parseOutUsername(token)
             }
         }
         let res = await fetch(`/api/table/${tableId}/reservation`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token
             },
             body:
                 JSON.stringify(payload)

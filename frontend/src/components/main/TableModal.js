@@ -1,7 +1,11 @@
 import Button from "../reusable_elements/Button"
 import PropTypes from 'prop-types'
+import {useContext} from "react";
+import {TokenContext} from "../../App";
 
 const TableModal = ({ table, onExit, onReserve, selectedDate }) => {
+  const {token} = useContext(TokenContext)
+
   return (
     <div
       className="modal fade show"
@@ -26,7 +30,7 @@ const TableModal = ({ table, onExit, onReserve, selectedDate }) => {
             <div>{selectedDate ? "At: " + selectedDate : "Please log in, and select a date to reserve"}</div>
           </div>
           <div className="modal-footer">
-            {(sessionStorage.getItem('username')!== null && selectedDate !== null) && <Button
+            {(token && selectedDate !== null) && <Button
                 text={"Reserve"}
                 bootstrapClassname={"btn-success"}
                 onClick={()=>onReserve(table.id)}

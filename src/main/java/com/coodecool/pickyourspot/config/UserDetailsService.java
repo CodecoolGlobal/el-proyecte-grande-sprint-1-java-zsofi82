@@ -3,7 +3,6 @@ package com.coodecool.pickyourspot.config;
 import com.coodecool.pickyourspot.model.AppUser;
 import com.coodecool.pickyourspot.storage.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -31,7 +30,7 @@ public class UserDetailsService implements org.springframework.security.core.use
                 .username(user.getUsername())
                 .email(user.getEmail())
                 .password(user.getPassword())
-//               .roles(user.getRoles) //TODO add roles to user
+                .role(user.getRole())
                 .build();
     }
 }

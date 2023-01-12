@@ -12,8 +12,8 @@ import java.util.UUID;
 
 @Repository
 public interface TableRepository extends JpaRepository<FoosballTable, UUID> {
-    @Query(value = "select f from FoosballTable f join f.reservations as r where r.user.id = :user_id group by f")
-    List<FoosballTable> getReservedTablesByUser(@Param("user_id") UUID userId);
+    @Query(value = "select f from FoosballTable f join f.reservations as r where r.user.username = :username group by f")
+    List<FoosballTable> getReservedTablesByUser(@Param("username") String username);
 
     @Query("SELECT f " +
             "FROM FoosballTable f " +
