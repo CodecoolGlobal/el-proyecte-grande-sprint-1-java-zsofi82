@@ -18,6 +18,16 @@ const Navbar = () => {
         const decodedToken = jwtDecode(token)
         return decodedToken.sub
     }
+    function parseRole(token) {
+        const decodedToken = jwtDecode(token)
+        return decodedToken.role[0].authority
+    }
+    function checkIfUserIsAdmin(){
+        if (token ==null){
+            return false;
+        }
+        return parseRole(token) === "ADMIN"
+    }
 
     return (
         <nav className="navbar sticky-top">
@@ -26,6 +36,11 @@ const Navbar = () => {
                     navigate("/")
                 }}>Pick Your Spot</span>
                 <ul className="flex-row navbar-nav">
+                    {checkIfUserIsAdmin() && <li className="nav-item col navbarButton">
+                        <Button bootstrapClassname={"navbar-button-style"} text={"Users"} onClick={() => {
+                            navigate("/admin")
+                        }}></Button>
+                    </li>}
                     {!token && <li className="nav-item col navbarButton">
                         <Button bootstrapClassname={"navbar-button-style"} text={"Register"} onClick={() => {
                             navigate("/registration")
