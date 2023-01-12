@@ -22,7 +22,12 @@ const Admin = () => {
                 setUsers(data)
                 setLoading(false)
             }
-            fetchUsers()
+            
+            try {
+                fetchUsers()
+            } catch (e) {
+                console.error(e);
+            }
         }
     })
 
