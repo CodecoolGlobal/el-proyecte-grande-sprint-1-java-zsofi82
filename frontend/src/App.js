@@ -7,6 +7,7 @@ import About from "./components/About";
 import React, {createContext, useState} from "react";
 import User from "./components/user/User";
 import Layout from "./components/Layout";
+import Admin from "./components/admin/Admin";
 
 export const TokenContext = createContext(null)
 
@@ -25,6 +26,7 @@ function App() {
                             <Route path="/registration" element={<Registration/>}/>
                             <Route path="/about" element={<About/>}/>
                             <Route path="/user/:userId" element={<User/>}/>
+                            <Route path="/admin" element={<Admin/>}/>
                         </Route>
                     </Routes>
                 </Router>

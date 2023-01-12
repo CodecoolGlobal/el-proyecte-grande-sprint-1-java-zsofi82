@@ -4,6 +4,8 @@ import com.coodecool.pickyourspot.model.AppUser;
 import com.coodecool.pickyourspot.model.Role;
 import com.coodecool.pickyourspot.storage.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,14 +20,16 @@ public class UserService {
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
 //        // Hardcode an admin to the database
-//        addAdminToDatabase();
+        addAdminToDatabase();
     }
 
     private void addAdminToDatabase() {
+        PasswordEncoder encoder = new BCryptPasswordEncoder();
+        String hashedPassword = encoder.encode("password");
         AppUser admin = new AppUser(UUID.randomUUID(),
                 "Admin Antal",
                 "admin@mail.com",
-                "password",
+                hashedPassword,
                 Role.ADMIN);
         userRepository.save(admin);
     }
