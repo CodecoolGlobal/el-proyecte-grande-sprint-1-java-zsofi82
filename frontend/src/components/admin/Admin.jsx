@@ -24,7 +24,7 @@ const Admin = () => {
             }
             fetchUsers()
         }
-    }, [token])
+    })
 
     function parseRole(token) {
         const decodedToken = jwtDecode(token)
