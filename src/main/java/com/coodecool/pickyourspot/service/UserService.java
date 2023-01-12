@@ -20,7 +20,7 @@ public class UserService {
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
 //        // Hardcode an admin to the database
-        addAdminToDatabase();
+//        addAdminToDatabase();
     }
 
     private void addAdminToDatabase() {
