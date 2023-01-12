@@ -10,11 +10,10 @@ const UserProfilePage = () => {
     const [tablesData, setTablesData] = useState({});
     const [loadingData, isLoadingData] = useState(true)
     const [isDelete, setDelete] = useState(false)
-
     const { token } = useContext(TokenContext)
-    const decodedToken = jwtDecode(token)
-    const username = decodedToken.sub
+
     useEffect(() => {
+        const username = parseUsernameFromToken(token)
         async function fetchUser() {
             let res = await fetch(`/api/user/${username}`,
                 {
@@ -43,16 +42,21 @@ const UserProfilePage = () => {
         }
     }, [isDelete])
 
+    function parseUsernameFromToken(token) {
+        const decodedToken = jwtDecode(token)
+        return decodedToken.sub
+    }
+
     return (
         <>
-            {!loadingData && 
+            {!loadingData &&
                 (token ?
-                <div>
-                    <ProfilePageHeader user={userData} />
-                    <ProfilePageContent tables={tablesData} setDelete={setDelete} />
-                </div>
-                :
-                <Navigate to="/" replace />)
+                    <div>
+                        <ProfilePageHeader user={userData} />
+                        <ProfilePageContent tables={tablesData} setDelete={setDelete} />
+                    </div>
+                    :
+                    <Navigate to="/" replace />)
             }
         </>
     )

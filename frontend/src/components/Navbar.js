@@ -25,10 +25,7 @@ const Navbar = () => {
     }
     
     function checkIfUserIsAdmin(){
-        if (token ==null){
-            return false;
-        }
-        return parseRole(token) === "ADMIN"
+        return token !== null && parseRole(token) === "ADMIN"
     }
 
     return (
