@@ -1,23 +1,36 @@
 import {useContext} from "react";
 import {TokenContext} from "../../App";
 
-const DeleteReservationButton = ({tableId, reservation, setDelete}) => {
+const useAuthFetch = () => {
     const {token} = useContext(TokenContext)
 
+    const authFetch = (url, fetchConfig) =>
+          fetch(url, {
+              ...fetchConfig,
+              headers: {
+                  ...fetchConfig.headers,
+                  'Authorization': 'Bearer ' + token
+              }
+          });
+
+    return {authenticatedFetch: authFetch};
+}
+
+const DeleteReservationButton = ({tableId, reservation, setDelete}) => {
+    const {authenticatedFetch} = useAuthFetch();
+
     async function fetchDeleteReservation() {
-        await fetch(`/api/table/${tableId}/reservation`, {
+        await authenticatedFetch(`/api/table/${tableId}/reservation`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + token
-
             },
             body: JSON.stringify(reservation)
         })
         setDelete(prev => !prev);
     }
     return(
-        <button className={"btn bg-info shadow-none"} onClick={fetchDeleteReservation}>&#10060;</button>
+            <button className={"btn bg-info shadow-none"} onClick={fetchDeleteReservation}>{`🗑`}</button>
     )
 
 
