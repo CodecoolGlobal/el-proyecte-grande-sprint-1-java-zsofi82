@@ -13,7 +13,8 @@ export const TokenContext = createContext(null)
 
 function App() {
     document.title = "Pick your spot"
-    const [token, setToken] = useState(localStorage.getItem("token"))
+    const getTokenFromStorage = () => localStorage.getItem("token");
+    const [token, setToken] = useState(getTokenFromStorage);
 
     return (
         <div className="App">
