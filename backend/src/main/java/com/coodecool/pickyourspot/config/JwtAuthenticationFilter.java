@@ -49,6 +49,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 );
                 SecurityContextHolder.getContext().setAuthentication(authToken);
             }
+            // FIXME: Should we do something if we received a token but it is not valid?
         }
         filterChain.doFilter(request, response);
     }
