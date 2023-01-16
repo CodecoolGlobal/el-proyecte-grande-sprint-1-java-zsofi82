@@ -1,11 +1,12 @@
 import PropTypes from "prop-types";
 
-const Button = ({ onClick, type, text, bootstrapClassname }) => {
+const Button = ({ onClick, type, text, bootstrapClassname, id }) => {
   return (
     <button
       className={"btn " + bootstrapClassname}
       onClick={onClick}
       type={type}
+      id={id}
     >
       {text}
     </button>

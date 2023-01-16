@@ -31,7 +31,7 @@ const Navbar = () => {
     return (
         <nav className="navbar sticky-top">
             <div className="container-fluid">
-                <span className="navbar-brand mb-0 h1 backToHome" onClick={() => {
+                <span className="navbar-brand mb-0 h1 backToHome" id={"home"} onClick={() => {
                     navigate("/")
                 }}>Pick Your Spot</span>
                 <ul className="flex-row navbar-nav">
