@@ -18,16 +18,16 @@ const SearchBar = ({date, location, setDate, setLocation}) => {
         <div className="container-fluid">
             <form className="row g-3 m-2">
                 <div className="col">
-                    <select className="form-select" value={location} onChange={(e)=>setLocation(e.target.value)}>
+                    <select className="form-select" id={"spot-selection"} value={location} onChange={(e)=>setLocation(e.target.value)}>
                         {spots.map(spot => (
-                            <option key={spot.value} value={spot.value}>
+                            <option key={spot.value} id={spot.value} value={spot.value}>
                                 {spot.text}
                             </option>
                         ))}
                     </select>
                 </div>
                 <div className="col">
-                    <DateTimePicker className="form-select"
+                    <DateTimePicker className="form-select" id={"date-picker"}
                                     selected={date}
                                     onChange={(date) => {
                                         setDate(date)

@@ -31,12 +31,13 @@ const TableModal = ({ table, onExit, onReserve, selectedDate }) => {
           </div>
           <div className="modal-footer">
             {(token && selectedDate !== null) && <Button
+                id={"reserve-button"}
                 text={"Reserve"}
                 bootstrapClassname={"btn-success"}
                 onClick={()=>onReserve(table.id)}
                 type={"button"} /> }
-
             <Button
+                id={"modal-close"}
               text={"Close"}
               bootstrapClassname={"btn-secondary"}
               onClick={() => onExit()}
