@@ -8,7 +8,7 @@ import jwtDecode from "jwt-decode";
 const Home = () => {
     const [tableData, setTableData] = useState({});
     const [clickedTable, setClickedTable] = useState(null);
-    const [date, setDate] = useState(currentDateRoundedToHours());
+    const [date, setDate] = useState(() => currentDateRoundedToHours());
     const [location, setLocation] = useState("");
     const {token} = useContext(TokenContext)
 
@@ -20,14 +20,8 @@ const Home = () => {
     }
 
     useEffect(() => {
-        async function fetchTables() {
-            let res = await fetch(`/api/table`)
-            let data = await res.json()
-            setTableData(data)
-        }
-
         try {
-            fetchTables()
+            filterTable()
         } catch (err) {
             console.error(err)
         }
