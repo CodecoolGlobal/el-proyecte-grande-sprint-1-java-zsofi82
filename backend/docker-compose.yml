@@ -1,6 +1,6 @@
 version: "3.8"
 services:
-  db:
+  my-database:
       image: "postgres:15.1-alpine3.17"
       environment:
          POSTGRES_DB: pick_your_spot
@@ -9,6 +9,9 @@ services:
       container_name: postgresdb
       ports:
         - "5433:5432"
+      volumes: 
+      - db:/var/lib/postgresql/data
+      restart: always
       networks:
         - my-network
   spring:
@@ -16,14 +19,14 @@ services:
     container_name: springbootapp
 
     depends_on:
-      - db
+      - my-database
     ports:
       - "8080:8080"
     networks:
         - my-network
     environment:
       SECRET_KEY: 3979244226452948404D635166546A576E5A7234753778214125432A462D4A61
-      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/pick_your_spot
+      SPRING_DATASOURCE_URL: jdbc:postgresql://my-database:5432/pick_your_spot
       POSTGRES_USERNAME: username
       POSTGRES_PASSWORD: password
 
@@ -31,3 +34,6 @@ networks:
   my-network:
     driver: bridge
     
+volumes:
+  db:
+    driver: local
