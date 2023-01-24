@@ -17,7 +17,7 @@ const DeleteReservationButton = ({tableId, reservation, setDelete}) => {
         setDelete(prev => !prev);
     }
     return(
-        <button className={"btn bg-info shadow-none"} onClick={fetchDeleteReservation}>&#10060;</button>
+        <button id={"delete-reservation"} className={"btn bg-info shadow-none"} onClick={fetchDeleteReservation}>&#10060;</button>
     )
 
 

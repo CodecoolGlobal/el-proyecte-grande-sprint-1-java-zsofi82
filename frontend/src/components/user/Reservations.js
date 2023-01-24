@@ -10,9 +10,9 @@ const Reservations = ({ table, setDelete }) => {
     return (
         <div className="col" >
             <div className="card bg-info" >
-                <div className="card-header"> <h4 className={"my-0 font-weight-normal"}>{table.name}</h4></div>
+                <div className="card-header"> <h4 className={"my-0 font-weight-normal"} id={table.name}>{table.name}</h4></div>
                 <div className="card-body">
-                    <p className="card-text"> {table.address} </p>
+                    <p className="card-text" id={table.address}> {table.address} </p>
                     {table.reservations.map((reservation) => <Reservation date={fromUTCtoLocale(reservation.reservationTime)} key={fromUTCtoLocale(reservation.reservationTime)} reservation={reservation} tableId={table.id} setDelete={setDelete} />)}
                 </div>
             </div>

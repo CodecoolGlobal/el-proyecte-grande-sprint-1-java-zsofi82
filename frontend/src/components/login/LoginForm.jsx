@@ -57,13 +57,13 @@ const LoginForm = () => {
             <div className="loginFormDiv">
                 <form className="loginForm" onSubmit={(e) => grabFormData(e)}>
                     <label>Name:</label>
-                    <input type="text" name="username" required>
+                    <input type="text" name="username" id={"login-name"} required>
                     </input>
                     <label>Password:</label>
-                    <input type="password" name="password" required>
+                    <input type="password" name="password" id={"login-password"} required>
                     </input>
-                    <Button type='submit' text='Submit' />
-                    <div>{(rawResponse && rawResponse.status !== 200) && "Username or password incorrect!" }</div>
+                    <Button type='submit' text='Submit' id={"login-submit"} />
+                    <div id={"login-response"}>{(rawResponse && rawResponse.status !== 200) && "Username or password incorrect!" }</div>
                 </form>
             </div>
         </>
