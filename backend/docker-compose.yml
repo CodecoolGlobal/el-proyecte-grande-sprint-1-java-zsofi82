@@ -1,24 +1,33 @@
-version: '2'
-
+version: "3.8"
 services:
-  app:
-    image: 'spring-image:latest'
-    ports:
-      - "8080:8080"
-    build:
-      context: .
-    container_name: app
+  db:
+      image: "postgres:15.1-alpine3.17"
+      environment:
+         POSTGRES_DB: pick_your_spot
+         POSTGRES_USER: username
+         POSTGRES_PASSWORD: password
+      container_name: postgresdb
+      ports:
+        - "5433:5432"
+      networks:
+        - my-network
+  spring:
+    image: spring-image
+    container_name: springbootapp
+
     depends_on:
       - db
+    ports:
+      - "8080:8080"
+    networks:
+        - my-network
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/compose-postgres
-      - SPRING_DATASOURCE_USERNAME=compose-postgres
-      - SPRING_DATASOURCE_PASSWORD=compose-postgres
-      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
-          
-  db:
-    image: 'postgres:15.1-alpine'
-    container_name: db
-    environment:
-      - POSTGRES_USER=compose-postgres
-      - POSTGRES_PASSWORD=compose-postgres
+      SECRET_KEY: 3979244226452948404D635166546A576E5A7234753778214125432A462D4A61
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/pick_your_spot
+      POSTGRES_USERNAME: username
+      POSTGRES_PASSWORD: password
+
+networks:
+  my-network:
+    driver: bridge
+    
