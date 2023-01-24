@@ -22,6 +22,7 @@ const LoginForm = () => {
 
 
     useEffect(() => {
+        // FIXME: can this produce an infinite loop with non-200 login?
         if (dataToServer) {
             try {
                 const backendUrl = `/api/login`
@@ -37,7 +38,8 @@ const LoginForm = () => {
                         return res
                     })
                     .then(res => res.json())
-                    .then(res => setServerResponse(res))
+                    .then(res => setServerResponse(res));
+                // TODO: move into the fetch callbacks
                 if (serverResponse  && rawResponse.status === 200) {
                     localStorage.setItem("token", serverResponse.token)
                     const token = localStorage.getItem("token")
