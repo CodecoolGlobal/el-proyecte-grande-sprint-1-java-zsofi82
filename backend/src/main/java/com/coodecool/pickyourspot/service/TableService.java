@@ -27,34 +27,42 @@ public class TableService {
                         ReservationRepository reservationRepository,
                         UserRepository userRepository) {
         this.tableRepository = tableRepository;
+
         // TODO adding default tables, just for testing, delete later
-//        tableRepository.save(FoosballTable.builder()
-//                .name("Codecool")
-//                .address("Budapest, Nagymező utca 44.")
-//                .build());
-//        tableRepository.save(FoosballTable.builder()
-//                .name("Vault 51")
-//                .address("Budapest, Ó utca 51.")
-//                .build());
-//        tableRepository.save(FoosballTable.builder()
-//                .name("Füge udvar")
-//                .address("Budapest, Klauzál utca 19.")
-//                .build());
-//        tableRepository.save(FoosballTable.builder()
-//                .name("Noiret bar")
-//                .address("Budapest, Dessewffy utca 8.")
-//                .build());
-//        tableRepository.save(FoosballTable.builder()
-//                .name("Petz söröző")
-//                .address("Székesfehérvár, Bőrgyár utca 23.")
-//                .build());
-//        tableRepository.save(FoosballTable.builder()
-//                .name("Kaiser Retro Club")
-//                .address("Székesfehérvár, Távirda utca 14.")
-//                .build());
+        addDefaultTablesToDatabase(tableRepository);
 
         this.reservationRepository = reservationRepository;
         this.userRepository = userRepository;
+    }
+
+    private void addDefaultTablesToDatabase(TableRepository tableRepository) {
+        // TODO if tables can be deleted, this can cause duplicate tables
+        if (tableRepository.findByName("Codecool").isEmpty()) {
+            tableRepository.save(FoosballTable.builder()
+                    .name("Codecool")
+                    .address("Budapest, Nagymező utca 44.")
+                    .build());
+            tableRepository.save(FoosballTable.builder()
+                    .name("Vault 51")
+                    .address("Budapest, Ó utca 51.")
+                    .build());
+            tableRepository.save(FoosballTable.builder()
+                    .name("Füge udvar")
+                    .address("Budapest, Klauzál utca 19.")
+                    .build());
+            tableRepository.save(FoosballTable.builder()
+                    .name("Noiret bar")
+                    .address("Budapest, Dessewffy utca 8.")
+                    .build());
+            tableRepository.save(FoosballTable.builder()
+                    .name("Petz söröző")
+                    .address("Székesfehérvár, Bőrgyár utca 23.")
+                    .build());
+            tableRepository.save(FoosballTable.builder()
+                    .name("Kaiser Retro Club")
+                    .address("Székesfehérvár, Távirda utca 14.")
+                    .build());
+        }
     }
 
     public List<FoosballTable> getAllTables() {

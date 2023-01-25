@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
@@ -21,4 +22,5 @@ public interface TableRepository extends JpaRepository<FoosballTable, UUID> {
             "AND f.address LIKE :location")
     List<FoosballTable> getFreeTablesByLocationAndDate(@Param("location") String locationString, @Param("reservationTime") LocalDateTime dateTime);
 
+    Optional<FoosballTable> findByName(String name);
 }
