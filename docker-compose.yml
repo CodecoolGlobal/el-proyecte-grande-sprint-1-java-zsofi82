@@ -15,7 +15,8 @@ services:
       networks:
         - my-network
   spring:
-    image: spring-image
+    build:
+      context: backend
     container_name: springbootapp
 
     depends_on:
@@ -29,6 +30,19 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://my-database:5432/pick_your_spot
       POSTGRES_USERNAME: username
       POSTGRES_PASSWORD: password
+  react:
+    build: 
+      context: frontend
+    container_name: react-app
+    depends_on:
+      - spring
+    ports:
+      - "3000:3000"
+    networks:
+      - my-network
+    environment:
+      - REACT_APP_GMAP_API_KEY=AIzaSyBS_FpXm9bCjGKQoHwHkgZbQGZ8a3vly0Y
+      - REACT_APP_BACKEND=http://springbootapp:8080
 
 networks:
   my-network:
