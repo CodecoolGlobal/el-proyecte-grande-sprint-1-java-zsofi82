@@ -19,19 +19,20 @@ public class UserService {
     @Autowired
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
-//        // Hardcode an admin to the database
-//        addAdminToDatabase();
+        addAdminToDatabase();
     }
 
     private void addAdminToDatabase() {
-        PasswordEncoder encoder = new BCryptPasswordEncoder();
-        String hashedPassword = encoder.encode("password");
-        AppUser admin = new AppUser(UUID.randomUUID(),
-                "Admin Antal",
-                "admin@mail.com",
-                hashedPassword,
-                Role.ADMIN);
-        userRepository.save(admin);
+        if (userRepository.findByUsername("Admin Antal").isEmpty()) {
+            PasswordEncoder encoder = new BCryptPasswordEncoder();
+            String hashedPassword = encoder.encode("password");
+            AppUser admin = new AppUser(UUID.randomUUID(),
+                    "Admin Antal",
+                    "admin@mail.com",
+                    hashedPassword,
+                    Role.ADMIN);
+            userRepository.save(admin);
+        }
     }
 
     public void addNewUser(AppUser appUser) {
@@ -59,7 +60,7 @@ public class UserService {
         return false;
     }
 
-    public  Optional<AppUser> checkIfUserInDatabase(AppUser appUser) {
+    public Optional<AppUser> checkIfUserInDatabase(AppUser appUser) {
 
         // TODO refactor? or let the Security handle it?
 
