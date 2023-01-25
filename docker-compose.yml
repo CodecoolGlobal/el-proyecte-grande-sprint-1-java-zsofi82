@@ -41,8 +41,7 @@ services:
     networks:
       - my-network
     environment:
-      - REACT_APP_GMAP_API_KEY=AIzaSyBS_FpXm9bCjGKQoHwHkgZbQGZ8a3vly0Y
-      - REACT_APP_BACKEND=http://springbootapp:8080
+      - REACT_APP_GMAP_API_KEY=${REACT_APP_GMAP_API_KEY}
 
 networks:
   my-network:
