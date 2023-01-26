@@ -1,14 +1,35 @@
-import {useContext, useEffect, useState} from "react"
+import { useContext, useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import Button from "../reusable_elements/Button"
-import {TokenContext} from "../../App";
+import { TokenContext } from "../../App";
 
 const LoginForm = () => {
     const [dataToServer, setDataToServer] = useState()
-    const [serverResponse, setServerResponse] = useState()
-    const [rawResponse, setRawResponse] = useState()
+    const [isFetchFailed, setIsFetchFailed] = useState(false)
     const navigate = useNavigate()
-    const {setToken} = useContext(TokenContext)
+    const { setToken } = useContext(TokenContext)
+
+    useEffect(() => {
+        if (dataToServer) {
+            async function loginUser() {
+                try {
+                    const response = await fetch(`/api/login`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-type': 'application/json',
+                        },
+                        body: JSON.stringify(dataToServer)
+                    })
+                    const data = await response.json();
+                    handleData(response, data);
+                } catch (err) {
+                    console.error(err)
+                    setIsFetchFailed(true)
+                }
+            }
+            loginUser();
+        }
+    }, [dataToServer, navigate])
 
 
     function grabFormData(e) {
@@ -20,39 +41,15 @@ const LoginForm = () => {
         setDataToServer(data)
     }
 
-
-    useEffect(() => {
-        // FIXME: can this produce an infinite loop with non-200 login?
-        if (dataToServer) {
-            try {
-                const backendUrl = `/api/login`
-                fetch(backendUrl, {
-                    method: 'POST',
-                    headers: {
-                        'Content-type': 'application/json',
-                    },
-                    body: JSON.stringify(dataToServer)
-                })
-                    .then(res => {
-                        setRawResponse(res)
-                        return res
-                    })
-                    .then(res => res.json())
-                    .then(res => setServerResponse(res));
-                // TODO: move into the fetch callbacks
-                if (serverResponse  && rawResponse.status === 200) {
-                    localStorage.setItem("token", serverResponse.token)
-                    const token = localStorage.getItem("token")
-                    setToken(token)
-                    setDataToServer(null)
-                    setRawResponse(null)
-                    navigate("/")
-                }
-            } catch (err) {
-                console.error(err)
-            }
+    function handleData(response, data) {
+        if (response.ok && data) {
+            localStorage.setItem("token", data.token)
+            setToken(data.token)
+            navigate("/")
+        } else {
+            throw new Error("Login of user failed.");
         }
-    }, [dataToServer, serverResponse, navigate])
+    }
 
     return (
         <>
@@ -62,10 +59,10 @@ const LoginForm = () => {
                     <input type="text" name="username" id={"login-name"} required>
                     </input>
                     <label>Password:</label>
-                    <input type="password" name="password" id={"login-password"} style={{minWidth: "20vw"}} required>
+                    <input type="password" name="password" id={"login-password"} style={{ minWidth: "20vw" }} required>
                     </input>
                     <Button type='submit' text='Submit' id={"login-submit"} />
-                    <label><div id={"login-response"}>{(rawResponse && rawResponse.status !== 200) && "Username or password incorrect!" }</div></label>
+                    <label><div id={"login-response"}>{(isFetchFailed) && "Username or password incorrect!"}</div></label>
                 </form>
             </div>
         </>
