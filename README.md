@@ -1,6 +1,15 @@
 # Pick your spot!
 
-Pick your spot is a foosball table reservation system.
+Pick your spot is a foosball table reservation system. 
+
+We developed this project over 5 weeks, as our final team project at codecool.
+
+1. API endpoints, Spring boot setup
+2. React frontend
+3. Database connection with Hibernate Repositories
+4. Spring security
+5. Docker containerisation  
+
 
 ## Installation
 ---
@@ -43,13 +52,10 @@ Your can view and delete your Reservations by pressing on "Profile".
 ## Technologies
 ---
 
-The app is using: 
 - React frontend
 - Java backend:
   - Spring Boot (dependency injection framework)
   - Spring security (JWT token authentication)
   - Hibernate (database connection)
 - Postgresql database
-
-
-
+- Docker CI/CD
