@@ -2,6 +2,7 @@ package com.coodecool.pickyourspot.config;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.lang.NonNull;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
@@ -49,8 +50,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 );
                 SecurityContextHolder.getContext().setAuthentication(authToken);
             }
+            else {
+                throw new BadCredentialsException("invalid token found in Authorization header");
+            }
         }
-        // FIXME: Should we do something if we received a token but it is not valid?
         filterChain.doFilter(request, response);
     }
 }

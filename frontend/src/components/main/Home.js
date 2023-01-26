@@ -73,8 +73,6 @@ const Home = () => {
             "location": location,
             "dateTime": date
         }
-        console.log(location)
-        console.log(date)
         let res = await fetch(`/api/table/free-tables`, {
             method: 'POST',
             headers: {
