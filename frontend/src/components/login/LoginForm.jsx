@@ -62,10 +62,10 @@ const LoginForm = () => {
                     <input type="text" name="username" id={"login-name"} required>
                     </input>
                     <label>Password:</label>
-                    <input type="password" name="password" id={"login-password"} required>
+                    <input type="password" name="password" id={"login-password"} style={{minWidth: "20vw"}} required>
                     </input>
                     <Button type='submit' text='Submit' id={"login-submit"} />
-                    <div id={"login-response"}>{(rawResponse && rawResponse.status !== 200) && "Username or password incorrect!" }</div>
+                    <label><div id={"login-response"}>{(rawResponse && rawResponse.status !== 200) && "Username or password incorrect!" }</div></label>
                 </form>
             </div>
         </>
