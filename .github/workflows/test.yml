@@ -26,6 +26,10 @@ jobs:
     needs: [backend_test]
     name: Build & test React
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: frontend
 
     steps:
       - uses: actions/checkout@v3
