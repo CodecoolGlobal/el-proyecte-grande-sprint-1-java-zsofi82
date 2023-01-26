@@ -1,8 +1,6 @@
 name: auto test
 
-# Controls when the action will run.
 on:
-  # Triggers the workflow on push or pull request events but only for the main branch
   push:
     branches: [ development ]
   pull_request:
@@ -10,8 +8,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  build_test:
-    name: Build & Test App
+  backend_test:
+    name: Build & test Spring
     runs-on: ubuntu-latest
 
     steps:
@@ -24,6 +22,19 @@ jobs:
       - name: Build with Maven
         working-directory: backend
         run: mvn --batch-mode --update-snapshots package
+  frontend_test:
+    needs: [backend_test]
+    name: Build & test React
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: frontend
 
-
-
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 19
+      - run: npm ci
+      - run: npm run test
