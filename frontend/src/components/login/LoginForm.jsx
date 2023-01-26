@@ -11,6 +11,9 @@ const LoginForm = () => {
 
     useEffect(() => {
         if (dataToServer) {
+            const controller = new AbortController();
+            const signal = controller.signal;
+
             async function loginUser() {
                 try {
                     const response = await fetch(`/api/login`, {
@@ -18,7 +21,8 @@ const LoginForm = () => {
                         headers: {
                             'Content-type': 'application/json',
                         },
-                        body: JSON.stringify(dataToServer)
+                        body: JSON.stringify(dataToServer),
+                        signal: signal
                     })
                     const data = await response.json();
                     handleData(response, data);
@@ -28,6 +32,11 @@ const LoginForm = () => {
                 }
             }
             loginUser();
+
+            return () => {
+                // cancel the request before component unmounts
+                controller.abort();
+            };
         }
     }, [dataToServer, navigate])
 
