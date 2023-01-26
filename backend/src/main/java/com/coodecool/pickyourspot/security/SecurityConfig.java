@@ -24,15 +24,11 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                // TODO: There are no get for these endpoints _BUT_ we should expect get requests
-                //       for /login and /registration if someone bookmarked those frontend views.
-                //       The index.html might need to be sent back in those cases.
                 .antMatchers(HttpMethod.GET, "/", "/api/login", "/api/registration").permitAll()
-                .antMatchers(HttpMethod.GET, "/api/table/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/login", "/api/registration", "/api/table/free-tables").permitAll()
                 .antMatchers(HttpMethod.POST, "/reservation").hasAuthority(Role.USER.name())
                 .antMatchers(HttpMethod.DELETE, "/reservation").hasAuthority(Role.USER.name())
-                .antMatchers(HttpMethod.GET, "/admin", "/api/user").hasAuthority(Role.ADMIN.name())
+                .antMatchers(HttpMethod.GET, "/api/user").hasAuthority(Role.ADMIN.name())
                 .anyRequest().authenticated()
                 .and()
                 .sessionManagement()

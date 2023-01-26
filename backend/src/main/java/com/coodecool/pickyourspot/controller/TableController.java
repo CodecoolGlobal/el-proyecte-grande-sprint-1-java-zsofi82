@@ -24,18 +24,12 @@ public class TableController {
         this.tableService = tableService;
     }
 
-    @GetMapping
-    public List<FoosballTable> getAllTable() {
-        return tableService.getAllTables();
-    }
-
     @PostMapping
     public ResponseEntity<String> addTable(@RequestBody FoosballTable foosballTable) {
         if (tableService.addNewTable(foosballTable)) {
             return ResponseEntity.ok("Added table");
         }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid table data");
-
     }
 
     @PostMapping("/{tableId}/reservation")
