@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import Button from '../reusable_elements/Button.js'
+import Button from '../reusable_elements/Button'
 
 const RegistrationForm = () => {
     const [userData, setUserData] = useState()

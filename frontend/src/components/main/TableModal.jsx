@@ -26,7 +26,7 @@ const TableModal = ({ table, onExit, onReserve, selectedDate }) => {
             <div>
             <a
             href={`https://www.google.com/maps/search/${table.address}/`}
-            target="_blank">{table.address}</a></div>
+            target="_blank" rel="noreferrer">{table.address}</a></div>
             <div>{selectedDate ? "At: " + selectedDate : "Please log in, and select a date to reserve"}</div>
           </div>
           <div className="modal-footer">
